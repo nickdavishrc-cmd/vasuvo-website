@@ -1,0 +1,424 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Medical Disclaimer — Vasuvo HealthTech Pvt Ltd. Important information about the non-medical nature of the Vasuvo app.">
+    <title>Medical Disclaimer — Vasuvo HealthTech</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.7; color: #333; background: #f8f9fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: bold; display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
+        .logo img { height: 50px; width: auto; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav a { color: white; text-decoration: none; transition: opacity 0.3s; font-weight: 500; }
+        nav a:hover { opacity: 0.8; }
+        .page-hero { background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%); color: white; padding: 130px 0 60px; text-align: center; }
+        .page-hero h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .page-hero .meta { opacity: 0.85; font-size: 1rem; margin-top: 0.5rem; }
+        .policy-wrapper { display: flex; gap: 2.5rem; max-width: 1100px; margin: 2.5rem auto 4rem; padding: 0 20px; align-items: flex-start; }
+        .toc { flex: 0 0 240px; position: sticky; top: 90px; background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border-left: 4px solid #4F7F6A; }
+        .toc h2 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #4F7F6A; margin-bottom: 1rem; }
+        .toc ol { padding-left: 1.1rem; }
+        .toc li { margin-bottom: 0.55rem; }
+        .toc a { color: #555; text-decoration: none; font-size: 0.88rem; line-height: 1.4; transition: color 0.2s; }
+        .toc a:hover { color: #4F7F6A; }
+        .policy-content { flex: 1; background: white; border-radius: 12px; padding: 2.5rem 2.8rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+        .policy-content section { margin-bottom: 2.8rem; }
+        .policy-content h2 { font-size: 1.35rem; color: #4F7F6A; border-bottom: 2px solid #e8f5f1; padding-bottom: 0.5rem; margin-bottom: 1rem; }
+        .policy-content p { margin-bottom: 0.9rem; color: #444; }
+        .policy-content ul, .policy-content ol { padding-left: 1.4rem; margin-bottom: 0.9rem; color: #444; }
+        .policy-content li { margin-bottom: 0.35rem; }
+        .callout { border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0; display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.95rem; }
+        .callout-warning { background: #fff8e1; border-left: 4px solid #f59e0b; color: #7c5a00; }
+        .callout-info { background: #e8f5f1; border-left: 4px solid #4F7F6A; color: #2a4a3d; }
+        .callout-danger { background: #fff1f0; border-left: 4px solid #e53e3e; color: #742a2a; }
+        .callout .icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .not-list { list-style: none; padding: 0; margin: 0.5rem 0; }
+        .not-list li { display: flex; align-items: flex-start; gap: 0.55rem; margin-bottom: 0.4rem; color: #742a2a; }
+        .not-list li::before { content: "\2717"; font-weight: bold; flex-shrink: 0; color: #e53e3e; }
+        .accept-list { list-style: none; padding: 0; margin: 0.5rem 0; }
+        .accept-list li { display: flex; align-items: flex-start; gap: 0.55rem; margin-bottom: 0.4rem; color: #2a4a3d; }
+        .accept-list li::before { content: "\2713"; font-weight: bold; flex-shrink: 0; color: #4F7F6A; }
+        .limit-box { background: #f0f7f4; border: 1px solid #b7d9ca; border-radius: 8px; padding: 1rem 1.4rem; margin: 0.8rem 0; }
+        .limit-box p { margin-bottom: 0.3rem; color: #2a4a3d; }
+        .contact-block { background: #f0f7f4; border-radius: 10px; padding: 1.2rem 1.5rem; margin-top: 1rem; }
+        .contact-block p { margin-bottom: 0.3rem; }
+        .contact-block a { color: #4F7F6A; text-decoration: none; font-weight: 600; }
+        .contact-block a:hover { text-decoration: underline; }
+        .acceptance-banner { background: linear-gradient(135deg, #e8f5f1, #d4eee6); border: 2px solid #4F7F6A; border-radius: 10px; padding: 1.4rem 1.6rem; margin: 1rem 0; }
+        .acceptance-banner p { margin-bottom: 0.4rem; color: #2a4a3d; font-weight: 500; }
+        footer { background: #2a3d34; color: white; padding: 3rem 0 1rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-section h3 { margin-bottom: 1rem; color: #8bc9ad; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: color 0.3s; }
+        .footer-section a:hover { color: #8bc9ad; }
+        .footer-section p { color: rgba(255,255,255,0.7); line-height: 1.8; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 2rem; }
+            .policy-wrapper { flex-direction: column; }
+            .toc { position: static; flex: none; width: 100%; }
+            .policy-content { padding: 1.5rem; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Vasuvo HealthTech Logo">
+                <div>Vasuvo HealthTech</div>
+            </a>
+            <ul>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#benefits">Benefits</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#ai-features">AI Insights</a></li>
+                <li><a href="products.html">All Products</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-hero">
+        <div class="container">
+            <h1>&#9889; Medical Disclaimer</h1>
+            <p class="meta"><strong>Effective Date:</strong> [Insert Date] &nbsp;|&nbsp; <strong>Last Updated:</strong> [Insert Date]</p>
+        </div>
+    </div>
+
+    <div class="policy-wrapper">
+
+        <aside class="toc">
+            <h2>Contents</h2>
+            <ol>
+                <li><a href="#s1">No Medical Service</a></li>
+                <li><a href="#s2">Not a Medical Device</a></li>
+                <li><a href="#s3">No Duty of Care</a></li>
+                <li><a href="#s4">No Reliance Clause</a></li>
+                <li><a href="#s5">Technology Failure</a></li>
+                <li><a href="#s6">No Emergency Functionality</a></li>
+                <li><a href="#s7">Caregiver Disclaimer</a></li>
+                <li><a href="#s8">Data Accuracy</a></li>
+                <li><a href="#s9">Assumption of Risk</a></li>
+                <li><a href="#s10">Limitation of Liability</a></li>
+                <li><a href="#s11">Indemnification</a></li>
+                <li><a href="#s12">No Warranties</a></li>
+                <li><a href="#s13">Regulatory Disclaimer</a></li>
+                <li><a href="#s14">Severability</a></li>
+                <li><a href="#s15">Acceptance</a></li>
+            </ol>
+        </aside>
+
+        <main class="policy-content">
+
+            <p>This Medical Disclaimer forms an integral part of the <a href="t&c.html" style="color:#4F7F6A;font-weight:600;">Terms &amp; Conditions</a> of <strong>Vasuvo HealthTech Pvt Ltd</strong> ("Company", "we", "our", "us") governing the Vasuvo mobile application ("App").</p>
+            <div class="callout callout-danger">
+                <span class="icon">&#128680;</span>
+                <div>
+                    <p style="margin-bottom:0.2rem;"><strong>By accessing or using the App, you expressly acknowledge and agree to the terms below.</strong></p>
+                    <p style="margin-bottom:0;">If you do not agree, you must immediately discontinue use.</p>
+                </div>
+            </div>
+
+            <section id="s1">
+                <h2>1. No Medical Service Whatsoever</h2>
+                <p>The App is a <strong>non-clinical, consumer-operated digital reminder and connectivity tool</strong>.</p>
+                <p>The Company:</p>
+                <ul class="not-list">
+                    <li>Does NOT provide medical advice</li>
+                    <li>Does NOT practice medicine</li>
+                    <li>Does NOT provide nursing services</li>
+                    <li>Does NOT provide telemedicine</li>
+                    <li>Does NOT provide health monitoring</li>
+                    <li>Does NOT provide emergency response services</li>
+                </ul>
+                <div class="callout callout-info">
+                    <span class="icon">&#8505;&#65039;</span>
+                    <span>The App is a <strong>self-managed lifestyle tool only</strong>.</span>
+                </div>
+            </section>
+
+            <section id="s2">
+                <h2>2. Not a Medical Device</h2>
+                <p>The App is not:</p>
+                <ul class="not-list">
+                    <li>A regulated medical device</li>
+                    <li>A diagnostic system</li>
+                    <li>A patient monitoring system</li>
+                    <li>A fall-detection system</li>
+                    <li>An FDA, CDSCO, or government-certified medical product</li>
+                </ul>
+                <div class="callout callout-warning">
+                    <span class="icon">&#9888;&#65039;</span>
+                    <span>Any alerts, reminders, or inactivity notifications are automated software functions that <strong>may fail without warning</strong>.</span>
+                </div>
+            </section>
+
+            <section id="s3">
+                <h2>3. No Duty of Care</h2>
+                <p>You acknowledge and agree that:</p>
+                <ul>
+                    <li>The Company owes no medical duty of care.</li>
+                    <li>The Company undertakes no obligation to monitor your health.</li>
+                    <li>The Company assumes no responsibility to act on any alert or inactivity signal.</li>
+                    <li>Use of the App does not create any fiduciary, medical, or supervisory obligation.</li>
+                </ul>
+            </section>
+
+            <section id="s4">
+                <h2>4. No Reliance Clause</h2>
+                <p>You agree that:</p>
+                <ul>
+                    <li>You will not rely on the App as your <strong>sole</strong> medication management system.</li>
+                    <li>You will independently verify all medication schedules.</li>
+                    <li>You understand that missed reminders may occur.</li>
+                    <li>You understand that technical failures are possible at any time.</li>
+                </ul>
+                <div class="callout callout-danger">
+                    <span class="icon">&#128680;</span>
+                    <span>The App must <strong>not</strong> be relied upon for life-sustaining medication management.</span>
+                </div>
+            </section>
+
+            <section id="s5">
+                <h2>5. Automation &amp; Technology Failure Disclosure</h2>
+                <p>The App depends on:</p>
+                <ul>
+                    <li>Device hardware</li>
+                    <li>Operating system permissions</li>
+                    <li>Internet connectivity</li>
+                    <li>Third-party push notification systems</li>
+                    <li>Cloud infrastructure providers</li>
+                </ul>
+                <p>Failures may occur due to:</p>
+                <ul>
+                    <li>Device battery depletion</li>
+                    <li>Software bugs</li>
+                    <li>Server downtime</li>
+                    <li>Third-party service interruptions</li>
+                    <li>Force majeure events</li>
+                </ul>
+                <div class="callout callout-warning">
+                    <span class="icon">&#9888;&#65039;</span>
+                    <span>The Company does not guarantee uninterrupted or error-free operation.</span>
+                </div>
+            </section>
+
+            <section id="s6">
+                <h2>6. No Emergency Functionality</h2>
+                <p>The App is <strong>NOT</strong> designed, marketed, or intended for emergency detection or emergency response.</p>
+                <p>The Company:</p>
+                <ul class="not-list">
+                    <li>Does not monitor users in real-time</li>
+                    <li>Does not dispatch medical assistance</li>
+                    <li>Does not contact emergency services</li>
+                </ul>
+                <div class="callout callout-danger">
+                    <span class="icon">&#128680;</span>
+                    <div>
+                        <p style="margin-bottom:0.3rem;"><strong>In case of emergency, contact local emergency services immediately.</strong></p>
+                        <p style="margin-bottom:0;">Failure of the App to detect or notify inactivity shall not create liability.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="s7">
+                <h2>7. Caregiver Linking Disclaimer</h2>
+                <p>The caregiver feature is a <strong>voluntary, user-controlled connection tool</strong>.</p>
+                <p>The Company:</p>
+                <ul class="not-list">
+                    <li>Does not verify caregiver identity</li>
+                    <li>Does not screen caregivers</li>
+                    <li>Does not supervise caregiver conduct</li>
+                    <li>Does not ensure caregiver responsiveness</li>
+                </ul>
+                <p>The Company is not liable for:</p>
+                <ul>
+                    <li>Caregiver negligence or failure to respond</li>
+                    <li>Delayed response or misuse of information</li>
+                    <li>Disputes between users</li>
+                </ul>
+                <div class="callout callout-info">
+                    <span class="icon">&#8505;&#65039;</span>
+                    <span>All caregiver relationships are private arrangements between users.</span>
+                </div>
+            </section>
+
+            <section id="s8">
+                <h2>8. User Data Accuracy Disclaimer</h2>
+                <p>All medical and medication information is:</p>
+                <ul>
+                    <li>Entered solely by users</li>
+                    <li>Not reviewed by medical professionals</li>
+                    <li>Not verified by the Company</li>
+                </ul>
+                <p>The Company makes no representations regarding accuracy or completeness of user-entered information.</p>
+            </section>
+
+            <section id="s9">
+                <h2>9. Assumption of Risk</h2>
+                <p>By using the App, you expressly assume all risks associated with:</p>
+                <ul>
+                    <li>Missed medication</li>
+                    <li>Incorrect dosage reminders</li>
+                    <li>Inactivity detection failure</li>
+                    <li>Health deterioration</li>
+                    <li>Hospitalization</li>
+                    <li>Injury</li>
+                    <li>Death</li>
+                </ul>
+                <div class="callout callout-warning">
+                    <span class="icon">&#9888;&#65039;</span>
+                    <span>You voluntarily accept these risks.</span>
+                </div>
+            </section>
+
+            <section id="s10">
+                <h2>10. Maximum Limitation of Liability</h2>
+                <p>To the maximum extent permitted by applicable Indian law, Vasuvo HealthTech Pvt Ltd, its founders, directors, shareholders, employees, contractors, affiliates, and agents shall <strong>NOT</strong> be liable for:</p>
+                <ul>
+                    <li>Any medical outcome or personal injury</li>
+                    <li>Wrongful death or emotional distress</li>
+                    <li>Consequential, indirect, special, or punitive damages</li>
+                    <li>Loss of profits or loss of data</li>
+                </ul>
+                <div class="limit-box">
+                    <p>&#128200; Total aggregate liability, if any, shall not exceed the <strong>total amount paid by you in the preceding 12 months</strong>.</p>
+                    <p>&#8505;&#65039; If no payment was made, liability shall not exceed <strong>INR 1,000</strong>.</p>
+                </div>
+            </section>
+
+            <section id="s11">
+                <h2>11. Indemnification <small style="font-size:0.75rem;color:#888;">(Litigation Shield)</small></h2>
+                <p>You agree to <strong>indemnify, defend, and hold harmless</strong> Vasuvo HealthTech Pvt Ltd and its founders, directors, officers, and employees from and against any claims, actions, damages, liabilities, losses, costs, or legal expenses arising from:</p>
+                <ul>
+                    <li>Your reliance on the App</li>
+                    <li>Your medical decisions</li>
+                    <li>Claims brought by family members, caregivers, or third parties</li>
+                    <li>Disputes arising from missed alerts</li>
+                    <li>Misuse of the App</li>
+                </ul>
+                <div class="callout callout-info">
+                    <span class="icon">&#8505;&#65039;</span>
+                    <span>This indemnification obligation <strong>survives termination</strong> of your account or these Terms.</span>
+                </div>
+            </section>
+
+            <section id="s12">
+                <h2>12. No Warranties</h2>
+                <p>The App is provided strictly <strong>"AS IS"</strong> and <strong>"AS AVAILABLE."</strong></p>
+                <p>The Company disclaims all warranties, express or implied, including:</p>
+                <ul>
+                    <li>Merchantability</li>
+                    <li>Fitness for a particular purpose</li>
+                    <li>Accuracy or reliability</li>
+                    <li>Continuous availability</li>
+                    <li>Non-infringement</li>
+                </ul>
+            </section>
+
+            <section id="s13">
+                <h2>13. Regulatory Disclaimer</h2>
+                <p>The App is not intended to be regulated as a medical device under applicable Indian health regulations.</p>
+                <div class="callout callout-info">
+                    <span class="icon">&#8505;&#65039;</span>
+                    <span>Nothing in the App should be interpreted as clinical guidance.</span>
+                </div>
+            </section>
+
+            <section id="s14">
+                <h2>14. Severability</h2>
+                <p>If any part of this Disclaimer is held unenforceable, the remaining provisions remain in full force and effect.</p>
+            </section>
+
+            <section id="s15">
+                <h2>15. Acceptance</h2>
+                <p>By clicking "I Agree" or continuing to use the App, you confirm that:</p>
+                <div class="acceptance-banner">
+                    <ul class="accept-list" style="padding:0;margin:0;">
+                        <li>You understand this Medical Disclaimer</li>
+                        <li>You accept all risks described herein</li>
+                        <li>You waive claims to the extent permitted by law</li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Vasuvo HealthTech</h3>
+                    <p>Vasuvo HealthTech is an intelligent medication management platform designed to help individuals and families stay on top of their health.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="index.html#features">Medication Reminders</a></li>
+                        <li><a href="index.html#features">Family Management</a></li>
+                        <li><a href="index.html#ai-features">AI Health Insights</a></li>
+                        <li><a href="index.html#features">Medical Records</a></li>
+                        <li><a href="index.html#features">Lab Finder</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="t&c.html">Terms &amp; Conditions</a></li>
+                        <li><a href="subscriptionlegal.html">Subscription Terms</a></li>
+                        <li><a href="medicaldisclaimer.html">Medical Disclaimer</a></li>
+                        <li><a href="mailto:support@vasuvo.com">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Get the App</h3>
+                    <ul>
+                        <li><a href="#">Download for Android</a></li>
+                        <li><a href="#">iOS (Coming Soon)</a></li>
+                        <li><a href="#">System Requirements</a></li>
+                        <li><a href="#">Release Notes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vasuvo HealthTech. All rights reserved. | Making healthcare management simple and accessible.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        const sections = document.querySelectorAll('.policy-content section[id]');
+        const tocLinks = document.querySelectorAll('.toc a');
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    tocLinks.forEach(l => { l.style.color = ''; l.style.fontWeight = ''; });
+                    const active = document.querySelector('.toc a[href="#' + entry.target.id + '"]');
+                    if (active) { active.style.color = '#4F7F6A'; active.style.fontWeight = '600'; }
+                }
+            });
+        }, { rootMargin: '-80px 0px -60% 0px' });
+        sections.forEach(s => obs.observe(s));
+    </script>
+</body>
+</html>

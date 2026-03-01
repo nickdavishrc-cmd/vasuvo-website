@@ -1,0 +1,386 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Subscription &amp; Payment Terms — Vasuvo HealthTech Pvt Ltd. Terms governing paid subscriptions and billing.">
+    <title>Subscription &amp; Payment Terms — Vasuvo HealthTech</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.7; color: #333; background: #f8f9fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: bold; display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
+        .logo img { height: 50px; width: auto; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav a { color: white; text-decoration: none; transition: opacity 0.3s; font-weight: 500; }
+        nav a:hover { opacity: 0.8; }
+        .page-hero { background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%); color: white; padding: 130px 0 60px; text-align: center; }
+        .page-hero h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .page-hero .meta { opacity: 0.85; font-size: 1rem; margin-top: 0.5rem; }
+        .policy-wrapper { display: flex; gap: 2.5rem; max-width: 1100px; margin: 2.5rem auto 4rem; padding: 0 20px; align-items: flex-start; }
+        .toc { flex: 0 0 240px; position: sticky; top: 90px; background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border-left: 4px solid #4F7F6A; }
+        .toc h2 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #4F7F6A; margin-bottom: 1rem; }
+        .toc ol { padding-left: 1.1rem; }
+        .toc li { margin-bottom: 0.55rem; }
+        .toc a { color: #555; text-decoration: none; font-size: 0.88rem; line-height: 1.4; transition: color 0.2s; }
+        .toc a:hover { color: #4F7F6A; }
+        .policy-content { flex: 1; background: white; border-radius: 12px; padding: 2.5rem 2.8rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+        .policy-content section { margin-bottom: 2.8rem; }
+        .policy-content h2 { font-size: 1.35rem; color: #4F7F6A; border-bottom: 2px solid #e8f5f1; padding-bottom: 0.5rem; margin-bottom: 1rem; }
+        .policy-content p { margin-bottom: 0.9rem; color: #444; }
+        .policy-content ul, .policy-content ol { padding-left: 1.4rem; margin-bottom: 0.9rem; color: #444; }
+        .policy-content li { margin-bottom: 0.35rem; }
+        .callout { border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0; display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.95rem; }
+        .callout-warning { background: #fff8e1; border-left: 4px solid #f59e0b; color: #7c5a00; }
+        .callout-info { background: #e8f5f1; border-left: 4px solid #4F7F6A; color: #2a4a3d; }
+        .callout-danger { background: #fff1f0; border-left: 4px solid #e53e3e; color: #742a2a; }
+        .callout .icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .steps { list-style: none; padding: 0; margin: 0.8rem 0; }
+        .steps li { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.45rem; color: #444; }
+        .steps li::before { content: "\2192"; color: #4F7F6A; font-weight: bold; flex-shrink: 0; margin-top: 0.05rem; }
+        .limit-box { background: #f0f7f4; border: 1px solid #b7d9ca; border-radius: 8px; padding: 1rem 1.4rem; margin: 0.8rem 0; }
+        .limit-box p { margin-bottom: 0.3rem; color: #2a4a3d; }
+        .contact-block { background: #f0f7f4; border-radius: 10px; padding: 1.2rem 1.5rem; margin-top: 1rem; }
+        .contact-block p { margin-bottom: 0.3rem; }
+        .contact-block a { color: #4F7F6A; text-decoration: none; font-weight: 600; }
+        .contact-block a:hover { text-decoration: underline; }
+        footer { background: #2a3d34; color: white; padding: 3rem 0 1rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-section h3 { margin-bottom: 1rem; color: #8bc9ad; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: color 0.3s; }
+        .footer-section a:hover { color: #8bc9ad; }
+        .footer-section p { color: rgba(255,255,255,0.7); line-height: 1.8; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 2rem; }
+            .policy-wrapper { flex-direction: column; }
+            .toc { position: static; flex: none; width: 100%; }
+            .policy-content { padding: 1.5rem; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Vasuvo HealthTech Logo">
+                <div>Vasuvo HealthTech</div>
+            </a>
+            <ul>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#benefits">Benefits</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#ai-features">AI Insights</a></li>
+                <li><a href="products.html">All Products</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-hero">
+        <div class="container">
+            <h1>&#128179; Subscription &amp; Payment Terms</h1>
+            <p class="meta"><strong>Effective Date:</strong> [Insert Date]</p>
+        </div>
+    </div>
+
+    <div class="policy-wrapper">
+
+        <aside class="toc">
+            <h2>Contents</h2>
+            <ol>
+                <li><a href="#s1">Subscription Plans</a></li>
+                <li><a href="#s2">Billing &amp; Auto-Renewal</a></li>
+                <li><a href="#s3">Pricing</a></li>
+                <li><a href="#s4">Free Trials</a></li>
+                <li><a href="#s5">Cancellation Policy</a></li>
+                <li><a href="#s6">No Refund Policy</a></li>
+                <li><a href="#s7">Payment Failure</a></li>
+                <li><a href="#s8">Taxes</a></li>
+                <li><a href="#s9">No Guarantee of Outcomes</a></li>
+                <li><a href="#s10">Service Modifications</a></li>
+                <li><a href="#s11">Termination by Company</a></li>
+                <li><a href="#s12">Limitation of Liability</a></li>
+                <li><a href="#s13">Chargebacks &amp; Disputes</a></li>
+                <li><a href="#s14">Indian Consumer Law</a></li>
+                <li><a href="#s15">Billing Contact</a></li>
+            </ol>
+        </aside>
+
+        <main class="policy-content">
+
+            <p>These Subscription Terms form part of the <a href="t&c.html" style="color:#4F7F6A;font-weight:600;">Terms &amp; Conditions</a> of <strong>Vasuvo HealthTech Pvt Ltd</strong> ("Company", "we", "our").</p>
+            <p>By purchasing a subscription, you agree to the following:</p>
+
+            <section id="s1">
+                <h2>1. Subscription Plans</h2>
+                <p>The App may offer paid subscription plans ("Subscription") which may include:</p>
+                <ul>
+                    <li>Advanced caregiver linking features</li>
+                    <li>Enhanced reminder customization</li>
+                    <li>Premium inactivity alerts</li>
+                    <li>Additional storage or features</li>
+                </ul>
+                <div class="callout callout-info">
+                    <span class="icon">&#8505;&#65039;</span>
+                    <div>
+                        <p style="margin-bottom:0.3rem;">Features may change at the Company's sole discretion. The Company does not guarantee that any specific feature will remain available permanently.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="s2">
+                <h2>2. Billing &amp; Auto-Renewal</h2>
+                <p>Subscriptions:</p>
+                <ul>
+                    <li>Are billed in advance</li>
+                    <li>Automatically renew at the end of each billing cycle</li>
+                    <li>Continue until cancelled by you</li>
+                </ul>
+                <p>By subscribing, you authorize <strong>recurring billing</strong> via your selected payment method.</p>
+                <div class="callout callout-info">
+                    <span class="icon">&#8505;&#65039;</span>
+                    <span>For Android users, subscriptions are processed through <strong>Google Play Store</strong> and are subject to Google's billing policies.</span>
+                </div>
+            </section>
+
+            <section id="s3">
+                <h2>3. Pricing</h2>
+                <p>Subscription prices:</p>
+                <ul>
+                    <li>Are displayed within the App</li>
+                    <li>May vary by region</li>
+                    <li>Are inclusive or exclusive of applicable taxes as shown at checkout</li>
+                </ul>
+                <p>We reserve the right to revise pricing at any time. <strong>Price changes will apply only to future billing cycles.</strong></p>
+            </section>
+
+            <section id="s4">
+                <h2>4. Free Trials <small style="font-size:0.75rem;color:#888;">(If Applicable)</small></h2>
+                <p>If a free trial is offered:</p>
+                <ul>
+                    <li>Billing begins automatically after the trial period</li>
+                    <li>You must cancel before the trial ends to avoid charges</li>
+                    <li>We may limit free trials per user, device, or payment method</li>
+                </ul>
+                <div class="callout callout-warning">
+                    <span class="icon">&#9888;&#65039;</span>
+                    <span>Abuse of free trials may result in account suspension.</span>
+                </div>
+            </section>
+
+            <section id="s5">
+                <h2>5. Cancellation Policy</h2>
+                <p>You may cancel your subscription at any time via:</p>
+                <ul class="steps">
+                    <li>Google Play &rarr; Profile &rarr; Payments &amp; Subscriptions &rarr; Subscriptions</li>
+                </ul>
+                <p>Cancellation:</p>
+                <ul>
+                    <li>Stops future renewals</li>
+                    <li>Does <strong>NOT</strong> provide a refund for the current billing period</li>
+                    <li>Access continues until the end of the paid period</li>
+                </ul>
+                <div class="callout callout-info">
+                    <span class="icon">&#8505;&#65039;</span>
+                    <span>The Company does not process subscription cancellations directly if billed via Google Play.</span>
+                </div>
+            </section>
+
+            <section id="s6">
+                <h2>6. No Refund Policy</h2>
+                <div class="callout callout-danger">
+                    <span class="icon">&#128680;</span>
+                    <div>
+                        <p style="margin-bottom:0.3rem;"><strong>Except where required by applicable law, all subscription payments are non-refundable.</strong></p>
+                    </div>
+                </div>
+                <p>We do not provide refunds for:</p>
+                <ul>
+                    <li>Partial usage</li>
+                    <li>Accidental subscription</li>
+                    <li>Device incompatibility</li>
+                    <li>Dissatisfaction with features</li>
+                    <li>Failure to cancel before renewal</li>
+                </ul>
+                <p>Refund requests for Google Play purchases must be made directly through Google.</p>
+            </section>
+
+            <section id="s7">
+                <h2>7. Payment Failure</h2>
+                <p>If payment fails:</p>
+                <ul>
+                    <li>Subscription may be suspended or terminated</li>
+                    <li>Access to premium features may be revoked</li>
+                    <li>Data associated with premium features may be restricted</li>
+                </ul>
+                <div class="callout callout-warning">
+                    <span class="icon">&#9888;&#65039;</span>
+                    <span>We are not liable for loss of data resulting from non-payment.</span>
+                </div>
+            </section>
+
+            <section id="s8">
+                <h2>8. Taxes</h2>
+                <p>You are responsible for applicable taxes, including <strong>GST</strong> where applicable.</p>
+                <p>Tax rates may vary based on jurisdiction.</p>
+            </section>
+
+            <section id="s9">
+                <h2>9. No Guarantee of Outcomes</h2>
+                <p>Subscription does not guarantee:</p>
+                <ul>
+                    <li>Improved health outcomes</li>
+                    <li>Medication adherence</li>
+                    <li>Caregiver responsiveness</li>
+                    <li>Detection of inactivity</li>
+                    <li>Prevention of medical emergencies</li>
+                </ul>
+                <div class="callout callout-info">
+                    <span class="icon">&#8505;&#65039;</span>
+                    <span>The subscription enhances features but does not alter the App's disclaimer as a non-medical service.</span>
+                </div>
+            </section>
+
+            <section id="s10">
+                <h2>10. Service Modifications</h2>
+                <p>We reserve the right to — without prior notice, subject to applicable law:</p>
+                <ul>
+                    <li>Modify subscription features</li>
+                    <li>Add or remove features</li>
+                    <li>Discontinue plans</li>
+                    <li>Change pricing</li>
+                </ul>
+            </section>
+
+            <section id="s11">
+                <h2>11. Termination by Company</h2>
+                <p>We may suspend or terminate your subscription <strong>without refund</strong> if you:</p>
+                <ul>
+                    <li>Violate our Terms &amp; Conditions</li>
+                    <li>Engage in fraud or abuse</li>
+                    <li>Misuse caregiver features</li>
+                    <li>Attempt to reverse engineer the App</li>
+                </ul>
+            </section>
+
+            <section id="s12">
+                <h2>12. Limitation of Liability <small style="font-size:0.75rem;color:#888;">(Subscription Specific)</small></h2>
+                <p>Even if you purchase a paid subscription:</p>
+                <div class="limit-box">
+                    <p>&#128200; The Company's total liability shall not exceed the <strong>amount paid by you in the 12 months preceding the claim</strong>.</p>
+                    <p>&#8505;&#65039; If required by law, liability shall not exceed <strong>INR 1,000</strong> for free users.</p>
+                </div>
+            </section>
+
+            <section id="s13">
+                <h2>13. Chargebacks &amp; Payment Disputes</h2>
+                <p>If you initiate a chargeback:</p>
+                <ul>
+                    <li>We may suspend your account</li>
+                    <li>We may permanently block future subscriptions</li>
+                    <li>You remain liable for unpaid amounts</li>
+                </ul>
+                <div class="callout callout-danger">
+                    <span class="icon">&#128680;</span>
+                    <span>Fraudulent disputes may result in legal action.</span>
+                </div>
+            </section>
+
+            <section id="s14">
+                <h2>14. Compliance with Indian Consumer Law</h2>
+                <p>Nothing in these Terms excludes rights that cannot be excluded under:</p>
+                <ul>
+                    <li>Consumer Protection Act, 2019</li>
+                    <li>Information Technology Act, 2000</li>
+                </ul>
+                <div class="callout callout-info">
+                    <span class="icon">&#8505;&#65039;</span>
+                    <span>However, to the maximum extent permitted by law, our liability remains limited as stated above.</span>
+                </div>
+            </section>
+
+            <section id="s15">
+                <h2>15. Contact for Billing Issues</h2>
+                <div class="contact-block">
+                    <p><strong>Vasuvo HealthTech Pvt Ltd</strong></p>
+                    <p>[Registered Address]</p>
+                    <p>&#128231; <a href="mailto:support@vasuvo.com">support@vasuvo.com</a></p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Vasuvo HealthTech</h3>
+                    <p>Vasuvo HealthTech is an intelligent medication management platform designed to help individuals and families stay on top of their health.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="index.html#features">Medication Reminders</a></li>
+                        <li><a href="index.html#features">Family Management</a></li>
+                        <li><a href="index.html#ai-features">AI Health Insights</a></li>
+                        <li><a href="index.html#features">Medical Records</a></li>
+                        <li><a href="index.html#features">Lab Finder</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="t&c.html">Terms &amp; Conditions</a></li>
+                        <li><a href="subscriptionlegal.html">Subscription Terms</a></li>
+                        <li><a href="mailto:support@vasuvo.com">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Get the App</h3>
+                    <ul>
+                        <li><a href="#">Download for Android</a></li>
+                        <li><a href="#">iOS (Coming Soon)</a></li>
+                        <li><a href="#">System Requirements</a></li>
+                        <li><a href="#">Release Notes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vasuvo HealthTech. All rights reserved. | Making healthcare management simple and accessible.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        const sections = document.querySelectorAll('.policy-content section[id]');
+        const tocLinks = document.querySelectorAll('.toc a');
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    tocLinks.forEach(l => { l.style.color = ''; l.style.fontWeight = ''; });
+                    const active = document.querySelector('.toc a[href="#' + entry.target.id + '"]');
+                    if (active) { active.style.color = '#4F7F6A'; active.style.fontWeight = '600'; }
+                }
+            });
+        }, { rootMargin: '-80px 0px -60% 0px' });
+        sections.forEach(s => obs.observe(s));
+    </script>
+</body>
+</html>

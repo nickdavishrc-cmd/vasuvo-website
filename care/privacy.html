@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy Policy — Vasuvo HealthTech Pvt Ltd. Learn how we collect, use, and protect your personal data.">
+    <title>Privacy Policy — Vasuvo HealthTech</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.7; color: #333; background: #f8f9fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: bold; display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
+        .logo img { height: 50px; width: auto; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav a { color: white; text-decoration: none; transition: opacity 0.3s; font-weight: 500; }
+        nav a:hover { opacity: 0.8; }
+        .page-hero { background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%); color: white; padding: 130px 0 60px; text-align: center; }
+        .page-hero h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .page-hero .meta { opacity: 0.85; font-size: 1rem; margin-top: 0.5rem; }
+        .policy-wrapper { display: flex; gap: 2.5rem; max-width: 1100px; margin: 2.5rem auto 4rem; padding: 0 20px; align-items: flex-start; }
+        .toc { flex: 0 0 240px; position: sticky; top: 90px; background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border-left: 4px solid #4F7F6A; }
+        .toc h2 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #4F7F6A; margin-bottom: 1rem; }
+        .toc ol { padding-left: 1.1rem; }
+        .toc li { margin-bottom: 0.55rem; }
+        .toc a { color: #555; text-decoration: none; font-size: 0.88rem; line-height: 1.4; transition: color 0.2s; }
+        .toc a:hover { color: #4F7F6A; }
+        .policy-content { flex: 1; background: white; border-radius: 12px; padding: 2.5rem 2.8rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+        .policy-content section { margin-bottom: 2.8rem; }
+        .policy-content h2 { font-size: 1.35rem; color: #4F7F6A; border-bottom: 2px solid #e8f5f1; padding-bottom: 0.5rem; margin-bottom: 1rem; }
+        .policy-content h3 { font-size: 1.05rem; color: #3a5f52; margin: 1.2rem 0 0.5rem; }
+        .policy-content p { margin-bottom: 0.9rem; color: #444; }
+        .policy-content ul, .policy-content ol { padding-left: 1.4rem; margin-bottom: 0.9rem; color: #444; }
+        .policy-content li { margin-bottom: 0.35rem; }
+        .callout { border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0; display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.95rem; }
+        .callout-warning { background: #fff8e1; border-left: 4px solid #f59e0b; color: #7c5a00; }
+        .callout-info { background: #e8f5f1; border-left: 4px solid #4F7F6A; color: #2a4a3d; }
+        .callout-danger { background: #fff1f0; border-left: 4px solid #e53e3e; color: #742a2a; }
+        .callout .icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .contact-block { background: #f0f7f4; border-radius: 10px; padding: 1.2rem 1.5rem; margin-top: 1rem; }
+        .contact-block p { margin-bottom: 0.3rem; }
+        .contact-block a { color: #4F7F6A; text-decoration: none; font-weight: 600; }
+        .contact-block a:hover { text-decoration: underline; }
+        .rights-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.8rem; margin-top: 0.8rem; }
+        .right-item { background: #f0f7f4; border-radius: 8px; padding: 0.75rem 1rem; font-size: 0.9rem; color: #3a5f52; display: flex; align-items: center; gap: 0.5rem; }
+        .right-item .icon { font-size: 1.1rem; }
+        footer { background: #2a3d34; color: white; padding: 3rem 0 1rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-section h3 { margin-bottom: 1rem; color: #8bc9ad; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: color 0.3s; }
+        .footer-section a:hover { color: #8bc9ad; }
+        .footer-section p { color: rgba(255,255,255,0.7); line-height: 1.8; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 2rem; }
+            .policy-wrapper { flex-direction: column; }
+            .toc { position: static; flex: none; width: 100%; }
+            .policy-content { padding: 1.5rem; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Vasuvo HealthTech Logo">
+                <div>Vasuvo HealthTech</div>
+            </a>
+            <ul>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#benefits">Benefits</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#ai-features">AI Insights</a></li>
+                <li><a href="products.html">All Products</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-hero">
+        <div class="container">
+            <h1>&#128203; Privacy Policy</h1>
+            <p class="meta"><strong>Effective Date:</strong> [Insert Date] &nbsp;|&nbsp; <strong>Last Updated:</strong> [Insert Date]</p>
+        </div>
+    </div>
+
+    <div class="policy-wrapper">
+        <aside class="toc">
+            <h2>Contents</h2>
+            <ol>
+                <li><a href="#s1">Information We Collect</a></li>
+                <li><a href="#s2">Lawful Basis for Processing</a></li>
+                <li><a href="#s3">How We Use Your Data</a></li>
+                <li><a href="#s4">International Data Transfers</a></li>
+                <li><a href="#s5">Data Sharing</a></li>
+                <li><a href="#s6">Data Storage &amp; Security</a></li>
+                <li><a href="#s7">Data Retention</a></li>
+                <li><a href="#s8">Your Rights</a></li>
+                <li><a href="#s9">Children's Privacy</a></li>
+                <li><a href="#s10">Account Deletion</a></li>
+                <li><a href="#s11">Medical Disclaimer</a></li>
+                <li><a href="#s12">Grievance Officer</a></li>
+                <li><a href="#s13">Policy Changes</a></li>
+                <li><a href="#s14">Contact Information</a></li>
+            </ol>
+        </aside>
+
+        <main class="policy-content">
+            <p>This Privacy Policy describes how <strong>Vasuvo HealthTech Pvt Ltd</strong> ("Company", "we", "our", or "us") collects, uses, stores, and protects personal data when you use the <strong>Vasuvo</strong> mobile application ("App").</p>
+            <p>Vasuvo is a consumer wellness and caregiver support application. It is <strong>not</strong> a medical provider or healthcare service.</p>
+            <p>This Policy complies with the <strong>Digital Personal Data Protection Act, 2023 (India)</strong> and applies to users in India and internationally.</p>
+
+            <section id="s1">
+                <h2>1. Information We Collect</h2>
+                <p>We collect only information necessary to provide our services.</p>
+                <h3>A. Account Information</h3>
+                <ul>
+                    <li>Full Name</li><li>Mobile Number</li><li>Email Address</li>
+                    <li>Profile photo <em>(optional)</em></li>
+                    <li>State / Location <em>(if voluntarily provided)</em></li>
+                </ul>
+                <h3>B. Caregiver &amp; Patient Information</h3>
+                <ul><li>Linked caregiver details</li><li>Relationship type</li><li>Emergency contact details</li></ul>
+                <h3>C. Health &amp; Reminder Information</h3>
+                <ul>
+                    <li>Medication names</li><li>Dosage details</li><li>Reminder schedules</li>
+                    <li>Health notes entered by user</li><li>Reminder completion logs</li>
+                    <li>Activity / inactivity check data <em>(if enabled)</em></li>
+                </ul>
+                <div class="callout callout-warning">
+                    <span class="icon">&#9888;&#65039;</span>
+                    <span>We do <strong>NOT</strong> collect medical records, prescriptions, insurance information, or hospital data.</span>
+                </div>
+                <h3>D. Device &amp; Technical Information</h3>
+                <ul><li>Device type</li><li>Operating system</li><li>App version</li><li>Notification token</li><li>Crash logs</li><li>Basic analytics data</li></ul>
+            </section>
+
+            <section id="s2">
+                <h2>2. Lawful Basis for Processing <small style="font-size:0.75rem;color:#888;">(India – DPDP Act)</small></h2>
+                <p>We process personal data based on:</p>
+                <ul>
+                    <li>User consent at registration</li>
+                    <li>Performance of service (reminders &amp; caregiver linking)</li>
+                    <li>Legal compliance where required</li>
+                </ul>
+                <div class="callout callout-info">
+                    <span class="icon">&#8505;&#65039;</span>
+                    <span>You may withdraw consent at any time.</span>
+                </div>
+            </section>
+
+            <section id="s3">
+                <h2>3. How We Use Your Data</h2>
+                <p>We use your information to:</p>
+                <ul>
+                    <li>Provide medication reminders</li><li>Enable caregiver notifications</li>
+                    <li>Detect inactivity <em>(if enabled)</em></li><li>Send safety alerts</li>
+                    <li>Improve app functionality</li><li>Provide customer support</li>
+                    <li>Maintain security and fraud prevention</li>
+                </ul>
+                <div class="callout callout-info">
+                    <span class="icon">&#128274;</span>
+                    <div>
+                        <p style="margin-bottom:0.3rem;">We <strong>DO NOT</strong> sell personal data.</p>
+                        <p style="margin-bottom:0;">We <strong>DO NOT</strong> use your data for targeted advertising.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="s4">
+                <h2>4. International Data Transfers</h2>
+                <p>If you are located outside India (including the United States), your information may be transferred to and processed in India where our servers or service providers are located.</p>
+                <p>By using the App, you consent to this transfer. We implement reasonable safeguards for cross-border data transfers.</p>
+            </section>
+
+            <section id="s5">
+                <h2>5. Data Sharing</h2>
+                <p>We may share limited data with:</p>
+                <ul>
+                    <li>Secure cloud hosting providers</li>
+                    <li>SMS or notification service providers</li>
+                    <li>Analytics providers <em>(non-health behavioral data only)</em></li>
+                    <li>Legal authorities if required by law</li>
+                </ul>
+                <p>All service providers are contractually obligated to maintain confidentiality.</p>
+                <div class="callout callout-warning">
+                    <span class="icon">&#128683;</span>
+                    <span>We do <strong>NOT</strong> sell, rent, or trade user data.</span>
+                </div>
+            </section>
+
+            <section id="s6">
+                <h2>6. Data Storage &amp; Security</h2>
+                <p>We implement reasonable technical and organizational safeguards:</p>
+                <ul>
+                    <li>Encrypted data transmission (HTTPS / TLS)</li>
+                    <li>Secure cloud infrastructure</li><li>Role-based access control</li>
+                    <li>Limited employee access</li><li>Regular security monitoring</li>
+                </ul>
+                <p style="color:#777;font-size:0.9rem;"><em>No digital system is 100% secure.</em></p>
+            </section>
+
+            <section id="s7">
+                <h2>7. Data Retention</h2>
+                <p>We retain personal data:</p>
+                <ul>
+                    <li>As long as your account is active</li>
+                    <li>Until you request deletion</li>
+                    <li>As required under applicable law</li>
+                </ul>
+                <p>Upon account deletion, personal data will be permanently erased within <strong>[X] working days</strong> unless legally required to retain it.</p>
+            </section>
+
+            <section id="s8">
+                <h2>8. Your Rights</h2>
+                <h3>Under India's DPDP Act, 2023</h3>
+                <div class="rights-grid">
+                    <div class="right-item"><span class="icon">&#128065;&#65039;</span> Access your personal data</div>
+                    <div class="right-item"><span class="icon">&#9999;&#65039;</span> Correct inaccurate data</div>
+                    <div class="right-item"><span class="icon">&#8617;&#65039;</span> Withdraw consent</div>
+                    <div class="right-item"><span class="icon">&#128465;&#65039;</span> Request deletion</div>
+                    <div class="right-item"><span class="icon">&#128100;</span> Nominate a representative</div>
+                </div>
+                <h3>For United States Users</h3>
+                <p>We do not sell personal data. Users may request access, correction, or deletion of their stored data.</p>
+                <div class="contact-block">
+                    <p>To exercise any of these rights, contact us:</p>
+                    <p>&#128231; <a href="mailto:support@vasuvo.com">support@vasuvo.com</a></p>
+                </div>
+            </section>
+
+            <section id="s9">
+                <h2>9. Children's Privacy</h2>
+                <p>The App is not intended for individuals below 18 years of age without guardian supervision.</p>
+                <p>If we learn that personal data has been collected without proper consent, we will delete it promptly.</p>
+            </section>
+
+            <section id="s10">
+                <h2>10. Account Deletion</h2>
+                <p>Users may delete their account by:</p>
+                <ul>
+                    <li><strong>In-app:</strong> App Settings &#8594; Delete Account</li>
+                    <li><strong>Email:</strong> <a href="mailto:support@vasuvo.com" style="color:#4F7F6A;font-weight:600;">support@vasuvo.com</a></li>
+                </ul>
+                <p>Deletion requests will be processed within <strong>[X] working days</strong>.</p>
+            </section>
+
+            <section id="s11">
+                <h2>11. Medical Disclaimer</h2>
+                <p>Vasuvo is a reminder and caregiver coordination application.</p>
+                <div class="callout callout-danger">
+                    <span class="icon">&#128680;</span>
+                    <div>
+                        <p style="margin-bottom:0.4rem;"><strong>It is NOT:</strong></p>
+                        <ul style="margin-bottom:0.4rem;padding-left:1.2rem;">
+                            <li>A medical device</li><li>A diagnostic tool</li>
+                            <li>A substitute for professional medical advice</li>
+                            <li>An emergency response system</li>
+                        </ul>
+                        <p style="margin-bottom:0;">Always consult a licensed healthcare professional for medical advice. In case of emergency, contact local emergency services immediately.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="s12">
+                <h2>12. Grievance Officer <small style="font-size:0.75rem;color:#888;">(India Requirement)</small></h2>
+                <p>In compliance with Indian law:</p>
+                <div class="contact-block">
+                    <p><strong>Name:</strong> [Insert Name]</p>
+                    <p>&#128231; <a href="mailto:grievance@vasuvo.com">grievance@vasuvo.com</a></p>
+                    <p><strong>Address:</strong> [Registered Office Address]</p>
+                </div>
+                <p style="margin-top:0.8rem;">We will respond within the time period required under applicable law.</p>
+            </section>
+
+            <section id="s13">
+                <h2>13. Changes to This Privacy Policy</h2>
+                <p>We may update this Privacy Policy periodically. Updated versions will be posted within the App and on our website.</p>
+            </section>
+
+            <section id="s14">
+                <h2>14. Contact Information</h2>
+                <div class="contact-block">
+                    <p><strong>Vasuvo HealthTech Pvt Ltd</strong></p>
+                    <p>[Registered Address]</p>
+                    <p>&#128231; <a href="mailto:support@vasuvo.com">support@vasuvo.com</a></p>
+                    <p>&#127760; <a href="https://www.vasuvo.com" target="_blank" rel="noopener">www.vasuvo.com</a></p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Vasuvo HealthTech</h3>
+                    <p>Vasuvo HealthTech is an intelligent medication management platform designed to help individuals and families stay on top of their health.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="index.html#features">Medication Reminders</a></li>
+                        <li><a href="index.html#features">Family Management</a></li>
+                        <li><a href="index.html#ai-features">AI Health Insights</a></li>
+                        <li><a href="index.html#features">Medical Records</a></li>
+                        <li><a href="index.html#features">Lab Finder</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="mailto:support@vasuvo.com">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Get the App</h3>
+                    <ul>
+                        <li><a href="#">Download for Android</a></li>
+                        <li><a href="#">iOS (Coming Soon)</a></li>
+                        <li><a href="#">System Requirements</a></li>
+                        <li><a href="#">Release Notes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vasuvo HealthTech. All rights reserved. | Making healthcare management simple and accessible.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        const sections = document.querySelectorAll('.policy-content section[id]');
+        const tocLinks = document.querySelectorAll('.toc a');
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    tocLinks.forEach(l => { l.style.color = ''; l.style.fontWeight = ''; });
+                    const active = document.querySelector('.toc a[href="#' + entry.target.id + '"]');
+                    if (active) { active.style.color = '#4F7F6A'; active.style.fontWeight = '600'; }
+                }
+            });
+        }, { rootMargin: '-80px 0px -60% 0px' });
+        sections.forEach(s => obs.observe(s));
+    </script>
+</body>
+</html>

@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vasuvo HealthTech - Healthcare technology solutions including medication management, lab services, and caregiver management platforms.">
+    <meta name="keywords" content="healthcare technology, medication management, lab services, caregiver management, healthcare solutions">
+    <title>Vasuvo HealthTech - Healthcare Technology Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #4F7F6A;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 4rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(45, 95, 126, 0.2);
+        }
+
+        .product-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            align-items: center;
+        }
+
+        .product-card:nth-child(even) .product-content {
+            direction: rtl;
+        }
+
+        .product-card:nth-child(even) .product-info {
+            direction: ltr;
+        }
+
+        .product-info {
+            padding: 3rem;
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-label {
+            display: inline-block;
+            background: #e8f5f1;
+            color: #4F7F6A;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product-info h3 {
+            font-size: 2rem;
+            color: #4F7F6A;
+            margin-bottom: 1rem;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: #4F7F6A;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .product-visual {
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            min-height: 400px;
+            text-align: center;
+        }
+
+        .product-visual.care {
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+        }
+
+        .product-visual.lab {
+            background: linear-gradient(135deg, #6B9080 0%, #4a6b5b 100%);
+        }
+
+        .product-visual.suite {
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+        }
+
+        .visual-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .visual-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #4F7F6A;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #3a5f52;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 127, 106, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #4F7F6A;
+            border: 2px solid #4F7F6A;
+        }
+
+        .btn-outline:hover {
+            background: #4F7F6A;
+            color: white;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Value Proposition */
+        .value-prop {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            background: #e8f5f1;
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            color: #4F7F6A;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: #4F7F6A;
+        }
+
+        .btn-white:hover {
+            background: #f0f0f0;
+        }
+
+        /* Footer */
+        footer {
+            background: #3a5f52;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #8bc9ad;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #8bc9ad;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .product-content {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card:nth-child(even) .product-content {
+                direction: ltr;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .product-info {
+                padding: 2rem;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Vasuvo HealthTech Logo">
+                <div>Vasuvo HealthTech</div>
+            </div>
+            <ul>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#why-vasuvo">Why Vasuvo</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="index.html">Vasuvo Care</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Vasuvo HealthTech</h1>
+            <p class="tagline">Innovative Healthcare Technology Solutions</p>
+            <p>We build comprehensive healthcare management platforms that improve patient outcomes, streamline operations, and empower healthcare providers.</p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">Our Product Suite</h2>
+            <p class="section-subtitle">Three powerful solutions designed to transform healthcare delivery and management</p>
+
+            <!-- Vasuvo Care -->
+            <div class="product-card">
+                <div class="product-content">
+                    <div class="product-info">
+                        <div class="product-icon">💊</div>
+                        <span class="product-label">Patient & Family Solution</span>
+                        <h3>Vasuvo Care</h3>
+                        <p>Intelligent medication management system that helps patients and families stay on top of their health. Never miss a dose, get AI-powered health insights, and manage family medications from one place.</p>
+                        
+                        <ul class="features-list">
+                            <li>Smart medication reminders with voice notifications</li>
+                            <li>Family health management & connection</li>
+                            <li>AI-powered health insights & drug interaction warnings</li>
+                            <li>Medical records storage & organization</li>
+                            <li>Medication adherence tracking & reporting</li>
+                            <li>Secure family chat & location sharing</li>
+                        </ul>
+
+                        <div style="display: flex; gap: 1rem;">
+                            <a href="index.html" class="btn btn-primary">Learn More</a>
+                            <a href="#contact" class="btn btn-outline">Request Demo</a>
+                        </div>
+                    </div>
+                    <div class="product-visual care">
+                        <div class="visual-icon">📱</div>
+                        <div class="visual-text">Mobile App for Patients</div>
+                        <p style="margin-top: 1rem; opacity: 0.9;">50,000+ active users<br>98% satisfaction rate</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vasuvo Lab -->
+            <div class="product-card">
+                <div class="product-content">
+                    <div class="product-info">
+                        <div class="product-icon">🔬</div>
+                        <span class="product-label">Lab Services Platform</span>
+                        <h3>Vasuvo Lab</h3>
+                        <p>Revolutionary platform that brings lab services directly to patients. Connect patients with nearby diagnostic centers, streamline sample collection, and deliver results with AI-powered interpretations.</p>
+                        
+                        <ul class="features-list">
+                            <li>Location-based lab finder & booking</li>
+                            <li>At-home sample collection scheduling</li>
+                            <li>AI-powered lab report analysis & interpretation</li>
+                            <li>Digital report storage & sharing</li>
+                            <li>Test result notifications & reminders</li>
+                            <li>Integration with healthcare providers</li>
+                        </ul>
+
+                        <div style="display: flex; gap: 1rem;">
+                            <a href="#contact" class="btn btn-primary">Learn More</a>
+                            <a href="#contact" class="btn btn-outline">Partner With Us</a>
+                        </div>
+                    </div>
+                    <div class="product-visual lab">
+                        <div class="visual-icon">🏥</div>
+                        <div class="visual-text">Lab Network Platform</div>
+                        <p style="margin-top: 1rem; opacity: 0.9;">Connect with 500+ labs<br>Same-day results available</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vasuvo Caregiver Suite -->
+            <div class="product-card">
+                <div class="product-content">
+                    <div class="product-info">
+                        <div class="product-icon">👥</div>
+                        <span class="product-label">Enterprise Solution</span>
+                        <h3>Vasuvo Caregiver Suite</h3>
+                        <p>Comprehensive management platform for caregiver companies. Manage your entire caregiver workforce, track performance metrics, coordinate patient care, and optimize operations—all from one centralized dashboard.</p>
+                        
+                        <ul class="features-list">
+                            <li>Centralized caregiver management dashboard</li>
+                            <li>Real-time performance tracking & analytics</li>
+                            <li>Patient assignment & scheduling automation</li>
+                            <li>Medication adherence monitoring for all patients</li>
+                            <li>Time tracking & payroll integration</li>
+                            <li>Training & certification management</li>
+                            <li>Client communication & reporting tools</li>
+                            <li>Compliance & documentation management</li>
+                        </ul>
+
+                        <div style="display: flex; gap: 1rem;">
+                            <a href="#contact" class="btn btn-primary">Schedule Demo</a>
+                            <a href="#contact" class="btn btn-outline">Enterprise Pricing</a>
+                        </div>
+                    </div>
+                    <div class="product-visual suite">
+                        <div class="visual-icon">💼</div>
+                        <div class="visual-text">Enterprise Management</div>
+                        <p style="margin-top: 1rem; opacity: 0.9;">Manage 100s of caregivers<br>Real-time insights & reporting</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Trusted by Healthcare Providers Nationwide</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Partner Labs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Caregiver Companies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section id="why-vasuvo" class="value-prop">
+        <div class="container">
+            <h2 class="section-title">Why Choose Vasuvo HealthTech?</h2>
+            <p class="section-subtitle">We're committed to transforming healthcare delivery through innovative technology</p>
+            
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="value-icon">🤖</div>
+                    <h3>AI-Powered Intelligence</h3>
+                    <p>Advanced AI technology provides personalized insights, drug interaction warnings, and intelligent recommendations.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">🔒</div>
+                    <h3>HIPAA Compliant</h3>
+                    <p>Enterprise-grade security with full HIPAA compliance. Your data is encrypted and protected at every level.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">📱</div>
+                    <h3>Mobile-First Design</h3>
+                    <p>Beautiful, intuitive interfaces designed for smartphones. Easy to use for all age groups and tech skill levels.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">🔗</div>
+                    <h3>Seamless Integration</h3>
+                    <p>Connect with existing healthcare systems, EHRs, and lab networks. APIs available for custom integrations.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">📊</div>
+                    <h3>Real-Time Analytics</h3>
+                    <p>Comprehensive dashboards with live data, performance metrics, and actionable insights for better decision-making.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3>Proven Results</h3>
+                    <p>80% improvement in medication adherence. Reduced hospital readmissions. Better health outcomes for patients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Healthcare?</h2>
+            <p>Join thousands of healthcare providers, patients, and organizations using Vasuvo HealthTech solutions</p>
+            <div class="cta-buttons">
+                <a href="mailto:contact@vasuvo.com" class="btn btn-white">Contact Sales</a>
+                <a href="#products" class="btn btn-outline" style="color: white; border-color: white;">Explore Products</a>
+            </div>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8;">
+                📞 Call us: 1-800-VASUVO | 📧 Email: contact@vasuvo.com
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Vasuvo HealthTech</h3>
+                    <p style="color: rgba(255, 255, 255, 0.7); line-height: 1.8;">
+                        Leading healthcare technology company providing innovative solutions for medication management, lab services, and caregiver operations.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="index.html">Vasuvo Care - Patient App</a></li>
+                        <li><a href="#products">Vasuvo Lab - Lab Services</a></li>
+                        <li><a href="#products">Vasuvo Caregiver Suite</a></li>
+                        <li><a href="#contact">Enterprise Solutions</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#why-vasuvo">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">HIPAA Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vasuvo HealthTech. All rights reserved. | Transforming healthcare through innovative technology.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.product-card, .value-card, .stat-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

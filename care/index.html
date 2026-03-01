@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vasuvo HealthTech - Your intelligent medication management companion. Never miss a dose, manage family health, and get AI-powered health insights.">
+    <meta name="keywords" content="medication reminder, health app, family health management, AI health insights">
+    <title>Vasuvo HealthTech - Smart Medication Management for Your Family</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #4F7F6A;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #4F7F6A;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #4F7F6A;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(79, 127, 106, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #4F7F6A;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .benefit-list {
+            list-style: none;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        .benefit-item:hover {
+            background: #e8f5f1;
+        }
+
+        .benefit-icon {
+            font-size: 1.8rem;
+            color: #4F7F6A;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h4 {
+            color: #4F7F6A;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-content p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .benefit-image {
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            min-height: 400px;
+        }
+
+        .benefit-image h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-stat {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #4F7F6A;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step:not(:last-child) .step-number::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 100%;
+            height: 2px;
+            background: #4F7F6A;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .step h3 {
+            color: #4F7F6A;
+            margin-bottom: 0.5rem;
+        }
+
+        .step p {
+            color: #666;
+        }
+
+        /* AI Features */
+        .ai-features {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+            color: white;
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .ai-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .ai-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .ai-card h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #4F7F6A;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #4F7F6A;
+        }
+
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            background: #2a3d34;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #8bc9ad;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #8bc9ad;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .step:not(:last-child) .step-number::after {
+                display: none;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Vasuvo HealthTech Logo">
+                <div>Vasuvo HealthTech</div>
+            </div>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#ai-features">AI Insights</a></li>
+                <li><a href="products.html">All Products</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Your Family's Health, Simplified</h1>
+            <p>Smart medication management powered by AI. Never miss a dose, manage your family's health, and get personalized health insights—all in one app.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Download for Android</a>
+                <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Everything You Need to Stay Healthy</h2>
+            <p class="section-subtitle">Comprehensive medication and health management tools for the whole family</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <h3>Smart Reminders</h3>
+                    <p>Never forget a medication again. Get intelligent reminders based on your schedule, with voice notifications and flexible timing options.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Family Management</h3>
+                    <p>Connect with family members and manage their medications remotely. Perfect for caring for aging parents or children with special needs.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Health Insights</h3>
+                    <p>Get personalized diet tips, drug interaction warnings, and lifestyle recommendations powered by advanced AI technology.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>Medical Records</h3>
+                    <p>Store and organize lab reports, prescriptions, and medical documents securely in one place. Easy access when you need it.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔬</div>
+                    <h3>Lab Finder</h3>
+                    <p>Find nearby diagnostic labs and clinics based on your location. Book appointments and keep track of test results.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Family Chat</h3>
+                    <p>Stay connected with your health care circle. Share updates, coordinate care, and support each other's health journey.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Location Sharing</h3>
+                    <p>Share your location with family members for safety and peace of mind. Optional privacy controls for when you need them.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛒</div>
+                    <h3>Medicine Marketplace</h3>
+                    <p>Order medications directly from the app. Compare prices, set up refill reminders, and get medicines delivered to your door.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Privacy First</h3>
+                    <p>Your health data is encrypted and secure. HIPAA-compliant storage with full control over who sees your information.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <h2 class="section-title">Why Choose Vasuvo HealthTech?</h2>
+            <p class="section-subtitle">More than just reminders—a complete health management solution</p>
+            
+            <div class="benefits-grid">
+                <ul class="benefit-list">
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✅</div>
+                        <div class="benefit-content">
+                            <h4>Improve Medication Adherence</h4>
+                            <p>Studies show 125,000 deaths annually are due to poor medication adherence. Our smart reminders help you stay on track.</p>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">💰</div>
+                        <div class="benefit-content">
+                            <h4>Save Money</h4>
+                            <p>Avoid expensive emergency visits by taking medications correctly. Compare medicine prices to find the best deals.</p>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">🎯</div>
+                        <div class="benefit-content">
+                            <h4>Better Health Outcomes</h4>
+                            <p>Consistent medication adherence leads to better disease management and improved quality of life for chronic conditions.</p>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">👵</div>
+                        <div class="benefit-content">
+                            <h4>Peace of Mind for Caregivers</h4>
+                            <p>Monitor elderly parents or family members remotely. Get notified if doses are missed and track their health journey.</p>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">🧠</div>
+                        <div class="benefit-content">
+                            <h4>Personalized Health Intelligence</h4>
+                            <p>AI analyzes your medications and provides tailored diet tips, exercise suggestions, and drug interaction warnings.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="benefit-image">
+                    <h3>Join Thousands of Families</h3>
+                    <div class="benefit-stat">50,000+</div>
+                    <p style="font-size: 1.2rem; opacity: 0.9;">Active users managing their health with Vasuvo HealthTech</p>
+                    <div style="margin-top: 2rem;">
+                        <div style="font-size: 2rem; font-weight: bold;">98%</div>
+                        <p>User satisfaction rate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Getting Started is Easy</h2>
+            <p class="section-subtitle">Set up in minutes and start managing your health today</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Create Your Profile</h3>
+                    <p>Sign up with your phone number and set up your health profile in seconds.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Add Medications</h3>
+                    <p>Scan prescriptions or manually enter your medications with dosage and schedule.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Set Reminders</h3>
+                    <p>Customize reminder times, notification sounds, and snooze options to fit your routine.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Stay Healthy</h3>
+                    <p>Get timely reminders, AI insights, and track your medication adherence effortlessly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Features -->
+    <section id="ai-features" class="ai-features">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Powered by Advanced AI</h2>
+            <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.9);">Intelligent health insights tailored to your unique needs</p>
+            
+            <div class="ai-grid">
+                <div class="ai-card">
+                    <h3>⚠️ Drug Interaction Warnings</h3>
+                    <p>Automatically detects potential interactions between your medications and alerts you to dangerous combinations.</p>
+                </div>
+
+                <div class="ai-card">
+                    <h3>🥗 Medication-Specific Diet Tips</h3>
+                    <p>Get personalized nutrition advice based on your medications. Learn what foods to eat and what to avoid.</p>
+                </div>
+
+                <div class="ai-card">
+                    <h3>📊 Lab Report Analysis</h3>
+                    <p>Upload lab reports and receive AI-powered interpretations in plain language. Understand what your results mean.</p>
+                </div>
+
+                <div class="ai-card">
+                    <h3>🎯 Personalized Recommendations</h3>
+                    <p>Receive lifestyle suggestions, exercise tips, and wellness advice tailored to your health conditions and age.</p>
+                </div>
+
+                <div class="ai-card">
+                    <h3>📈 Adherence Intelligence</h3>
+                    <p>AI learns your patterns and optimizes reminder timing to maximize adherence and minimize disruption.</p>
+                </div>
+
+                <div class="ai-card">
+                    <h3>🔮 Health Predictions</h3>
+                    <p>Get proactive insights about potential health risks based on your medication patterns and health data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Users Say</h2>
+            <p class="section-subtitle">Real stories from real people managing their health with Vasuvo HealthTech</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Vasuvo HealthTech has been a game-changer for managing my mother's diabetes medications. The family connection feature lets me make sure she never misses a dose, even when I'm not with her."</p>
+                    <div class="testimonial-author">Sarah Martinez</div>
+                    <div class="testimonial-role">Caregiver, Managing Parent's Health</div>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"As someone on multiple medications for hypertension, the drug interaction warnings have been incredibly valuable. I caught a potential issue before my doctor did!"</p>
+                    <div class="testimonial-author">James Chen</div>
+                    <div class="testimonial-role">Heart Disease Patient</div>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"The AI diet recommendations are spot-on. I learned which foods to avoid with my medications, and my symptoms have improved significantly."</p>
+                    <div class="testimonial-author">Priya Sharma</div>
+                    <div class="testimonial-role">Chronic Condition Management</div>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"The voice reminders are perfect for my elderly father who has vision issues. He can hear his medication schedule clearly without struggling to read his phone."</p>
+                    <div class="testimonial-author">Michael O'Brien</div>
+                    <div class="testimonial-role">Family Caregiver</div>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"I love being able to store all my medical records in one place. No more digging through papers when I need to show my doctor something!"</p>
+                    <div class="testimonial-author">Linda Thompson</div>
+                    <div class="testimonial-role">Managing Multiple Conditions</div>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"The medication adherence tracker helps me visualize my consistency. Seeing my streak motivates me to stay on schedule every day."</p>
+                    <div class="testimonial-author">Robert Jackson</div>
+                    <div class="testimonial-role">Post-Surgery Recovery</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Start Your Health Journey Today</h2>
+            <p>Join thousands of families who trust Vasuvo HealthTech for their medication management</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Download Now - It's Free</a>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Available on Android • iOS Coming Soon</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Vasuvo HealthTech</h3>
+                    <p style="color: rgba(255, 255, 255, 0.7); line-height: 1.8;">
+                        Vasuvo HealthTech is an intelligent medication management platform designed to help individuals and families stay on top of their health. Our mission is to make healthcare more accessible and manageable for everyone.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#features">Medication Reminders</a></li>
+                        <li><a href="#features">Family Management</a></li>
+                        <li><a href="#ai-features">AI Health Insights</a></li>
+                        <li><a href="#features">Medical Records</a></li>
+                        <li><a href="#features">Lab Finder</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="t&c.html">Terms &amp; Conditions</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Get the App</h3>
+                    <ul>
+                        <li><a href="#">Download for Android</a></li>
+                        <li><a href="#">iOS (Coming Soon)</a></li>
+                        <li><a href="#">System Requirements</a></li>
+                        <li><a href="#">Release Notes</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vasuvo HealthTech. All rights reserved. | Making healthcare management simple and accessible.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.feature-card, .benefit-item, .step, .ai-card, .testimonial').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
