@@ -426,14 +426,14 @@
                     <h2>Send Us a Message</h2>
                     <p class="form-subtitle">Fill in the form below and your query will be sent directly to our team.</p>
 
-                    <div class="form-message success" id="successMsg">
-                        ✅ Your message has been sent! We'll get back to you shortly.
-                    </div>
-                    <div class="form-message error" id="errorMsg">
-                        ❌ Something went wrong. Please try emailing us directly at <a href="mailto:contact@vasuvo.com">contact@vasuvo.com</a>.
-                    </div>
+                    <form id="contactForm" action="https://formsubmit.co/contact@vasuvo.com" method="POST" novalidate>
+                        <!-- Formsubmit configuration -->
+                        <input type="hidden" name="_subject" value="[Vasuvo Care] New Contact Form Submission">
+                        <input type="hidden" name="_next" value="https://vasuvo.com/care/contact.html?sent=1">
+                        <input type="hidden" name="_captcha" value="false">
+                        <!-- Honeypot spam protection -->
+                        <input type="text" name="_honey" style="display:none">
 
-                    <form id="contactForm" novalidate>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name <span class="required">*</span></label>
@@ -456,9 +456,9 @@
                                 <option value="" disabled selected>Select a topic…</option>
                                 <option value="General Query">General Query</option>
                                 <option value="Technical Support">Technical Support</option>
-                                <option value="Billing & Subscription">Billing &amp; Subscription</option>
+                                <option value="Billing &amp; Subscription">Billing &amp; Subscription</option>
                                 <option value="Feature Request">Feature Request</option>
-                                <option value="Privacy & Data">Privacy &amp; Data</option>
+                                <option value="Privacy &amp; Data">Privacy &amp; Data</option>
                                 <option value="Partnership">Partnership</option>
                                 <option value="Other">Other</option>
                             </select>
@@ -469,8 +469,13 @@
                             <textarea id="message" name="message" placeholder="Describe your question or feedback in detail…" required></textarea>
                         </div>
 
-                        <button type="submit" class="submit-btn">Send Message</button>
+                        <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
                     </form>
+
+                    <!-- Success banner shown after redirect back -->
+                    <div class="form-message success" id="successMsg" style="display:none">
+                        ✅ Your message has been sent! We'll get back to you shortly.
+                    </div>
                 </div>
 
             </div>
@@ -523,55 +528,23 @@
     </footer>
 
     <script>
-        const form = document.getElementById('contactForm');
-        const successMsg = document.getElementById('successMsg');
-        const errorMsg = document.getElementById('errorMsg');
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // Basic client-side validation
-            const firstName = document.getElementById('firstName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value.trim();
-
-            if (!firstName || !email || !subject || !message) {
-                return;
+        // Show success banner if redirected back after successful submission
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('sent') === '1') {
+            const banner = document.getElementById('successMsg');
+            if (banner) {
+                banner.style.display = 'block';
+                banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
+            // Clean the URL without reloading
+            history.replaceState(null, '', window.location.pathname);
+        }
 
-            // Build mailto link and open it
-            const toAddress = 'contact@vasuvo.com';
-            const mailSubject = encodeURIComponent('[Vasuvo Care] ' + subject);
-            const lastName = document.getElementById('lastName').value.trim();
-            const fullName = lastName ? firstName + ' ' + lastName : firstName;
-
-            const body = encodeURIComponent(
-                'Name: ' + fullName + '\n' +
-                'Email: ' + email + '\n' +
-                'Subject: ' + subject + '\n\n' +
-                'Message:\n' + message
-            );
-
-            const mailtoLink = 'mailto:' + toAddress +
-                '?subject=' + mailSubject +
-                '&body=' + body;
-
-            // Attempt to open mail client
-            const link = document.createElement('a');
-            link.href = mailtoLink;
-            link.style.display = 'none';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            // Show success message and reset form
-            successMsg.style.display = 'block';
-            errorMsg.style.display = 'none';
-            form.reset();
-
-            // Scroll success message into view
-            successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Disable submit button while form is submitting
+        document.getElementById('contactForm').addEventListener('submit', function () {
+            const btn = document.getElementById('submitBtn');
+            btn.textContent = 'Sending…';
+            btn.disabled = true;
         });
     </script>
 
