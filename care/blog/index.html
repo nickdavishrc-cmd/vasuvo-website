@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vasuvo Health Blog — expert articles on heart health, diabetes, nutrition, mental wellness and more.">
+  <title>Vasuvo Health Blog</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    /* ── Nav ──────────────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #00796B 0%, #005a50 100%);
+      color: white;
+      padding: 0.9rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { font-size: 1.4rem; font-weight: 700; color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .logo span { font-size: 1rem; font-weight: 400; opacity: 0.82; }
+    nav a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.95rem; font-weight: 500; margin-left: 1.4rem; transition: opacity .2s; }
+    nav a:hover { opacity: 0.7; }
+    nav a.active { border-bottom: 2px solid white; padding-bottom: 2px; }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #00796B 0%, #005a50 100%);
+      color: white;
+      text-align: center;
+      padding: 3.5rem 1.2rem 3rem;
+    }
+    .hero h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: .5rem; }
+    .hero p { font-size: 1.05rem; opacity: .88; }
+
+    /* ── Tag filter ───────────────────────────────────────────── */
+    .tag-bar {
+      max-width: 1100px;
+      margin: 1.6rem auto 0;
+      padding: 0 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .tag-btn {
+      padding: .37rem .95rem;
+      border-radius: 999px;
+      border: 1.5px solid #00796B;
+      background: white;
+      color: #00796B;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .18s, color .18s;
+    }
+    .tag-btn:hover, .tag-btn.active {
+      background: #00796B;
+      color: white;
+    }
+
+    /* ── Article grid ─────────────────────────────────────────── */
+    .articles {
+      max-width: 1100px;
+      margin: 1.4rem auto 3rem;
+      padding: 0 1.2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.2rem;
+    }
+
+    /* ── Article card ─────────────────────────────────────────── */
+    .card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      display: flex;
+      flex-direction: column;
+      transition: transform .18s, box-shadow .18s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+
+    .card-cover {
+      height: 140px;
+      background: linear-gradient(135deg, #00796B, #005a50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-cover img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+    .card-cover .emoji-fallback { position: relative; z-index: 1; }
+
+    .card-body { padding: 1rem 1.1rem 1.1rem; flex: 1; display: flex; flex-direction: column; }
+    .card-cluster {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #00796B;
+      margin-bottom: .3rem;
+    }
+    .card-title { font-size: 1rem; font-weight: 700; line-height: 1.35; margin-bottom: .45rem; color: #111827; }
+    .card-summary { font-size: .875rem; color: #4b5563; flex: 1; }
+    .card-meta {
+      margin-top: .7rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .78rem;
+      color: #6b7280;
+    }
+    .card-meta .tag {
+      background: #E8F5E9;
+      color: #00796B;
+      border-radius: 999px;
+      padding: .15rem .6rem;
+      font-weight: 600;
+    }
+    .read-time::before { content: '🕐 '; }
+
+    /* ── States ───────────────────────────────────────────────── */
+    .state-msg {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1.2rem;
+      text-align: center;
+      color: #6b7280;
+    }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid #e5e7eb;
+      border-top-color: #00796B;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Deep-link banner ─────────────────────────────────────── */
+    .app-banner {
+      background: #E8F5E9;
+      border-top: 1px solid #A5D6A7;
+      text-align: center;
+      padding: 1.1rem 1.2rem;
+      font-size: .92rem;
+      color: #1f4e3d;
+    }
+    .app-banner a {
+      color: #00796B;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      .articles { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ───────────────────────────────────────────────────────── -->
+<header>
+  <div class="nav-inner">
+    <a class="logo" href="/care/index.html">
+      🌿 Vasuvo <span>Care</span>
+    </a>
+    <nav>
+      <a href="/care/index.html">Home</a>
+      <a href="/care/products.html">App</a>
+      <a href="/care/blog/index.html" class="active">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ──────────────────────────────────────────────────────── -->
+<section class="hero">
+  <h1>🌿 Vasuvo Health Blog</h1>
+  <p>Evidence-based articles on heart health, diabetes, nutrition and more — curated by our care team.</p>
+</section>
+
+<!-- ── Tag filter ────────────────────────────────────────────────── -->
+<div class="tag-bar" id="tagBar">
+  <!-- buttons injected by JS after articles load -->
+</div>
+
+<!-- ── Article grid ──────────────────────────────────────────────── -->
+<div id="articles" class="articles">
+  <div class="state-msg"><div class="spinner"></div>Loading articles…</div>
+</div>
+
+<!-- ── App deep-link banner ──────────────────────────────────────── -->
+<div class="app-banner">
+  📱 Read these articles on the go — open them in the <a href="https://onelink.to/vasuvo" target="_blank">Vasuvo app</a> under <strong>Healthy Pages</strong>.
+</div>
+
+<script>
+  // ── Config ────────────────────────────────────────────────────────────────
+  // Auto-detect: use the same origin when served from the real domain,
+  // fall back to the local dev server when opened as file:// or localhost.
+  const _origin = window.location.hostname === 'vasuvo.com'
+    ? 'https://api.vasuvo.com'
+    : 'http://192.168.1.113:8000';
+  const API_BASE = _origin;
+
+  // Cluster display order — Cardiometabolic first
+  const CLUSTER_ORDER = [
+    'Cardiometabolic', 'General', 'Diabetes', 'Heart Health',
+    'Nutrition', 'Mental Wellness', 'Seniors',
+  ];
+
+  let _allArticles = [];
+  let _activeTag   = 'All';
+
+  // ── Fetch ─────────────────────────────────────────────────────────────────
+  async function loadArticles() {
+    try {
+      // Public endpoint — returns all published articles
+      const r = await fetch(`${API_BASE}/api/v1/content/articles?language=en`, {
+        headers: { 'Accept': 'application/json' },
+      });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      _allArticles = await r.json();
+      buildTagBar();
+      render('All');
+    } catch (e) {
+      document.getElementById('articles').innerHTML =
+        `<div class="state-msg">⚠️ Could not load articles right now.<br><small>${e.message}</small></div>`;
+    }
+  }
+
+  // ── Tag bar ───────────────────────────────────────────────────────────────
+  function buildTagBar() {
+    // Collect unique clusters, Cardiometabolic first
+    const present = [...new Set(_allArticles.map(a => a.cluster))];
+    const ordered = CLUSTER_ORDER.filter(c => present.includes(c))
+      .concat(present.filter(c => !CLUSTER_ORDER.includes(c)));
+
+    const bar = document.getElementById('tagBar');
+    bar.innerHTML = '';
+
+    ['All', ...ordered].forEach(tag => {
+      const btn = document.createElement('button');
+      btn.className = 'tag-btn' + (tag === 'All' ? ' active' : '');
+      btn.textContent = tag;
+      btn.addEventListener('click', () => {
+        _activeTag = tag;
+        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        render(tag);
+      });
+      bar.appendChild(btn);
+    });
+  }
+
+  // ── Render articles ───────────────────────────────────────────────────────
+  function render(tag) {
+    const filtered = tag === 'All'
+      ? _allArticles
+      : _allArticles.filter(a => a.cluster === tag || (a.tags || []).includes(tag));
+
+    // Sort: Cardiometabolic cluster first, then by updated_at desc
+    filtered.sort((a, b) => {
+      const ai = CLUSTER_ORDER.indexOf(a.cluster);
+      const bi = CLUSTER_ORDER.indexOf(b.cluster);
+      if (ai !== bi) return ai - bi;
+      return new Date(b.updated_at) - new Date(a.updated_at);
+    });
+
+    const container = document.getElementById('articles');
+
+    if (filtered.length === 0) {
+      container.innerHTML = '<div class="state-msg">No articles found for this topic yet.</div>';
+      return;
+    }
+
+    container.innerHTML = filtered.map(a => cardHtml(a)).join('');
+  }
+
+  // ── Card HTML ─────────────────────────────────────────────────────────────
+  function cardHtml(a) {
+    const coverHtml = a.cover_image_url
+      ? `<img src="${escHtml(a.cover_image_url)}" alt="${escHtml(a.title)}" loading="lazy" />`
+        + `<span class="emoji-fallback">${escHtml(a.emoji || '📄')}</span>`
+      : `<span class="emoji-fallback">${escHtml(a.emoji || '📄')}</span>`;
+
+    const tagsHtml = (a.tags || []).slice(0, 2)
+      .map(t => `<span class="tag">${escHtml(t)}</span>`).join('');
+
+    const articleUrl = `/care/blog/article.html?id=${encodeURIComponent(a.id)}`;
+
+    return `
+      <a class="card" href="${articleUrl}">
+        <div class="card-cover">${coverHtml}</div>
+        <div class="card-body">
+          <div class="card-cluster">${escHtml(a.cluster)}</div>
+          <div class="card-title">${escHtml(a.title)}</div>
+          <div class="card-summary">${escHtml(a.summary)}</div>
+          <div class="card-meta">
+            <span class="read-time">${a.reading_time} min read</span>
+            ${tagsHtml}
+          </div>
+        </div>
+      </a>`;
+  }
+
+  function escHtml(s) {
+    return String(s ?? '')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  loadArticles();
+</script>
+</body>
+</html>
