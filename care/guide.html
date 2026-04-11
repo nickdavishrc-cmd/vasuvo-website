@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vasuvo Care Complete User Guide — Learn how to use medication reminders, family connections, AI insights, vitals tracking, and more.">
+    <title>Vasuvo Care — User Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        header {
+            background: #2a3d34;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo img { height: 44px; width: auto; }
+
+        nav ul { display: flex; list-style: none; gap: 1.5rem; }
+        nav a { color: white; text-decoration: none; font-weight: 500; transition: opacity 0.3s; }
+        nav a:hover { opacity: 0.8; }
+
+        /* Layout */
+        .page-wrap {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        /* Sidebar TOC */
+        .toc {
+            flex: 0 0 260px;
+            position: sticky;
+            top: 90px;
+            background: white;
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            border-left: 4px solid #4F7F6A;
+            max-height: calc(100vh - 110px);
+            overflow-y: auto;
+        }
+
+        .toc h2 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #4F7F6A;
+            margin-bottom: 1rem;
+        }
+
+        .toc ul { list-style: none; }
+
+        .toc li a {
+            display: block;
+            padding: 0.3rem 0.5rem;
+            border-radius: 6px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .toc li a:hover,
+        .toc li a.active {
+            background: #e8f5f1;
+            color: #2a6049;
+            font-weight: 600;
+        }
+
+        /* Main content */
+        .guide-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .guide-content h1 {
+            font-size: 2.2rem;
+            color: #2a3d34;
+            margin-bottom: 0.5rem;
+        }
+
+        .guide-meta {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        /* Sections */
+        .guide-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            scroll-margin-top: 90px;
+        }
+
+        .guide-section h2 {
+            font-size: 1.5rem;
+            color: #4F7F6A;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e8f5f1;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .guide-section h3 {
+            font-size: 1.1rem;
+            color: #2a3d34;
+            margin: 1.5rem 0 0.6rem;
+        }
+
+        .guide-section h4 {
+            font-size: 1rem;
+            color: #4F7F6A;
+            margin: 1rem 0 0.4rem;
+        }
+
+        .guide-section p { color: #555; margin-bottom: 0.8rem; }
+
+        .guide-section ol,
+        .guide-section ul {
+            margin: 0.5rem 0 1rem 1.2rem;
+            color: #555;
+        }
+
+        .guide-section li { margin-bottom: 0.4rem; }
+
+        /* Tables */
+        .guide-section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .guide-section th {
+            background: #4F7F6A;
+            color: white;
+            padding: 0.7rem 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .guide-section th:first-child { border-radius: 8px 0 0 0; }
+        .guide-section th:last-child { border-radius: 0 8px 0 0; }
+
+        .guide-section td {
+            padding: 0.65rem 1rem;
+            border-bottom: 1px solid #f0f0f0;
+            color: #444;
+        }
+
+        .guide-section tr:last-child td { border-bottom: none; }
+        .guide-section tr:nth-child(even) td { background: #f8f9fa; }
+
+        /* Check marks */
+        .check { color: #4F7F6A; font-weight: bold; }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            background: #e8f5f1;
+            color: #4F7F6A;
+            border: 1px solid #b2ddc9;
+            border-radius: 20px;
+            padding: 2px 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        .badge.plus { background: #fff8e1; color: #c67c00; border-color: #f5c842; }
+
+        /* Tip / Note boxes */
+        .note {
+            background: #e8f5f1;
+            border-left: 4px solid #4F7F6A;
+            border-radius: 0 8px 8px 0;
+            padding: 0.8rem 1.2rem;
+            margin: 1rem 0;
+            color: #2a5a45;
+            font-size: 0.92rem;
+        }
+
+        blockquote {
+            border-left: 4px solid #4F7F6A;
+            padding: 0.6rem 1rem;
+            margin: 1rem 0;
+            background: #f0faf5;
+            border-radius: 0 8px 8px 0;
+            color: #3a6b55;
+            font-style: italic;
+        }
+
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        /* Footer */
+        footer {
+            background: #2a3d34;
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        footer a { color: #8bc9ad; text-decoration: none; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .toc { display: none; }
+            .page-wrap { padding: 90px 16px 40px; }
+            .guide-section { padding: 1.5rem; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Vasuvo Care Logo">
+                <span>Vasuvo Care</span>
+            </a>
+            <ul>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-wrap">
+
+        <!-- Sidebar TOC -->
+        <aside class="toc">
+            <h2>Contents</h2>
+            <ul>
+                <li><a href="#s1">1. Getting Started</a></li>
+                <li><a href="#s2">2. Home Screen</a></li>
+                <li><a href="#s3">3. Medications</a></li>
+                <li><a href="#s4">4. Health Tracker</a></li>
+                <li><a href="#s5">5. AI Insights</a></li>
+                <li><a href="#s6">6. Medical Records</a></li>
+                <li><a href="#s7">7. Family &amp; Connections</a></li>
+                <li><a href="#s8">8. Messages</a></li>
+                <li><a href="#s9">9. Location Sharing</a></li>
+                <li><a href="#s10">10. For You Tab</a></li>
+                <li><a href="#s11">11. Healthy Pages</a></li>
+                <li><a href="#s12">12. Lab Finder</a></li>
+                <li><a href="#s13">13. My Rewards</a></li>
+                <li><a href="#s14">14. Spiritual Moment</a></li>
+                <li><a href="#s15">15. Activity Monitoring</a></li>
+                <li><a href="#s16">16. Adherence Report</a></li>
+                <li><a href="#s17">17. Profile &amp; Settings</a></li>
+                <li><a href="#s18">18. Health Card</a></li>
+                <li><a href="#s19">19. Subscription Plans</a></li>
+                <li><a href="#s20">20. SOS Emergency</a></li>
+                <li><a href="#s21">21. Notifications</a></li>
+                <li><a href="#s22">22. Caregiver Login</a></li>
+                <li><a href="#s23">23. Tips &amp; Troubleshooting</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Guide -->
+        <main class="guide-content">
+
+            <h1>Vasuvo Care — User Guide</h1>
+            <p class="guide-meta">Version 1.0 &nbsp;|&nbsp; Platform: Android (iOS coming soon) &nbsp;|&nbsp; Your intelligent family health companion</p>
+
+            <!-- 1 -->
+            <section class="guide-section" id="s1">
+                <h2>🚀 1. Getting Started</h2>
+
+                <h3>Who is Vasuvo Care for?</h3>
+                <table>
+                    <tr><th>Role</th><th>Who</th><th>What they do</th></tr>
+                    <tr><td><strong>Member / Patient</strong></td><td>The person taking medication</td><td>Manages their own medications, logs vitals, gets reminders</td></tr>
+                    <tr><td><strong>Care Partner</strong></td><td>Family member, son/daughter, spouse</td><td>Monitors the patient, gets missed-dose alerts, views records</td></tr>
+                </table>
+
+                <h3>Step 1 — Download &amp; Open</h3>
+                <p>Install Vasuvo Care from the Google Play Store and open it.</p>
+
+                <h3>Step 2 — Choose Your Role</h3>
+                <p>On the <strong>Role Selection</strong> screen:</p>
+                <ul>
+                    <li>Tap <strong>"I am a Member or Patient"</strong> if you are the one taking medicine</li>
+                    <li>Tap <strong>"I am a Care Partner"</strong> if you are looking after someone else</li>
+                </ul>
+
+                <h3>Step 3 — Register</h3>
+                <ol>
+                    <li>Enter your <strong>full name</strong> and <strong>mobile number</strong></li>
+                    <li>An <strong>OTP</strong> will be sent — enter it to verify your number</li>
+                    <li>Create a <strong>4–6 digit PIN</strong> (used for daily login — no password to remember)</li>
+                    <li>Read and accept the <strong>Medical Disclaimer</strong></li>
+                </ol>
+
+                <h3>Step 4 — Log In</h3>
+                <p>Open the app → enter your phone number → enter your PIN → you're in.</p>
+            </section>
+
+            <!-- 2 -->
+            <section class="guide-section" id="s2">
+                <h2>🏠 2. Home Screen</h2>
+                <p>The Home Screen is your daily health dashboard. It shows:</p>
+                <ul>
+                    <li><strong>Today's Medications</strong> — every dose due today with status (Pending / Taken / Missed)</li>
+                    <li><strong>Medication Streak</strong> — your consecutive days of perfect adherence</li>
+                    <li><strong>Allergy Alert</strong> — a red banner if you have recorded allergies</li>
+                    <li><strong>Quick Actions</strong> — fast access to Location Sharing, Medical Records, and more</li>
+                    <li><strong>Member View</strong> (Care Partners only) — switch between connected patients using the member selector at the top</li>
+                </ul>
+
+                <h3>Marking a Dose as Taken</h3>
+                <p>On the Home Screen, find the medication card and tap <strong>"Mark as Taken"</strong>. The status updates immediately and your streak is preserved.</p>
+            </section>
+
+            <!-- 3 -->
+            <section class="guide-section" id="s3">
+                <h2>💊 3. Medications</h2>
+
+                <h3>Adding a Medication</h3>
+                <ol>
+                    <li>Go to <strong>Home → Medications</strong> (or tap the pill icon in the bottom nav)</li>
+                    <li>Tap the <strong>➕ Add Medication</strong> button</li>
+                    <li>Fill in: Name, Type, Dosage, Frequency, Times, Days, Start Date, and optionally Supply</li>
+                    <li>Tap <strong>Save</strong> — reminders are scheduled immediately</li>
+                </ol>
+
+                <h3>Medication Types Supported</h3>
+                <p>Tablet, Capsule, Liquid, Injection, Syrup, Gel, Patch, Inhaler, Drop, Other</p>
+
+                <h3>Editing or Deleting</h3>
+                <p>Open <strong>Medications</strong> → tap any medication → tap the <strong>edit</strong> (pencil) or <strong>delete</strong> (trash) icon.</p>
+
+                <h3>Missed Dose Escalation</h3>
+                <ul>
+                    <li><strong>Level 1</strong> — reminder resent to you</li>
+                    <li><strong>Level 2</strong> — your Care Partner is notified</li>
+                    <li><strong>Level 3</strong> — SMS alert sent (if configured)</li>
+                </ul>
+
+                <h3>Supply Tracking</h3>
+                <p>Enter a supply count when adding a medication. The app counts down with each dose and sends a refill reminder when running low.</p>
+            </section>
+
+            <!-- 4 -->
+            <section class="guide-section" id="s4">
+                <h2>📊 4. Health Tracker (Vitals)</h2>
+
+                <h3>Supported Vital Types</h3>
+                <table>
+                    <tr><th>Vital</th><th>What to enter</th></tr>
+                    <tr><td>Blood Pressure</td><td>Systolic / Diastolic (e.g. 120/80)</td></tr>
+                    <tr><td>Blood Sugar</td><td>mg/dL or mmol/L</td></tr>
+                    <tr><td>Weight</td><td>kg or lbs</td></tr>
+                    <tr><td>Heart Rate</td><td>beats per minute</td></tr>
+                    <tr><td>Temperature</td><td>°C or °F</td></tr>
+                    <tr><td>Oxygen Saturation</td><td>SpO₂ %</td></tr>
+                    <tr><td>Cholesterol (LDL / HDL)</td><td>mg/dL</td></tr>
+                    <tr><td>HbA1c</td><td>%</td></tr>
+                    <tr><td>Waist Circumference</td><td>cm</td></tr>
+                    <tr><td>Triglycerides</td><td>mg/dL</td></tr>
+                </table>
+
+                <h3>Logging a Reading</h3>
+                <ol>
+                    <li>Open <strong>Health Tracker</strong></li>
+                    <li>Tap the <strong>➕</strong> next to any vital type</li>
+                    <li>Enter the value and confirm</li>
+                </ol>
+
+                <h3>Daily Vitals Reminders</h3>
+                <p>The app sends reminders at <strong>8 AM and 10 AM</strong> via server-side push notification — reliably, even when the app is closed.</p>
+            </section>
+
+            <!-- 5 -->
+            <section class="guide-section" id="s5">
+                <h2>🤖 5. AI Insights (AI Clinic)</h2>
+                <p>Personalized health intelligence powered by Google Gemini AI — tailored to <strong>your medications and health conditions</strong>.</p>
+
+                <h3>What AI Insights Shows</h3>
+                <ul>
+                    <li><strong>Drug Interaction Warnings</strong> — flags dangerous combinations</li>
+                    <li><strong>Diet Tips</strong> — foods to eat more of based on your medications</li>
+                    <li><strong>Foods to Be Cautious Of</strong> — what to avoid</li>
+                    <li><strong>Lifestyle Recommendations</strong> — sleep, exercise, daily habits</li>
+                    <li><strong>Hydration Tips</strong> — water intake guidance</li>
+                    <li><strong>Condition Detection</strong> — recognizes chronic conditions from medication names</li>
+                </ul>
+
+                <h3>Refreshing Insights</h3>
+                <p>Tap the <strong>refresh</strong> icon (top right) to generate a fresh analysis.</p>
+
+                <h3>Care Plus — Custom Questions <span class="badge plus">Care Plus</span></h3>
+                <p>Care Plus subscribers can type <strong>any health question</strong> and get an AI answer in addition to automated insights.</p>
+            </section>
+
+            <!-- 6 -->
+            <section class="guide-section" id="s6">
+                <h2>📄 6. Medical Records</h2>
+                <p>A secure digital filing cabinet for all your health documents.</p>
+
+                <h3>Supported Record Types</h3>
+                <p>Blood Reports, Prescriptions, X-Rays, MRI scans, CT Scans, Other documents</p>
+
+                <h3>Uploading a Record</h3>
+                <ol>
+                    <li>Go to <strong>Home → Medical Records</strong></li>
+                    <li>Tap <strong>Upload</strong></li>
+                    <li>Choose Camera (photo) or File (PDF/image from phone)</li>
+                    <li>Select the record type and add an optional note</li>
+                    <li>Tap <strong>Save</strong></li>
+                </ol>
+
+                <h3>Downloading as PDF</h3>
+                <p>Tap the <strong>Download</strong> icon on any record to save a PDF copy to your phone.</p>
+            </section>
+
+            <!-- 7 -->
+            <section class="guide-section" id="s7">
+                <h2>👨‍👩‍👧‍👦 7. Family &amp; Connections</h2>
+
+                <h3>Member — Sharing Your PIN</h3>
+                <ol>
+                    <li>Go to <strong>Profile</strong></li>
+                    <li>Your unique <strong>Member PIN</strong> (format: VASU-XXXXXX) is shown prominently</li>
+                    <li>Share this PIN with your family member via WhatsApp or call</li>
+                </ol>
+
+                <h3>Care Partner — Connecting to a Member</h3>
+                <ol>
+                    <li>Go to <strong>Connections</strong></li>
+                    <li>Tap <strong>Connect to a Member</strong></li>
+                    <li>Enter the Member's PIN — a connection request is sent for the Member to approve</li>
+                </ol>
+
+                <h3>Consent Controls</h3>
+                <p>Members can grant or revoke per-connection consent for <strong>Medical Records</strong> and <strong>Adherence Reports</strong>.</p>
+
+                <h3>Multiple Care Partners <span class="badge plus">Care Plus</span></h3>
+                <p>Free plan supports 1 Care Partner. Care Plus allows unlimited Care Partners.</p>
+            </section>
+
+            <!-- 8 -->
+            <section class="guide-section" id="s8">
+                <h2>💬 8. Messages</h2>
+                <p>Secure in-app messaging between connected Members and Care Partners.</p>
+                <ol>
+                    <li>Tap <strong>Messages</strong> in the bottom navigation</li>
+                    <li>Select a conversation</li>
+                    <li>Type your message and tap <strong>Send</strong></li>
+                </ol>
+                <p>Messages stay private within the app — no external messaging service needed.</p>
+            </section>
+
+            <!-- 9 -->
+            <section class="guide-section" id="s9">
+                <h2>📍 9. Location Sharing</h2>
+
+                <h3>Enabling Location Sharing</h3>
+                <ol>
+                    <li>From <strong>Home → Location Sharing</strong> (quick action)</li>
+                    <li>Toggle <strong>Share My Location</strong> to ON</li>
+                    <li>Grant location permission when prompted</li>
+                </ol>
+
+                <h3>Privacy Controls</h3>
+                <p>Location sharing is opt-in — you control when it's on or off. Toggle it off at any time.</p>
+            </section>
+
+            <!-- 10 -->
+            <section class="guide-section" id="s10">
+                <h2>✨ 10. For You Tab</h2>
+
+                <h3>Essentials Tab</h3>
+                <p>Quick-access cards for: AI Clinic, Health Tracker, Medical Records, Lab Finder, My Rewards</p>
+
+                <h3>Wellness Tab</h3>
+                <ul>
+                    <li><strong>Weather &amp; Wellness Card</strong> — health advice based on today's weather</li>
+                    <li><strong>Dynamic Insights Card</strong> — AI-powered daily health tips</li>
+                    <li><strong>Age Wellness Card</strong> — age-appropriate wellness suggestions</li>
+                </ul>
+
+                <h3>Advanced Scoring Tab</h3>
+                <p><strong>Cardiovascular Risk Score</strong> — a clinically-calibrated score based on Blood Pressure, Blood Sugar, Cholesterol, BMI, smoking status, age, and family history. Enter your data in <strong>Profile → Heart Health Profile</strong>.</p>
+            </section>
+
+            <!-- 11 -->
+            <section class="guide-section" id="s11">
+                <h2>📰 11. Healthy Pages</h2>
+                <p>Curated health articles covering: medication management, chronic condition guides, nutrition, mental wellness, and senior health.</p>
+                <p>Access via <strong>For You → Essentials → Healthy Pages</strong>.</p>
+            </section>
+
+            <!-- 12 -->
+            <section class="guide-section" id="s12">
+                <h2>🔬 12. Lab Finder</h2>
+                <p>Find diagnostic labs, clinics, and pathology centers near you.</p>
+                <ol>
+                    <li>Open <strong>Lab Finder</strong> (For You → Essentials)</li>
+                    <li>Allow location permission when prompted</li>
+                    <li>The map shows nearby labs with name, address, distance, hours, and contact</li>
+                    <li>Tap a lab to open directions in Google Maps</li>
+                </ol>
+            </section>
+
+            <!-- 13 -->
+            <section class="guide-section" id="s13">
+                <h2>🎁 13. My Rewards</h2>
+                <p>Earn reward points and access health-related offers. View your points balance, redeem discount coupons, and access exclusive offers for Vasuvo Care users.</p>
+                <p>Access via <strong>For You → Essentials → My Rewards</strong>.</p>
+            </section>
+
+            <!-- 14 -->
+            <section class="guide-section" id="s14">
+                <h2>🕉️ 14. Spiritual Moment</h2>
+                <p>A daily moment of calm — inspirational quotes and affirmations drawn from multiple traditions (Buddhist, Universal, Indian philosophy).</p>
+                <ul>
+                    <li>Opens automatically once per day on login</li>
+                    <li>Access anytime from the Home screen menu</li>
+                </ul>
+            </section>
+
+            <!-- 15 -->
+            <section class="guide-section" id="s15">
+                <h2>📡 15. Activity Monitoring <span class="badge plus">Care Plus</span></h2>
+                <p>Passive safety monitoring for Members — no action needed from them.</p>
+
+                <h3>How it Works</h3>
+                <p>The app detects when a Member has not been active and notifies connected Care Partners:</p>
+                <ul>
+                    <li><strong>MEDIUM</strong> — 4 hours inactive</li>
+                    <li><strong>HIGH</strong> — 6 hours inactive</li>
+                    <li><strong>EMERGENCY</strong> — 8+ hours inactive</li>
+                </ul>
+
+                <blockquote>"⚠️ [Name] has not been active for X hours. Please check on them."</blockquote>
+            </section>
+
+            <!-- 16 -->
+            <section class="guide-section" id="s16">
+                <h2>📋 16. Adherence Report <span class="badge plus">Care Plus</span></h2>
+                <p>A detailed report of medication-taking behavior over time.</p>
+
+                <h3>What the Report Shows</h3>
+                <ul>
+                    <li>Medication-by-medication adherence percentage</li>
+                    <li>Dates and times of taken vs. missed doses</li>
+                    <li>Overall adherence score and trends</li>
+                </ul>
+
+                <h3>How to Generate</h3>
+                <ol>
+                    <li>Go to <strong>Medications → Adherence Report</strong></li>
+                    <li>Select the time period — the report generates automatically</li>
+                    <li>Tap <strong>Download</strong> to save as PDF and share with your doctor</li>
+                </ol>
+            </section>
+
+            <!-- 17 -->
+            <section class="guide-section" id="s17">
+                <h2>👤 17. Profile &amp; Settings</h2>
+
+                <h3>Basic Information</h3>
+                <p>Name, Email (optional), Date of Birth, Blood Type</p>
+
+                <h3>Heart Health Profile</h3>
+                <p>Used for Cardiovascular Risk Score: Biological Sex, Height, Smoking Status, Family History of Heart Disease</p>
+
+                <h3>Emergency Contact</h3>
+                <p>Name, phone, and relationship of the person to call in an emergency — shown on the SOS screen and Health Card.</p>
+
+                <h3>Voice Notifications</h3>
+                <p>Toggle Voice Reminders on/off. Choose language: <strong>English</strong> or <strong>Hindi</strong>.</p>
+
+                <h3>Saving Changes</h3>
+                <p>Scroll to the bottom and tap <strong>Save Changes</strong>.</p>
+            </section>
+
+            <!-- 18 -->
+            <section class="guide-section" id="s18">
+                <h2>🆘 18. Health Card</h2>
+                <p>A digital emergency health card accessible to first responders.</p>
+                <p><strong>Contains:</strong> Name, Date of Birth, Blood Type, Allergies (highlighted in red), Chronic conditions, Emergency contact, Primary physician contact.</p>
+                <p><strong>Access:</strong> Profile → Health Card</p>
+                <div class="note">The Health Card can be shown on-screen to medical staff even without fully unlocking the app.</div>
+            </section>
+
+            <!-- 19 -->
+            <section class="guide-section" id="s19">
+                <h2>💳 19. Subscription Plans</h2>
+
+                <h3>Free — Care Plan</h3>
+                <table>
+                    <tr><th>Feature</th><th style="text-align:center;">Included</th></tr>
+                    <tr><td>Medication management (add/edit/delete)</td><td style="text-align:center;" class="check">✓ Unlimited</td></tr>
+                    <tr><td>Daily medication reminders</td><td style="text-align:center;" class="check">✓ Unlimited</td></tr>
+                    <tr><td>Voice notifications</td><td style="text-align:center;" class="check">✓</td></tr>
+                    <tr><td>Missed dose alerts to 1 Care Partner</td><td style="text-align:center;" class="check">✓</td></tr>
+                    <tr><td>Family Connection</td><td style="text-align:center;" class="check">✓ 1 Care Partner</td></tr>
+                    <tr><td>Secure messaging</td><td style="text-align:center;" class="check">✓ Unlimited</td></tr>
+                    <tr><td>Medical records storage</td><td style="text-align:center;" class="check">✓</td></tr>
+                    <tr><td>Location sharing</td><td style="text-align:center;" class="check">✓</td></tr>
+                    <tr><td>Health Tracker (vitals)</td><td style="text-align:center;" class="check">✓</td></tr>
+                    <tr><td>Healthy Pages content</td><td style="text-align:center;" class="check">✓</td></tr>
+                </table>
+
+                <h3>Care Plus — ₹399/month <span class="badge plus">Care Plus</span></h3>
+                <table>
+                    <tr><th>Feature</th><th style="text-align:center;">Included</th></tr>
+                    <tr><td>Multiple Care Partners</td><td style="text-align:center;" class="check">✓ Unlimited</td></tr>
+                    <tr><td>AI Clinic — full custom query access</td><td style="text-align:center;" class="check">✓</td></tr>
+                    <tr><td>Active monitoring &amp; inactivity alerts</td><td style="text-align:center;" class="check">✓</td></tr>
+                    <tr><td>Advanced adherence scoring</td><td style="text-align:center;" class="check">✓</td></tr>
+                    <tr><td>Downloadable adherence reports</td><td style="text-align:center;" class="check">✓</td></tr>
+                    <tr><td>Emergency escalation chain</td><td style="text-align:center;" class="check">✓</td></tr>
+                    <tr><td>SOS button</td><td style="text-align:center;" class="check">✓</td></tr>
+                    <tr><td>Passive safety monitoring</td><td style="text-align:center;" class="check">✓</td></tr>
+                </table>
+
+                <div class="note">New users get a <strong>7-day free Care Plus trial</strong> automatically on registration. No payment required.</div>
+
+                <h3>Upgrading</h3>
+                <p>Go to <strong>Profile → Subscription</strong> → tap <strong>Upgrade to Care Plus</strong> → complete payment via Razorpay (UPI, card, net banking all supported).</p>
+            </section>
+
+            <!-- 20 -->
+            <section class="guide-section" id="s20">
+                <h2>🆘 20. SOS Emergency Button <span class="badge plus">Care Plus</span></h2>
+                <p>One tap to alert your entire care network.</p>
+                <ol>
+                    <li>Press the <strong>SOS</strong> button (red button in the bottom navigation bar)</li>
+                    <li>Confirm the emergency in the popup</li>
+                    <li>Instant alerts sent to all connected Care Partners (push notification) and Emergency contact (SMS)</li>
+                    <li>Your location is shared with the alert</li>
+                </ol>
+            </section>
+
+            <!-- 21 -->
+            <section class="guide-section" id="s21">
+                <h2>🔔 21. Notifications — How They Work</h2>
+
+                <h3>1. Medication Reminders</h3>
+                <p>Delivered by your device's alarm system at exact scheduled times, also backed by server-side push via Google FCM.</p>
+
+                <h3>2. Morning Vitals Reminders</h3>
+                <p>Sent at <strong>8 AM and 10 AM</strong> daily by the Vasuvo server. Arrives even if the app is completely closed.</p>
+
+                <h3>3. Missed Dose &amp; Safety Alerts</h3>
+                <p>Sent by the Vasuvo server when a dose is missed or inactivity is detected. Delivered via Google FCM — bypasses battery optimization.</p>
+
+                <div class="note"><strong>Important:</strong> On first launch, always tap <strong>Allow</strong> for notification permission — without it, medication reminders cannot be delivered.</div>
+            </section>
+
+            <!-- 22 -->
+            <section class="guide-section" id="s22">
+                <h2>🏥 22. Caregiver Professional Login</h2>
+                <p>For professional caregivers (nurses, care agencies) — a separate login mode with a dashboard view.</p>
+                <p>On the Role Selection screen → tap <strong>"I am a Professional Caregiver"</strong> → enter your organization credentials.</p>
+                <p>The dashboard shows assigned patients, their medication schedules and adherence, and quick contact actions.</p>
+            </section>
+
+            <!-- 23 -->
+            <section class="guide-section" id="s23">
+                <h2>🛠️ 23. Tips &amp; Troubleshooting</h2>
+
+                <h3>Notifications not coming?</h3>
+                <ol>
+                    <li>Go to <strong>Settings → Apps → Vasuvo Care → Notifications</strong> → make sure all channels are enabled</li>
+                    <li>Check that <strong>"Pause app activity if unused"</strong> is OFF (Settings → Apps → Vasuvo Care)</li>
+                    <li>Vitals reminders come via Google's servers — they work even when the app is closed</li>
+                </ol>
+
+                <h3>The app shows old data?</h3>
+                <p>Pull down on any screen to <strong>force refresh</strong>. The app auto-refreshes every minute in the background.</p>
+
+                <h3>How do I switch between patients? (Care Partners)</h3>
+                <p>On the Home screen, tap the <strong>Member selector</strong> at the top to switch between your connected Members.</p>
+
+                <h3>My adherence report is missing data?</h3>
+                <p>The Member must grant Adherence Report consent: <strong>Connections → [your name] → Consent → Adherence Reports → Enable</strong>.</p>
+
+                <h3>I forgot my PIN?</h3>
+                <p>Tap <strong>"Forgot PIN?"</strong> on the login screen → enter your registered phone number → an OTP is sent → reset your PIN.</p>
+
+                <h3>How do I cancel Care Plus?</h3>
+                <p>Go to <strong>Profile → Subscription → Switch to Free</strong>. You retain Care Plus access until the end of the current billing period.</p>
+
+                <h3>Quick Reference — Bottom Navigation</h3>
+                <table>
+                    <tr><th>Icon</th><th>Screen</th></tr>
+                    <tr><td>🏠 Home</td><td>Today's medications, streak, quick actions</td></tr>
+                    <tr><td>💊 Medications</td><td>Full medication list, add/edit doses</td></tr>
+                    <tr><td>🤖 AI Clinic</td><td>Personalized AI health insights</td></tr>
+                    <tr><td>✨ For You</td><td>Essentials, wellness, advanced scoring</td></tr>
+                    <tr><td>👤 Profile</td><td>Settings, health details, subscription</td></tr>
+                </table>
+            </section>
+
+            <p style="color:#999; font-size:0.85rem; margin-top:2rem; text-align:center;">
+                Vasuvo Care is a health management tool. It is not a substitute for professional medical advice. Always consult your doctor for medical decisions.<br>
+                © 2026 Vasuvo HealthTech. All rights reserved.
+            </p>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Vasuvo Care. All rights reserved. &nbsp;|&nbsp;
+            <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp;
+            <a href="t&c.html">Terms &amp; Conditions</a> &nbsp;|&nbsp;
+            <a href="contact.html">Contact Us</a>
+        </p>
+    </footer>
+
+    <script>
+        // Highlight active TOC link on scroll
+        const sections = document.querySelectorAll('.guide-section');
+        const tocLinks = document.querySelectorAll('.toc a');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    tocLinks.forEach(link => link.classList.remove('active'));
+                    const active = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-20% 0px -70% 0px' });
+
+        sections.forEach(s => observer.observe(s));
+    </script>
+
+</body>
+</html>
