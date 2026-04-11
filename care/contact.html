@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Vasuvo Care - Get in touch with our support team for queries, feedback, or help.">
+    <title>Contact Us - Vasuvo Care</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: #2a3d34;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+            color: white;
+            padding: 130px 0 70px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .page-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* Info Cards */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .info-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .info-card h3 {
+            color: #4F7F6A;
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+
+        .info-card p, .info-card a {
+            color: #666;
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+
+        .info-card a:hover {
+            color: #4F7F6A;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .form-card h2 {
+            color: #2a3d34;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-card .form-subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #2a3d34;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        label span.required {
+            color: #e05;
+            margin-left: 2px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e8e8e8;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: #333;
+            background: #fafafa;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #4F7F6A;
+            box-shadow: 0 0 0 3px rgba(79, 127, 106, 0.15);
+            background: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.3px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 127, 106, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Success / Error messages */
+        .form-message {
+            display: none;
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-message.success {
+            background: #e8f5f1;
+            color: #2a6049;
+            border: 1px solid #b2ddc9;
+        }
+
+        .form-message.error {
+            background: #fef0f0;
+            color: #b91c1c;
+            border: 1px solid #fca5a5;
+        }
+
+        /* Footer */
+        footer {
+            background: #2a3d34;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #8bc9ad;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #8bc9ad;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-card, .info-card {
+            animation: fadeInUp 0.6s ease both;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .form-card {
+                padding: 1.5rem;
+            }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Vasuvo Care Logo">
+                <div>Vasuvo Care</div>
+            </a>
+            <ul>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#benefits">Benefits</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#ai-features">AI Insights</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+                <li><a href="products.html">All Products</a></li>
+                <li><a href="blog/index.html">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Have a question, feedback, or need support? We'd love to hear from you.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+
+                <!-- Info Panel -->
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-icon">📧</div>
+                        <div>
+                            <h3>Email Us</h3>
+                            <a href="mailto:contact@vasuvo.com">contact@vasuvo.com</a>
+                            <p style="margin-top: 0.25rem; font-size: 0.85rem;">We typically respond within 24 hours.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">💬</div>
+                        <div>
+                            <h3>General Queries</h3>
+                            <p>Questions about the app, features, or your account — we're here to help.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">🛡️</div>
+                        <div>
+                            <h3>Privacy &amp; Legal</h3>
+                            <p>For privacy concerns or legal inquiries, please reference our <a href="privacy.html">Privacy Policy</a> and <a href="t&c.html">Terms &amp; Conditions</a>.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">⏱️</div>
+                        <div>
+                            <h3>Response Time</h3>
+                            <p>Monday – Saturday, 9 AM – 6 PM IST.<br>We aim to reply within one business day.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="form-card">
+                    <h2>Send Us a Message</h2>
+                    <p class="form-subtitle">Fill in the form below and your query will be sent directly to our team.</p>
+
+                    <div class="form-message success" id="successMsg">
+                        ✅ Your message has been sent! We'll get back to you shortly.
+                    </div>
+                    <div class="form-message error" id="errorMsg">
+                        ❌ Something went wrong. Please try emailing us directly at <a href="mailto:contact@vasuvo.com">contact@vasuvo.com</a>.
+                    </div>
+
+                    <form id="contactForm" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Priya" required autocomplete="given-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Sharma" autocomplete="family-name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject <span class="required">*</span></label>
+                            <select id="subject" name="subject" required>
+                                <option value="" disabled selected>Select a topic…</option>
+                                <option value="General Query">General Query</option>
+                                <option value="Technical Support">Technical Support</option>
+                                <option value="Billing & Subscription">Billing &amp; Subscription</option>
+                                <option value="Feature Request">Feature Request</option>
+                                <option value="Privacy & Data">Privacy &amp; Data</option>
+                                <option value="Partnership">Partnership</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Your Query <span class="required">*</span></label>
+                            <textarea id="message" name="message" placeholder="Describe your question or feedback in detail…" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Vasuvo Care</h3>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.8;">
+                        Vasuvo Care is an intelligent medication management platform designed to help individuals and families stay on top of their health.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="index.html#features">Medication Reminders</a></li>
+                        <li><a href="index.html#features">Family Management</a></li>
+                        <li><a href="index.html#ai-features">AI Health Insights</a></li>
+                        <li><a href="index.html#pricing">Pricing Plans</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="t&c.html">Terms &amp; Conditions</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Get the App</h3>
+                    <ul>
+                        <li><a href="#">Download for Android</a></li>
+                        <li><a href="#">iOS (Coming Soon)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vasuvo Care. All rights reserved. | Making healthcare management simple and accessible.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const successMsg = document.getElementById('successMsg');
+        const errorMsg = document.getElementById('errorMsg');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Basic client-side validation
+            const firstName = document.getElementById('firstName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
+
+            if (!firstName || !email || !subject || !message) {
+                return;
+            }
+
+            // Build mailto link and open it
+            const toAddress = 'contact@vasuvo.com';
+            const mailSubject = encodeURIComponent('[Vasuvo Care] ' + subject);
+            const lastName = document.getElementById('lastName').value.trim();
+            const fullName = lastName ? firstName + ' ' + lastName : firstName;
+
+            const body = encodeURIComponent(
+                'Name: ' + fullName + '\n' +
+                'Email: ' + email + '\n' +
+                'Subject: ' + subject + '\n\n' +
+                'Message:\n' + message
+            );
+
+            const mailtoLink = 'mailto:' + toAddress +
+                '?subject=' + mailSubject +
+                '&body=' + body;
+
+            // Attempt to open mail client
+            const link = document.createElement('a');
+            link.href = mailtoLink;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Show success message and reset form
+            successMsg.style.display = 'block';
+            errorMsg.style.display = 'none';
+            form.reset();
+
+            // Scroll success message into view
+            successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    </script>
+
+</body>
+</html>
