@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vasuvo Care — System Architecture Diagram</title>
+  <style>
+    :root {
+      --bg:       #0d1117;
+      --surface:  #161b22;
+      --border:   #30363d;
+      --text:     #e6edf3;
+      --muted:    #8b949e;
+      /* layer colours */
+      --user-bg:  #0c2d48; --user-bd:  #388bfd;
+      --cli-bg:   #0c3320; --cli-bd:   #3fb950;
+      --net-bg:   #2d1f00; --net-bd:   #d29922;
+      --gw-bg:    #1f0c2d; --gw-bd:    #bc8cff;
+      --be-bg:    #0c1f2d; --be-bd:    #79c0ff;
+      --as-bg:    #1f2d0c; --as-bd:    #7ee787;
+      --ex-bg:    #2d0c1f; --ex-bd:    #ff7b72;
+      --da-bg:    #2d1500; --da-bd:    #ffa657;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body { background:var(--bg); color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      line-height:1.5; }
+
+    /* ── HEADER ── */
+    .page-header {
+      background:linear-gradient(135deg,#1c3a2e 0%,#0d1117 65%);
+      border-bottom:1px solid var(--border);
+      padding:1.75rem 2.5rem;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .page-header h1 { font-size:1.7rem; color:#3fb950; display:flex; align-items:center; gap:.6rem; }
+    .page-header .subtitle { color:#3fb950; font-size:.95rem; margin-top:.2rem; }
+    .page-header .meta { color:var(--muted); font-size:.82rem; text-align:right; }
+
+    /* ── LAYOUT ── */
+    .content { max-width:1360px; margin:0 auto; padding:2rem 2rem 3rem; }
+    .section-title {
+      font-size:.9rem; text-transform:uppercase; letter-spacing:2px;
+      color:var(--muted); margin:2.5rem 0 1.2rem;
+      padding-bottom:.5rem; border-bottom:1px solid var(--border);
+    }
+
+    /* ── DIAGRAM WRAPPER ── */
+    .arch-diagram {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:12px; padding:1.75rem 1.5rem; overflow-x:auto;
+    }
+
+    /* ── LAYER ROW ── */
+    .arch-layer { display:flex; align-items:stretch; gap:1rem; }
+
+    .layer-label {
+      flex:0 0 115px; display:flex; flex-direction:column;
+      align-items:flex-end; justify-content:center;
+      padding-right:.85rem; border-right:2px solid var(--border);
+      text-align:right;
+    }
+    .label-name { font-size:.72rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; }
+    .label-desc { font-size:.62rem; color:var(--muted); margin-top:2px; }
+
+    .layer-nodes {
+      flex:1; display:flex; flex-wrap:wrap; gap:.65rem;
+      padding:.6rem 0; align-items:center;
+    }
+
+    /* ── NODE BOX ── */
+    .node {
+      display:flex; flex-direction:column; align-items:center;
+      text-align:center; padding:.7rem .8rem; border-radius:8px;
+      border:1px solid; min-width:118px; max-width:155px;
+      transition:transform .18s, box-shadow .18s; cursor:default;
+    }
+    .node:hover { transform:translateY(-3px); box-shadow:0 6px 18px rgba(0,0,0,.5); }
+    .node .ni  { font-size:1.35rem; margin-bottom:.3rem; }
+    .node .nt  { font-size:.76rem; font-weight:600; line-height:1.3; }
+    .node .nst { font-size:.6rem; color:var(--muted); margin-top:.2rem; font-family:monospace; }
+
+    /* per-layer colouring */
+    .l-user .node  { background:var(--user-bg); border-color:var(--user-bd); }
+    .l-user  .label-name  { color:var(--user-bd); }
+    .l-cli  .node  { background:var(--cli-bg);  border-color:var(--cli-bd); }
+    .l-cli   .label-name  { color:var(--cli-bd); }
+    .l-net  .node  { background:var(--net-bg);  border-color:var(--net-bd); }
+    .l-net   .label-name  { color:var(--net-bd); }
+    .l-gw   .node  { background:var(--gw-bg);   border-color:var(--gw-bd); }
+    .l-gw    .label-name  { color:var(--gw-bd); }
+    .l-be   .node  { background:var(--be-bg);   border-color:var(--be-bd); }
+    .l-be    .label-name  { color:var(--be-bd); }
+    .l-as   .node  { background:var(--as-bg);   border-color:var(--as-bd); }
+    .l-as    .label-name  { color:var(--as-bd); }
+    .l-ex   .node  { background:var(--ex-bg);   border-color:var(--ex-bd); }
+    .l-ex    .label-name  { color:var(--ex-bd); }
+    .l-da   .node  { background:var(--da-bg);   border-color:var(--da-bd); }
+    .l-da    .label-name  { color:var(--da-bd); }
+
+    /* ── CONNECTOR ── */
+    .conn-row {
+      display:flex; align-items:center; gap:.6rem;
+      padding:3px 0 3px 135px;
+    }
+    .conn-v   { display:flex; flex-direction:column; align-items:center; }
+    .conn-line { width:2px; height:18px; background:var(--border); }
+    .conn-head { width:0; height:0;
+      border-left:5px solid transparent; border-right:5px solid transparent;
+      border-top:8px solid var(--border); }
+    .conn-label { font-size:.68rem; color:var(--muted); font-style:italic; }
+
+    /* ── LEGEND ── */
+    .legend {
+      display:flex; flex-wrap:wrap; gap:.9rem; margin-top:1rem;
+      padding:1rem 1.25rem; background:var(--surface);
+      border:1px solid var(--border); border-radius:8px;
+    }
+    .legend-item { display:flex; align-items:center; gap:.45rem; font-size:.75rem; }
+    .ldot { width:11px; height:11px; border-radius:3px; flex-shrink:0; }
+
+    /* ── FLOW CARDS ── */
+    .flow-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+      gap:1rem; margin-top:1rem;
+    }
+    .flow-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:10px; padding:1.2rem;
+    }
+    .flow-card h3 { font-size:.88rem; margin-bottom:.7rem; display:flex; align-items:center; gap:.45rem; }
+    .flow-steps { list-style:none; counter-reset:s; }
+    .flow-steps li {
+      counter-increment:s; display:flex; gap:.65rem;
+      padding:.35rem 0; font-size:.8rem; color:var(--muted);
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+    .flow-steps li:last-child { border-bottom:none; }
+    .flow-steps li::before {
+      content:counter(s); flex-shrink:0; width:19px; height:19px;
+      background:var(--border); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.67rem; font-weight:700; color:var(--text);
+    }
+
+    /* ── TECH TABLE ── */
+    table { width:100%; border-collapse:collapse; font-size:.86rem; margin-top:1rem; }
+    thead th {
+      background:var(--surface); border:1px solid var(--border);
+      padding:.7rem 1rem; text-align:left; font-size:.75rem;
+      letter-spacing:.5px; color:var(--muted); text-transform:uppercase;
+    }
+    tbody td { border:1px solid var(--border); padding:.6rem 1rem; }
+    tbody tr:nth-child(even) td { background:rgba(255,255,255,.025); }
+    tbody tr:hover td { background:rgba(255,255,255,.05); }
+    .tag {
+      display:inline-block; padding:2px 8px; border-radius:12px;
+      font-size:.7rem; font-family:monospace; margin:1px;
+    }
+
+    /* ── SECURITY CARDS ── */
+    .sec-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:1rem; margin-top:1rem;
+    }
+    .sec-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-left:3px solid #3fb950; border-radius:0 8px 8px 0; padding:1rem;
+    }
+    .sec-card h4 { font-size:.83rem; margin-bottom:.5rem; color:#3fb950; }
+    .sec-card ul { font-size:.77rem; color:var(--muted); padding-left:1rem; line-height:1.75; }
+
+    /* ── NETWORK TOPOLOGY ASCII ── */
+    .topo {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:10px; padding:1.5rem; font-size:.82rem;
+      color:var(--muted); font-family:monospace; line-height:2.1;
+      overflow-x:auto; white-space:pre;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align:center; padding:2rem; color:var(--muted);
+      font-size:.78rem; border-top:1px solid var(--border); margin-top:3rem;
+    }
+    footer a { color:#3fb950; text-decoration:none; }
+    footer a:hover { text-decoration:underline; }
+
+    @media (max-width:700px) {
+      .page-header { flex-direction:column; gap:.75rem; text-align:center; }
+      .page-header .meta { text-align:center; }
+      .topo { font-size:.68rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+<header class="page-header">
+  <div>
+    <h1>⚕️ Vasuvo Care</h1>
+    <div class="subtitle">System Architecture Diagram</div>
+  </div>
+  <div class="meta">
+    <div>Version 1.0 &nbsp;|&nbsp; April 2026</div>
+    <div style="margin-top:4px;">Platform: Android · iOS (Soon) · Web</div>
+    <div style="margin-top:4px; color:#d29922;">⚠ Confidential — Internal Engineering Document</div>
+  </div>
+</header>
+
+<div class="content">
+
+  <!-- ═════════════════════ ARCHITECTURE DIAGRAM ═════════════════════ -->
+  <h2 class="section-title">Layered System Architecture</h2>
+
+  <div class="arch-diagram">
+
+    <!-- ── LAYER 1 · USERS ── -->
+    <div class="arch-layer l-user">
+      <div class="layer-label">
+        <span class="label-name">Users</span>
+        <span class="label-desc">Actors</span>
+      </div>
+      <div class="layer-nodes">
+        <div class="node"><div class="ni">👤</div><div class="nt">Member / Patient</div><div class="nst">Takes medication</div></div>
+        <div class="node"><div class="ni">👥</div><div class="nt">Care Partner</div><div class="nst">Family caregiver</div></div>
+        <div class="node"><div class="ni">🏥</div><div class="nt">Professional Caregiver</div><div class="nst">Agency staff</div></div>
+        <div class="node"><div class="ni">🌐</div><div class="nt">Website Visitor</div><div class="nst">Marketing / Info</div></div>
+      </div>
+    </div>
+
+    <div class="conn-row">
+      <div class="conn-v"><div class="conn-line"></div><div class="conn-head"></div></div>
+      <span class="conn-label">HTTPS / Internet</span>
+    </div>
+
+    <!-- ── LAYER 2 · CLIENT ── -->
+    <div class="arch-layer l-cli">
+      <div class="layer-label">
+        <span class="label-name">Client</span>
+        <span class="label-desc">Presentation</span>
+      </div>
+      <div class="layer-nodes">
+        <div class="node"><div class="ni">📱</div><div class="nt">Android App</div><div class="nst">Kotlin / Flutter</div></div>
+        <div class="node"><div class="ni">📱</div><div class="nt">iOS App</div><div class="nst">Coming soon</div></div>
+        <div class="node"><div class="ni">🌐</div><div class="nt">Web (GitHub Pages)</div><div class="nst">Static HTML / CSS / JS</div></div>
+        <div class="node"><div class="ni">🔔</div><div class="nt">FCM Client SDK</div><div class="nst">Push receiver</div></div>
+        <div class="node"><div class="ni">🗺️</div><div class="nt">Maps SDK</div><div class="nst">Lab finder / Location</div></div>
+      </div>
+    </div>
+
+    <div class="conn-row">
+      <div class="conn-v"><div class="conn-line"></div><div class="conn-head"></div></div>
+      <span class="conn-label">REST API + WebSocket over TLS 1.3</span>
+    </div>
+
+    <!-- ── LAYER 3 · NETWORK / SECURITY ── -->
+    <div class="arch-layer l-net">
+      <div class="layer-label">
+        <span class="label-name">Network</span>
+        <span class="label-desc">Security</span>
+      </div>
+      <div class="layer-nodes">
+        <div class="node"><div class="ni">🔒</div><div class="nt">TLS 1.3 Encryption</div><div class="nst">All traffic encrypted</div></div>
+        <div class="node"><div class="ni">🔥</div><div class="nt">WAF / Firewall</div><div class="nst">DDoS · Injection protection</div></div>
+        <div class="node"><div class="ni">🚦</div><div class="nt">Rate Limiter</div><div class="nst">Per IP / per user</div></div>
+        <div class="node"><div class="ni">🛡️</div><div class="nt">CORS Policy</div><div class="nst">Whitelist origins</div></div>
+        <div class="node"><div class="ni">☁️</div><div class="nt">CDN</div><div class="nst">Static assets · Edge cache</div></div>
+      </div>
+    </div>
+
+    <div class="conn-row">
+      <div class="conn-v"><div class="conn-line"></div><div class="conn-head"></div></div>
+      <span class="conn-label">Authenticated requests</span>
+    </div>
+
+    <!-- ── LAYER 4 · API GATEWAY ── -->
+    <div class="arch-layer l-gw">
+      <div class="layer-label">
+        <span class="label-name">API Gateway</span>
+        <span class="label-desc">Routing</span>
+      </div>
+      <div class="layer-nodes">
+        <div class="node"><div class="ni">⚖️</div><div class="nt">Load Balancer</div><div class="nst">Nginx / Cloud LB</div></div>
+        <div class="node"><div class="ni">🚪</div><div class="nt">API Gateway</div><div class="nst">Route · Version · Throttle</div></div>
+        <div class="node"><div class="ni">🔐</div><div class="nt">Auth Middleware</div><div class="nst">JWT validation</div></div>
+        <div class="node"><div class="ni">📊</div><div class="nt">Request Logger</div><div class="nst">Audit trail</div></div>
+        <div class="node"><div class="ni">🩺</div><div class="nt">Health Checks</div><div class="nst">Service liveness</div></div>
+      </div>
+    </div>
+
+    <div class="conn-row">
+      <div class="conn-v"><div class="conn-line"></div><div class="conn-head"></div></div>
+      <span class="conn-label">Internal service calls</span>
+    </div>
+
+    <!-- ── LAYER 5 · BACKEND MICROSERVICES ── -->
+    <div class="arch-layer l-be">
+      <div class="layer-label">
+        <span class="label-name">Backend</span>
+        <span class="label-desc">Microservices</span>
+      </div>
+      <div class="layer-nodes">
+        <div class="node"><div class="ni">🔑</div><div class="nt">Auth Service</div><div class="nst">OTP · PIN · JWT</div></div>
+        <div class="node"><div class="ni">👤</div><div class="nt">User Service</div><div class="nst">Profiles · Settings</div></div>
+        <div class="node"><div class="ni">💊</div><div class="nt">Medication Service</div><div class="nst">CRUD · Supply tracker</div></div>
+        <div class="node"><div class="ni">⏰</div><div class="nt">Reminder Scheduler</div><div class="nst">Cron · Bull Queue</div></div>
+        <div class="node"><div class="ni">🔔</div><div class="nt">Notification Service</div><div class="nst">FCM · SMS · Escalation</div></div>
+        <div class="node"><div class="ni">🤖</div><div class="nt">AI Service</div><div class="nst">Gemini API · Cache</div></div>
+        <div class="node"><div class="ni">📄</div><div class="nt">Medical Records</div><div class="nst">Upload · PDF · GCS</div></div>
+        <div class="node"><div class="ni">📊</div><div class="nt">Vitals Service</div><div class="nst">BP · Sugar · Charts</div></div>
+        <div class="node"><div class="ni">📍</div><div class="nt">Location Service</div><div class="nst">Real-time · WebSocket</div></div>
+        <div class="node"><div class="ni">💬</div><div class="nt">Messaging Service</div><div class="nst">In-app chat · WS</div></div>
+        <div class="node"><div class="ni">👨‍👩‍👧</div><div class="nt">Connections Service</div><div class="nst">Member–Caregiver links</div></div>
+        <div class="node"><div class="ni">💳</div><div class="nt">Subscription Service</div><div class="nst">Plans · Razorpay</div></div>
+        <div class="node"><div class="ni">📡</div><div class="nt">Activity Monitor</div><div class="nst">Inactivity · SOS alerts</div></div>
+        <div class="node"><div class="ni">📈</div><div class="nt">Adherence Service</div><div class="nst">Reports · Scoring</div></div>
+        <div class="node"><div class="ni">🏆</div><div class="nt">Rewards Service</div><div class="nst">Points · Coupons</div></div>
+        <div class="node"><div class="ni">🔬</div><div class="nt">Lab Finder Service</div><div class="nst">Maps · Lab data</div></div>
+      </div>
+    </div>
+
+    <div class="conn-row">
+      <div class="conn-v"><div class="conn-line"></div><div class="conn-head"></div></div>
+      <span class="conn-label">Async jobs · Events · Cache reads/writes</span>
+    </div>
+
+    <!-- ── LAYER 6 · ASYNC / QUEUE ── -->
+    <div class="arch-layer l-as">
+      <div class="layer-label">
+        <span class="label-name">Async Layer</span>
+        <span class="label-desc">Queue · Cache</span>
+      </div>
+      <div class="layer-nodes">
+        <div class="node"><div class="ni">📨</div><div class="nt">Job Queue</div><div class="nst">Bull / Redis Queue</div></div>
+        <div class="node"><div class="ni">⚡</div><div class="nt">Cache Layer</div><div class="nst">Redis · TTL-based</div></div>
+        <div class="node"><div class="ni">🔄</div><div class="nt">Pub / Sub</div><div class="nst">Redis Pub/Sub · WS fanout</div></div>
+        <div class="node"><div class="ni">🕐</div><div class="nt">Cron Scheduler</div><div class="nst">node-cron · Daily jobs</div></div>
+        <div class="node"><div class="ni">📦</div><div class="nt">Event Bus</div><div class="nst">Internal domain events</div></div>
+      </div>
+    </div>
+
+    <div class="conn-row">
+      <div class="conn-v"><div class="conn-line"></div><div class="conn-head"></div></div>
+      <span class="conn-label">Third-party API calls</span>
+    </div>
+
+    <!-- ── LAYER 7 · EXTERNAL SERVICES ── -->
+    <div class="arch-layer l-ex">
+      <div class="layer-label">
+        <span class="label-name">External</span>
+        <span class="label-desc">3rd-party APIs</span>
+      </div>
+      <div class="layer-nodes">
+        <div class="node"><div class="ni">🔔</div><div class="nt">Google FCM</div><div class="nst">Push notifications</div></div>
+        <div class="node"><div class="ni">🤖</div><div class="nt">Google Gemini AI</div><div class="nst">Health AI insights</div></div>
+        <div class="node"><div class="ni">💳</div><div class="nt">Razorpay</div><div class="nst">UPI · Card · NetBanking</div></div>
+        <div class="node"><div class="ni">📱</div><div class="nt">SMS Gateway</div><div class="nst">MSG91 / Twilio · OTP</div></div>
+        <div class="node"><div class="ni">🗺️</div><div class="nt">Google Maps API</div><div class="nst">Lab finder · Geocoding</div></div>
+        <div class="node"><div class="ni">🌤️</div><div class="nt">Weather API</div><div class="nst">Wellness health cards</div></div>
+        <div class="node"><div class="ni">🔑</div><div class="nt">Firebase Auth</div><div class="nst">OTP verification</div></div>
+        <div class="node"><div class="ni">📧</div><div class="nt">Web3Forms</div><div class="nst">Website contact form</div></div>
+      </div>
+    </div>
+
+    <div class="conn-row">
+      <div class="conn-v"><div class="conn-line"></div><div class="conn-head"></div></div>
+      <span class="conn-label">Queries · Reads · Writes · File I/O</span>
+    </div>
+
+    <!-- ── LAYER 8 · DATA ── -->
+    <div class="arch-layer l-da">
+      <div class="layer-label">
+        <span class="label-name">Data Layer</span>
+        <span class="label-desc">Persistence</span>
+      </div>
+      <div class="layer-nodes">
+        <div class="node"><div class="ni">🗄️</div><div class="nt">PostgreSQL</div><div class="nst">Users · Meds · Subs · Vitals</div></div>
+        <div class="node"><div class="ni">🗃️</div><div class="nt">MongoDB / Firestore</div><div class="nst">Records metadata · Messages</div></div>
+        <div class="node"><div class="ni">⚡</div><div class="nt">Redis</div><div class="nst">Sessions · Cache · Queue</div></div>
+        <div class="node"><div class="ni">📁</div><div class="nt">Cloud Storage (GCS)</div><div class="nst">PDFs · Images · Videos</div></div>
+        <div class="node"><div class="ni">📊</div><div class="nt">Analytics Store</div><div class="nst">Adherence · Usage metrics</div></div>
+        <div class="node"><div class="ni">📝</div><div class="nt">Audit Logs</div><div class="nst">HIPAA trail · Access log</div></div>
+      </div>
+    </div>
+
+  </div><!-- /arch-diagram -->
+
+  <!-- ── LEGEND ── -->
+  <div class="legend">
+    <div class="legend-item"><div class="ldot" style="background:var(--user-bd)"></div>Users / Actors</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--cli-bd)"></div>Client Layer</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--net-bd)"></div>Network / Security</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--gw-bd)"></div>API Gateway</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--be-bd)"></div>Backend Microservices</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--as-bd)"></div>Async / Queue / Cache</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--ex-bd)"></div>External APIs</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--da-bd)"></div>Data Layer</div>
+  </div>
+
+  <!-- ═════════════════════ NETWORK TOPOLOGY ═════════════════════ -->
+  <h2 class="section-title">Network Topology</h2>
+  <div class="topo">
+  [Android App / iOS App]    ──HTTPS──▶  [Cloudflare CDN / Edge]  ──▶  [Nginx Load Balancer]
+                                                                                  │
+  [Website Visitor]          ──HTTPS──▶  [GitHub Pages CDN]                      │
+                                                                                  ▼
+                                                              [API Gateway — Node.js / NestJS]
+                                                              [Auth Middleware · Rate Limiter · Logger]
+                                                                                  │
+                                              ┌───────────────┼───────────────────┐
+                                              ▼               ▼                   ▼
+                                    [WebSocket Server]  [REST Services]   [Job Workers / Cron]
+                                    Location · Chat     Medication · AI   Reminders · Escalation
+                                              │               │                   │
+                                              └───────────────┼───────────────────┘
+                                                              │ Private VPC
+                                         ┌────────────────────┼────────────────────────┐
+                                         ▼                    ▼                        ▼
+                               [PostgreSQL Primary]     [Redis Cluster]       [MongoDB / Firestore]
+                               [+ Read Replicas]   Cache · Queue · Pub/Sub   Records · Messages
+                                         │
+                                         └──▶ [Google Cloud Storage]   PDFs · Images · Backups
+                                              [Analytics DB]            Adherence · Usage
+                                              [Audit Log Store]         HIPAA compliance trail
+
+  External API calls (outbound from backend):
+    ├──▶ Google FCM          Push notifications (reminders · SOS · missed-dose)
+    ├──▶ Google Gemini AI    AI health insights, drug interactions, lab analysis
+    ├──▶ Razorpay            Subscription payments (webhook → HMAC-SHA256 verify)
+    ├──▶ SMS Gateway         OTP delivery, emergency SMS alerts
+    ├──▶ Google Maps API     Lab finder geocoding, distance calculation
+    ├──▶ Weather API         Wellness health card data
+    └──▶ Firebase Auth       OTP phone verification on registration
+  </div>
+
+  <!-- ═════════════════════ KEY DATA FLOWS ═════════════════════ -->
+  <h2 class="section-title">Key Data Flows</h2>
+  <div class="flow-grid">
+
+    <div class="flow-card">
+      <h3 style="color:var(--cli-bd)">💊 Medication Reminder Flow</h3>
+      <ol class="flow-steps">
+        <li>User adds medication with reminder time in Android App</li>
+        <li>Medication Service saves schedule to PostgreSQL</li>
+        <li>Reminder Scheduler enqueues job in Bull/Redis Queue</li>
+        <li>At scheduled time, Job Worker fires Notification Service</li>
+        <li>Notification Service calls Google FCM → push to device</li>
+        <li>If dose missed after grace period, escalation Level 1 triggers</li>
+        <li>Level 1 → SMS to user; Level 2 → FCM + SMS to Care Partner; Level 3 → SOS alert</li>
+      </ol>
+    </div>
+
+    <div class="flow-card">
+      <h3 style="color:var(--cli-bd)">🔑 Authentication Flow</h3>
+      <ol class="flow-steps">
+        <li>User enters phone number on Android App</li>
+        <li>Auth Service calls Firebase Auth / MSG91 to send OTP via SMS</li>
+        <li>OTP stored in Redis with 5-minute TTL</li>
+        <li>User submits OTP → Auth Service validates from Redis</li>
+        <li>On success: JWT access token + refresh token issued</li>
+        <li>User creates 4–6 digit PIN; stored as bcrypt hash in PostgreSQL</li>
+        <li>Subsequent logins use PIN only; OTP only for re-registration</li>
+      </ol>
+    </div>
+
+    <div class="flow-card">
+      <h3 style="color:var(--gw-bd)">🤖 AI Insights Flow</h3>
+      <ol class="flow-steps">
+        <li>User opens AI Clinic; app sends request with JWT to API Gateway</li>
+        <li>AI Service fetches user's medication list from PostgreSQL</li>
+        <li>Checks Redis cache — if fresh insight exists, return immediately</li>
+        <li>Cache miss: builds structured prompt with medications + conditions</li>
+        <li>Calls Google Gemini API with safety-filtered prompt</li>
+        <li>Response parsed, structured into categories (interactions, diet, lifestyle)</li>
+        <li>Cached in Redis (24 h TTL); returned to app</li>
+      </ol>
+    </div>
+
+    <div class="flow-card">
+      <h3 style="color:var(--da-bd)">📄 Medical Record Upload</h3>
+      <ol class="flow-steps">
+        <li>User selects photo / PDF in app</li>
+        <li>App sends multipart upload to API Gateway</li>
+        <li>Medical Records Service validates file type and size</li>
+        <li>File uploaded to Google Cloud Storage (GCS) with encryption at rest</li>
+        <li>Signed URL generated with short expiry for secure access</li>
+        <li>Metadata (type, date, GCS path, owner ID) stored in MongoDB</li>
+        <li>Care Partners with consent can access records via their own app</li>
+      </ol>
+    </div>
+
+    <div class="flow-card">
+      <h3 style="color:var(--ex-bd)">🆘 SOS Emergency Flow</h3>
+      <ol class="flow-steps">
+        <li>User taps SOS button (Care Plus only) and confirms</li>
+        <li>App sends SOS event with current GPS location to API</li>
+        <li>Activity Monitor Service processes emergency trigger</li>
+        <li>Connections Service fetches all linked Care Partners</li>
+        <li>FCM high-priority push sent simultaneously to all Care Partners</li>
+        <li>SMS emergency alert dispatched to registered Emergency Contact</li>
+        <li>Live location shared via WebSocket to all connected caregivers</li>
+      </ol>
+    </div>
+
+    <div class="flow-card">
+      <h3 style="color:var(--net-bd)">💳 Subscription & Payment Flow</h3>
+      <ol class="flow-steps">
+        <li>User taps "Upgrade to Care Plus" in app</li>
+        <li>Subscription Service creates Razorpay order via server-side API</li>
+        <li>Order ID returned to app; Razorpay Android SDK launched</li>
+        <li>User completes payment (UPI / Card / Net Banking)</li>
+        <li>Razorpay sends payment webhook to Subscription Service</li>
+        <li>Webhook signature verified (HMAC-SHA256) before processing</li>
+        <li>Plan upgraded to Care Plus in PostgreSQL; features unlocked immediately</li>
+      </ol>
+    </div>
+
+    <div class="flow-card">
+      <h3 style="color:var(--user-bd)">📍 Real-time Location Sharing</h3>
+      <ol class="flow-steps">
+        <li>Member enables location sharing in app</li>
+        <li>App opens WebSocket connection to Location Service</li>
+        <li>GPS coordinates pushed to server every 30 seconds</li>
+        <li>Location Service publishes to member's Redis Pub/Sub channel</li>
+        <li>Care Partner app subscribes to that channel via WebSocket</li>
+        <li>Location updates streamed to Care Partner in real time</li>
+        <li>Member disables → WebSocket closed, channel unsubscribed</li>
+      </ol>
+    </div>
+
+    <div class="flow-card">
+      <h3 style="color:var(--as-bd)">📡 Activity Monitoring Flow</h3>
+      <ol class="flow-steps">
+        <li>App sends heartbeat ping to Activity Monitor every 15 minutes</li>
+        <li>Last-active timestamp updated in Redis</li>
+        <li>Cron job runs every 30 minutes to check all active members</li>
+        <li>No activity for 4 h → MEDIUM alert sent to all Care Partners via FCM</li>
+        <li>No activity for 6 h → HIGH alert; 8 h → EMERGENCY escalation</li>
+        <li>SMS fallback sent at EMERGENCY level</li>
+        <li>Member opens app → activity resolved; caregivers notified of resolution</li>
+      </ol>
+    </div>
+
+    <div class="flow-card">
+      <h3 style="color:var(--cli-bd)">🌐 Website Contact Form Flow</h3>
+      <ol class="flow-steps">
+        <li>Visitor fills form on vasuvo.com/care/contact.html</li>
+        <li>Browser JS submits AJAX POST to Web3Forms API</li>
+        <li>Web3Forms validates the access key server-side</li>
+        <li>Honeypot field checked to block bots</li>
+        <li>Email delivered to contact@vasuvo.com</li>
+        <li>Success banner shown to visitor; form hidden</li>
+        <li>No backend server involved (fully static hosting via GitHub Pages)</li>
+      </ol>
+    </div>
+
+    <div class="flow-card">
+      <h3 style="color:var(--gw-bd)">🔬 Lab Finder Flow</h3>
+      <ol class="flow-steps">
+        <li>User opens Lab Finder in app</li>
+        <li>App requests device GPS location permission</li>
+        <li>Location coordinates sent to Lab Finder Service</li>
+        <li>Service queries Google Maps Places API for nearby labs</li>
+        <li>Results filtered, sorted by distance, rated</li>
+        <li>Lab list returned with distance, address, contact info</li>
+        <li>User taps lab → Maps SDK opens for navigation directions</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <!-- ═════════════════════ TECHNOLOGY STACK ═════════════════════ -->
+  <h2 class="section-title">Technology Stack</h2>
+  <table>
+    <thead>
+      <tr><th>Layer</th><th>Component</th><th>Technology</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Client</td><td>Android App</td>
+        <td><span class="tag" style="background:var(--cli-bg);color:var(--cli-bd);border:1px solid var(--cli-bd)">Kotlin / Flutter</span></td>
+        <td>Primary mobile interface for Members &amp; Care Partners</td>
+      </tr>
+      <tr>
+        <td>Client</td><td>Website</td>
+        <td><span class="tag" style="background:var(--cli-bg);color:var(--cli-bd);border:1px solid var(--cli-bd)">HTML / CSS / JS</span>
+            <span class="tag" style="background:var(--cli-bg);color:var(--cli-bd);border:1px solid var(--cli-bd)">GitHub Pages</span></td>
+        <td>Marketing site, legal docs, contact form (Web3Forms)</td>
+      </tr>
+      <tr>
+        <td>Backend</td><td>API Server</td>
+        <td><span class="tag" style="background:var(--be-bg);color:var(--be-bd);border:1px solid var(--be-bd)">Node.js</span>
+            <span class="tag" style="background:var(--be-bg);color:var(--be-bd);border:1px solid var(--be-bd)">NestJS / Express</span></td>
+        <td>Core REST API, business logic, service orchestration</td>
+      </tr>
+      <tr>
+        <td>Backend</td><td>Real-time</td>
+        <td><span class="tag" style="background:var(--be-bg);color:var(--be-bd);border:1px solid var(--be-bd)">WebSockets</span>
+            <span class="tag" style="background:var(--be-bg);color:var(--be-bd);border:1px solid var(--be-bd)">Socket.io</span></td>
+        <td>Live location sharing, in-app messaging, activity heartbeat</td>
+      </tr>
+      <tr>
+        <td>Database</td><td>Primary DB</td>
+        <td><span class="tag" style="background:var(--da-bg);color:var(--da-bd);border:1px solid var(--da-bd)">PostgreSQL</span></td>
+        <td>Users, medications, connections, subscriptions, vitals</td>
+      </tr>
+      <tr>
+        <td>Database</td><td>Document Store</td>
+        <td><span class="tag" style="background:var(--da-bg);color:var(--da-bd);border:1px solid var(--da-bd)">MongoDB / Firestore</span></td>
+        <td>Medical records metadata, chat messages, AI response store</td>
+      </tr>
+      <tr>
+        <td>Cache / Queue</td><td>In-memory Store</td>
+        <td><span class="tag" style="background:var(--as-bg);color:var(--as-bd);border:1px solid var(--as-bd)">Redis</span></td>
+        <td>Sessions, OTP TTL, AI cache, Bull job queue, Pub/Sub, rate limiting</td>
+      </tr>
+      <tr>
+        <td>Storage</td><td>Object Storage</td>
+        <td><span class="tag" style="background:var(--da-bg);color:var(--da-bd);border:1px solid var(--da-bd)">Google Cloud Storage</span></td>
+        <td>Medical PDFs, images, X-rays, demo videos</td>
+      </tr>
+      <tr>
+        <td>AI</td><td>Health Intelligence</td>
+        <td><span class="tag" style="background:var(--ex-bg);color:var(--ex-bd);border:1px solid var(--ex-bd)">Google Gemini API</span></td>
+        <td>Drug interactions, diet tips, lab analysis, custom queries</td>
+      </tr>
+      <tr>
+        <td>Notifications</td><td>Push</td>
+        <td><span class="tag" style="background:var(--ex-bg);color:var(--ex-bd);border:1px solid var(--ex-bd)">Google FCM</span></td>
+        <td>Medication reminders, missed-dose alerts, SOS, vitals reminders</td>
+      </tr>
+      <tr>
+        <td>Notifications</td><td>SMS</td>
+        <td><span class="tag" style="background:var(--ex-bg);color:var(--ex-bd);border:1px solid var(--ex-bd)">MSG91 / Twilio</span></td>
+        <td>OTP delivery, emergency SMS to caregivers and contacts</td>
+      </tr>
+      <tr>
+        <td>Payments</td><td>Payment Gateway</td>
+        <td><span class="tag" style="background:var(--ex-bg);color:var(--ex-bd);border:1px solid var(--ex-bd)">Razorpay</span></td>
+        <td>UPI, card, net banking for Care Plus subscriptions (₹399/month)</td>
+      </tr>
+      <tr>
+        <td>Maps</td><td>Location &amp; Geocoding</td>
+        <td><span class="tag" style="background:var(--ex-bg);color:var(--ex-bd);border:1px solid var(--ex-bd)">Google Maps API</span></td>
+        <td>Lab finder, nearby lab search, distance calculation, navigation</td>
+      </tr>
+      <tr>
+        <td>Auth</td><td>OTP Verification</td>
+        <td><span class="tag" style="background:var(--ex-bg);color:var(--ex-bd);border:1px solid var(--ex-bd)">Firebase Auth / MSG91</span></td>
+        <td>Phone number OTP on registration and device change</td>
+      </tr>
+      <tr>
+        <td>Hosting</td><td>Backend Infrastructure</td>
+        <td><span class="tag" style="background:var(--net-bg);color:var(--net-bd);border:1px solid var(--net-bd)">GCP / AWS</span></td>
+        <td>Backend servers, managed databases, CDN, object storage</td>
+      </tr>
+      <tr>
+        <td>Hosting</td><td>Website</td>
+        <td><span class="tag" style="background:var(--net-bg);color:var(--net-bd);border:1px solid var(--net-bd)">GitHub Pages</span>
+            <span class="tag" style="background:var(--net-bg);color:var(--net-bd);border:1px solid var(--net-bd)">Custom Domain CNAME</span></td>
+        <td>Static site at vasuvo.com; zero server cost, CDN-backed</td>
+      </tr>
+      <tr>
+        <td>Infra</td><td>Reverse Proxy</td>
+        <td><span class="tag" style="background:var(--net-bg);color:var(--net-bd);border:1px solid var(--net-bd)">Nginx</span></td>
+        <td>Load balancing, SSL termination, WebSocket proxying</td>
+      </tr>
+      <tr>
+        <td>DevOps</td><td>Monitoring</td>
+        <td><span class="tag" style="background:var(--net-bg);color:var(--net-bd);border:1px solid var(--net-bd)">Sentry / Datadog</span></td>
+        <td>Error tracking, performance monitoring, uptime alerting</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═════════════════════ SECURITY ARCHITECTURE ═════════════════════ -->
+  <h2 class="section-title">Security Architecture</h2>
+  <div class="sec-grid">
+    <div class="sec-card">
+      <h4>🔐 Authentication &amp; Authorization</h4>
+      <ul>
+        <li>OTP via SMS for registration (5-min Redis TTL)</li>
+        <li>4–6 digit PIN for daily login (bcrypt hashed)</li>
+        <li>JWT access tokens (short TTL) + refresh tokens</li>
+        <li>Role-based access: Member / Care Partner / Professional</li>
+        <li>Per-connection explicit consent model for data sharing</li>
+      </ul>
+    </div>
+    <div class="sec-card">
+      <h4>🔒 Data Encryption</h4>
+      <ul>
+        <li>All traffic over TLS 1.3</li>
+        <li>Medical records encrypted at rest in GCS</li>
+        <li>Sensitive DB fields encrypted (AES-256)</li>
+        <li>Signed URLs for time-limited file access</li>
+        <li>Razorpay webhooks verified with HMAC-SHA256</li>
+      </ul>
+    </div>
+    <div class="sec-card">
+      <h4>🛡️ API Protection</h4>
+      <ul>
+        <li>Rate limiting per IP and per authenticated user</li>
+        <li>WAF for DDoS and SQL/code injection protection</li>
+        <li>CORS whitelist for allowed origins</li>
+        <li>All inputs validated and sanitised at boundary</li>
+        <li>Parameterised queries — no dynamic SQL</li>
+      </ul>
+    </div>
+    <div class="sec-card">
+      <h4>📋 Compliance &amp; Audit</h4>
+      <ul>
+        <li>HIPAA-aligned data handling practices</li>
+        <li>Full audit trail for all data access and mutations</li>
+        <li>Member controls consent per Care Partner individually</li>
+        <li>Right to data deletion available in Profile settings</li>
+        <li>Regular dependency security audits</li>
+      </ul>
+    </div>
+    <div class="sec-card">
+      <h4>📱 Mobile Security</h4>
+      <ul>
+        <li>Certificate pinning to prevent MITM attacks</li>
+        <li>App PIN required on every session start</li>
+        <li>No sensitive data cached in plaintext on device</li>
+        <li>Biometric auth support (fingerprint / face unlock)</li>
+        <li>Remote session invalidation from server</li>
+      </ul>
+    </div>
+    <div class="sec-card">
+      <h4>☁️ Infrastructure Security</h4>
+      <ul>
+        <li>All backend services inside private VPC</li>
+        <li>Databases not exposed to public internet</li>
+        <li>Secrets via environment variables / HashiCorp Vault</li>
+        <li>Automated daily backups with point-in-time recovery</li>
+        <li>Least-privilege IAM roles for every service</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═════════════════════ DATABASE SCHEMA OVERVIEW ═════════════════════ -->
+  <h2 class="section-title">Database Schema Overview</h2>
+  <table>
+    <thead>
+      <tr><th>Store</th><th>Key Entities</th><th>Key Fields</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PostgreSQL</td><td>users</td>
+        <td>id, phone, pin_hash, name, plan, created_at</td>
+        <td>Central identity; PIN stored as bcrypt hash</td>
+      </tr>
+      <tr>
+        <td>PostgreSQL</td><td>medications</td>
+        <td>id, user_id, name, dose, frequency, times[], supply_count, start_date</td>
+        <td>Soft-deleted; linked to reminder_schedules</td>
+      </tr>
+      <tr>
+        <td>PostgreSQL</td><td>reminder_schedules</td>
+        <td>id, medication_id, scheduled_at, status, sent_at</td>
+        <td>Populated by Reminder Scheduler; updated by Notification Service</td>
+      </tr>
+      <tr>
+        <td>PostgreSQL</td><td>connections</td>
+        <td>id, member_id, caregiver_id, role, consent_flags, status</td>
+        <td>Consent flags control per-feature data access</td>
+      </tr>
+      <tr>
+        <td>PostgreSQL</td><td>vitals</td>
+        <td>id, user_id, type, value, unit, recorded_at</td>
+        <td>Types: BP, sugar, weight, SpO₂, temperature</td>
+      </tr>
+      <tr>
+        <td>PostgreSQL</td><td>subscriptions</td>
+        <td>id, user_id, plan, razorpay_order_id, paid_at, expires_at</td>
+        <td>Webhook updates paid_at; plan enforced at API level</td>
+      </tr>
+      <tr>
+        <td>PostgreSQL</td><td>rewards</td>
+        <td>id, user_id, points, source, created_at</td>
+        <td>Earned for adherence streaks and app engagement</td>
+      </tr>
+      <tr>
+        <td>MongoDB</td><td>medical_records</td>
+        <td>_id, owner_id, type, gcs_path, signed_url, tags[], uploaded_at</td>
+        <td>Flexible schema for varied record types (prescription, lab, scan)</td>
+      </tr>
+      <tr>
+        <td>MongoDB</td><td>messages</td>
+        <td>_id, room_id, sender_id, content, read_by[], created_at</td>
+        <td>In-app chat; room_id ties to a connection pair</td>
+      </tr>
+      <tr>
+        <td>Redis</td><td>otp:{phone}</td>
+        <td>6-digit OTP string</td>
+        <td>TTL = 300 s; deleted on first successful verify</td>
+      </tr>
+      <tr>
+        <td>Redis</td><td>ai_cache:{user_id}</td>
+        <td>Serialised AI response JSON</td>
+        <td>TTL = 86 400 s (24 h); invalidated on medication change</td>
+      </tr>
+      <tr>
+        <td>Redis</td><td>session:{token}</td>
+        <td>user_id, device_id, issued_at</td>
+        <td>TTL matches JWT refresh expiry; cleared on logout</td>
+      </tr>
+      <tr>
+        <td>Redis</td><td>location:{user_id}</td>
+        <td>lat, lng, timestamp</td>
+        <td>TTL = 60 s; refreshed by heartbeat pings</td>
+      </tr>
+      <tr>
+        <td>GCS</td><td>medical-records bucket</td>
+        <td>/{user_id}/{uuid}.{ext}</td>
+        <td>Versioned; encrypted at rest; access via signed URLs only</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div><!-- /content -->
+
+<footer>
+  <p>Vasuvo Care — System Architecture v1.0 &nbsp;|&nbsp; April 2026 &nbsp;|&nbsp; Confidential — Internal Engineering Document</p>
+  <p style="margin-top:.5rem"><a href="../index.html">← Back to Vasuvo Care</a></p>
+</footer>
+
+</body>
+</html>
