@@ -19,32 +19,34 @@
     header {
       background: #2a3d34;
       color: white;
-      padding: 0.9rem 0;
-      position: sticky;
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
       top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     .nav-inner {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1.2rem;
+      padding: 0 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .logo { font-size: 1.4rem; font-weight: 700; color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-    .logo span { font-size: 1rem; font-weight: 400; opacity: 0.82; }
-    nav a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.95rem; font-weight: 500; margin-left: 1.4rem; transition: opacity .2s; }
-    nav a:hover { opacity: 0.7; }
+    .logo { font-size: 1.8rem; font-weight: bold; color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .logo img { height: 50px; width: auto; }
+    nav a { color: white; text-decoration: none; font-size: 1rem; font-weight: 500; margin-left: 1.4rem; transition: opacity .2s; }
+    nav a:hover { opacity: 0.8; }
     nav a.active { border-bottom: 2px solid white; padding-bottom: 2px; }
 
     /* ── Hero ─────────────────────────────────────────────────── */
     .hero {
-      background: linear-gradient(135deg, #00796B 0%, #005a50 100%);
+      background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
       color: white;
       text-align: center;
       padding: 3.5rem 1.2rem 3rem;
+      margin-top: 70px;
     }
     .hero h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: .5rem; }
     .hero p { font-size: 1.05rem; opacity: .88; }
@@ -61,16 +63,16 @@
     .tag-btn {
       padding: .37rem .95rem;
       border-radius: 999px;
-      border: 1.5px solid #00796B;
+      border: 1.5px solid #4F7F6A;
       background: white;
-      color: #00796B;
+      color: #4F7F6A;
       font-size: .85rem;
       font-weight: 600;
       cursor: pointer;
       transition: background .18s, color .18s;
     }
     .tag-btn:hover, .tag-btn.active {
-      background: #00796B;
+      background: #4F7F6A;
       color: white;
     }
 
@@ -101,7 +103,7 @@
 
     .card-cover {
       height: 140px;
-      background: linear-gradient(135deg, #00796B, #005a50);
+      background: linear-gradient(135deg, #4F7F6A, #3a5f52);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -119,7 +121,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: .06em;
-      color: #00796B;
+      color: #4F7F6A;
       margin-bottom: .3rem;
     }
     .card-title { font-size: 1rem; font-weight: 700; line-height: 1.35; margin-bottom: .45rem; color: #111827; }
@@ -133,8 +135,8 @@
       color: #6b7280;
     }
     .card-meta .tag {
-      background: #E8F5E9;
-      color: #00796B;
+      background: #e8f5f1;
+      color: #4F7F6A;
       border-radius: 999px;
       padding: .15rem .6rem;
       font-weight: 600;
@@ -152,7 +154,7 @@
     .spinner {
       width: 36px; height: 36px;
       border: 3px solid #e5e7eb;
-      border-top-color: #00796B;
+      border-top-color: #4F7F6A;
       border-radius: 50%;
       animation: spin .7s linear infinite;
       margin: 0 auto 1rem;
@@ -161,15 +163,15 @@
 
     /* ── Deep-link banner ─────────────────────────────────────── */
     .app-banner {
-      background: #E8F5E9;
-      border-top: 1px solid #A5D6A7;
+      background: #e8f5f1;
+      border-top: 1px solid #8bc9ad;
       text-align: center;
       padding: 1.1rem 1.2rem;
       font-size: .92rem;
-      color: #1f4e3d;
+      color: #2a3d34;
     }
     .app-banner a {
-      color: #00796B;
+      color: #4F7F6A;
       font-weight: 700;
       text-decoration: none;
     }
@@ -186,7 +188,8 @@
 <header>
   <div class="nav-inner">
     <a class="logo" href="/care/index.html">
-      🌿 Vasuvo <span>Care</span>
+      <img src="/care/images/logo.png" alt="Vasuvo Care Logo">
+      <div>Vasuvo Care</div>
     </a>
     <nav>
       <a href="/care/index.html">Home</a>
@@ -198,7 +201,7 @@
 
 <!-- ── Hero ──────────────────────────────────────────────────────── -->
 <section class="hero">
-  <h1>🌿 Vasuvo Health Blog</h1>
+  <h1>Vasuvo Health Blog</h1>
   <p>Evidence-based articles on heart health, diabetes, nutrition and more — curated by our care team.</p>
 </section>
 
