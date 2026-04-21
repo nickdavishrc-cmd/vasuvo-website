@@ -552,9 +552,8 @@
         ? `<img src="${escHtml(v.thumbnail_url)}" alt="${escHtml(v.title)}" loading="lazy" />`
         : '';
       const duration = v.duration ? `<span class="video-duration">${escHtml(v.duration)}</span>` : '';
-      const videoUrl = v.video_url || '';
       return `
-        <div class="video-card" onclick="openVideoModal('${escHtml(videoUrl)}')" style="cursor:pointer;">
+        <div class="video-card" data-video-url="${escHtml(v.video_url || '')}">
           <div class="video-thumb">
             ${thumb}
             <div class="play-btn">▶</div>
@@ -567,6 +566,11 @@
           </div>
         </div>`;
     }).join('');
+
+    // attach click handlers after rendering
+    container.querySelectorAll('.video-card').forEach(card => {
+      card.addEventListener('click', () => openVideoModal(card.dataset.videoUrl));
+    });
   }
 
   function openVideoModal(videoUrl) {
@@ -584,8 +588,7 @@
   }
 
   function closeVideoModal(e) {
-    if (e && e.target !== document.getElementById('videoModal') && e.type !== 'click') return;
-    if (e && e.currentTarget === document.getElementById('videoModal') && e.target !== e.currentTarget) return;
+    if (e && e.target !== e.currentTarget) return;
     document.getElementById('videoModalContent').innerHTML = '';
     document.getElementById('videoModal').style.display = 'none';
     document.body.style.overflow = '';
@@ -618,14 +621,14 @@
           + `<span class="emoji-fallback">${escHtml(r.emoji || '🥗')}</span>`
         : `<span class="emoji-fallback">${escHtml(r.emoji || '🥗')}</span>`;
       const meta = [
-        r.prep_time   ? `⏱ Prep ${escHtml(r.prep_time)}` : null,
-        r.cook_time   ? `🔥 Cook ${escHtml(r.cook_time)}` : null,
-        r.servings    ? `🍽 ${escHtml(String(r.servings))} servings` : null,
+        r.prep_time ? `⏱ Prep ${escHtml(r.prep_time)}` : null,
+        r.cook_time ? `🔥 Cook ${escHtml(r.cook_time)}` : null,
+        r.servings  ? `🍽 ${escHtml(String(r.servings))} servings` : null,
       ].filter(Boolean).map(m => `<span>${m}</span>`).join('');
       const cal = r.calories ? `<span class="cal">~${escHtml(String(r.calories))} kcal</span>` : '';
-      const recipeUrl = r.url || '#';
       return `
-        <a class="recipe-card" href="${escHtml(recipeUrl)}" target="_blank" rel="noopener">
+        <div class="recipe-card" data-recipe-id="${escHtml(String(r.id || ''))}"
+             data-recipe='${JSON.stringify({title:r.title,category:r.category,emoji:r.emoji,cover:r.cover_image_url,description:r.description||r.summary,prep_time:r.prep_time,cook_time:r.cook_time,servings:r.servings,calories:r.calories,ingredients:r.ingredients,steps:r.steps||r.instructions,tags:r.tags}).replace(/'/g,"&#39;")}'>
           <div class="recipe-cover">${cover}</div>
           <div class="recipe-body">
             <div class="recipe-category">${escHtml(r.category || 'Nutrition')}</div>
@@ -633,8 +636,57 @@
             <div class="recipe-desc">${escHtml(r.description || r.summary || '')}</div>
             <div class="recipe-meta">${meta}${cal}</div>
           </div>
-        </a>`;
+        </div>`;
     }).join('');
+
+    // attach click handlers after rendering
+    container.querySelectorAll('.recipe-card').forEach(card => {
+      card.addEventListener('click', () => openRecipeModal(card.dataset.recipe));
+    });
+  }
+
+  function openRecipeModal(jsonStr) {
+    try {
+      const r = JSON.parse(jsonStr);
+      const modal = document.getElementById('recipeModal');
+      const cover = r.cover
+        ? `<img src="${escHtml(r.cover)}" alt="${escHtml(r.title)}" style="width:100%;max-height:280px;object-fit:cover;border-radius:10px 10px 0 0;">`
+        : `<div style="background:linear-gradient(135deg,#4F7F6A,#3a5f52);padding:2.5rem;text-align:center;font-size:4rem;border-radius:10px 10px 0 0;">${escHtml(r.emoji||'🥗')}</div>`;
+      const meta = [
+        r.prep_time ? `<div><strong>Prep</strong><br>${escHtml(r.prep_time)}</div>` : null,
+        r.cook_time ? `<div><strong>Cook</strong><br>${escHtml(r.cook_time)}</div>` : null,
+        r.servings  ? `<div><strong>Servings</strong><br>${escHtml(String(r.servings))}</div>` : null,
+        r.calories  ? `<div><strong>Calories</strong><br>~${escHtml(String(r.calories))} kcal</div>` : null,
+      ].filter(Boolean).join('');
+      const ingredients = Array.isArray(r.ingredients) && r.ingredients.length
+        ? `<h3 style="color:#2a3d34;margin:1.25rem 0 .5rem;">Ingredients</h3><ul style="padding-left:1.25rem;color:#374151;">${r.ingredients.map(i=>`<li style="margin-bottom:.3rem;">${escHtml(String(i))}</li>`).join('')}</ul>`
+        : '';
+      const steps = Array.isArray(r.steps) && r.steps.length
+        ? `<h3 style="color:#2a3d34;margin:1.25rem 0 .5rem;">Instructions</h3><ol style="padding-left:1.25rem;color:#374151;">${r.steps.map(s=>`<li style="margin-bottom:.6rem;">${escHtml(String(s))}</li>`).join('')}</ol>`
+        : '';
+      const tags = Array.isArray(r.tags) && r.tags.length
+        ? `<div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.4rem;">${r.tags.map(t=>`<span style="background:#e8f5f1;color:#4F7F6A;border-radius:999px;padding:.2rem .65rem;font-size:.8rem;font-weight:600;">${escHtml(t)}</span>`).join('')}</div>`
+        : '';
+      document.getElementById('recipeModalContent').innerHTML = `
+        ${cover}
+        <div style="padding:1.5rem 1.75rem 1.75rem;">
+          <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#4F7F6A;margin-bottom:.3rem;">${escHtml(r.category||'Nutrition')}</div>
+          <h2 style="font-size:1.5rem;font-weight:800;color:#111827;margin-bottom:1rem;">${escHtml(r.title)}</h2>
+          ${meta ? `<div style="display:flex;flex-wrap:wrap;gap:1rem;background:#f8f9fa;border-radius:8px;padding:.9rem 1rem;margin-bottom:1rem;font-size:.9rem;text-align:center;color:#374151;">${meta}</div>` : ''}
+          ${r.description ? `<p style="color:#4b5563;margin-bottom:.5rem;">${escHtml(r.description)}</p>` : ''}
+          ${ingredients}
+          ${steps}
+          ${tags}
+        </div>`;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    } catch(err) { console.error(err); }
+  }
+
+  function closeRecipeModal(e) {
+    if (e && e.target !== e.currentTarget) return;
+    document.getElementById('recipeModal').style.display = 'none';
+    document.body.style.overflow = '';
   }
   loadArticles();
   loadVideos();
@@ -644,8 +696,16 @@
 <!-- ── Video Modal ───────────────────────────────────────────────── -->
 <div id="videoModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:9999; align-items:center; justify-content:center;" onclick="closeVideoModal(event)">
   <div style="position:relative; width:92%; max-width:860px;">
-    <button onclick="closeVideoModal()" style="position:absolute; top:-38px; right:0; background:none; border:none; color:white; font-size:2rem; cursor:pointer; line-height:1;">&times;</button>
+    <button onclick="document.getElementById('videoModal').style.display='none'; document.getElementById('videoModalContent').innerHTML=''; document.body.style.overflow='';" style="position:absolute; top:-38px; right:0; background:none; border:none; color:white; font-size:2rem; cursor:pointer; line-height:1;">&times;</button>
     <div id="videoModalContent" style="position:relative; padding-bottom:56.25%; height:0; background:#000; border-radius:10px; overflow:hidden;"></div>
+  </div>
+</div>
+
+<!-- ── Recipe Modal ─────────────────────────────────────────────── -->
+<div id="recipeModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:9999; align-items:center; justify-content:center; overflow-y:auto; padding:20px;" onclick="closeRecipeModal(event)">
+  <div style="position:relative; width:92%; max-width:640px; background:white; border-radius:12px; overflow:hidden; max-height:90vh; overflow-y:auto;">
+    <button onclick="document.getElementById('recipeModal').style.display='none'; document.body.style.overflow='';" style="position:absolute; top:10px; right:14px; background:rgba(0,0,0,0.4); border:none; color:white; font-size:1.5rem; cursor:pointer; line-height:1; border-radius:50%; width:32px; height:32px; z-index:10;">&times;</button>
+    <div id="recipeModalContent"></div>
   </div>
 </div>
 </body>
