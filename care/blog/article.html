@@ -157,6 +157,19 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .state-msg { text-align: center; color: #6b7280; padding: 3rem 1rem; }
 
+    /* ── App banner ── */
+    .app-banner {
+      background: #e8f5f1;
+      border: 1px solid #8bc9ad;
+      border-radius: 10px;
+      padding: .85rem 1.1rem;
+      font-size: .88rem;
+      color: #2a3d34;
+      margin-bottom: 1.75rem;
+      text-align: center;
+    }
+    .app-banner a { color: #4F7F6A; font-weight: 700; text-decoration: none; }
+
     @media (max-width: 600px) {
       .article-title { font-size: 1.5rem; }
       nav a { margin-left: .8rem; font-size: .9rem; }
@@ -227,6 +240,7 @@
 
       wrap.innerHTML = `
         <a class="back-link" href="index.html">← Back to Blog</a>
+        <div class="app-banner">📱 Read these articles on the go — open them in the <a href="https://onelink.to/vasuvo" target="_blank">Vasuvo app</a> under <strong>Healthy Pages</strong>.</div>
         <div class="article-cluster">${escHtml(a.cluster || '')}</div>
         <h1 class="article-title">${escHtml(a.title)}</h1>
         <div class="article-meta">
@@ -234,11 +248,28 @@
           ${a.updated_at   ? `<span>📅 ${new Date(a.updated_at).toLocaleDateString('en-IN', {day:'numeric',month:'long',year:'numeric'})}</span>` : ''}
         </div>
         ${cover}
-        <div class="article-content">${a.body || escHtml(a.summary || '')}</div>
+        <div class="article-content">${renderBody(a)}</div>
         ${tags}`;
     } catch (e) {
       wrap.innerHTML = `<div class="state-msg">⚠️ Could not load article.<br><small>${escHtml(e.message)}</small><br><br><a href="index.html">← Back to Blog</a></div>`;
     }
+  }
+
+  function renderBody(a) {
+    const body = a.body;
+    if (!body) return escHtml(a.summary || '');
+    // body is a structured object: {sections: [{heading, points[]}]}
+    if (body && Array.isArray(body.sections)) {
+      return body.sections.map(sec => {
+        const h = sec.heading ? `<h2>${escHtml(sec.heading)}</h2>` : '';
+        const pts = Array.isArray(sec.points) && sec.points.length
+          ? `<ul>${sec.points.map(p => `<li>${escHtml(String(p))}</li>`).join('')}</ul>`
+          : '';
+        return h + pts;
+      }).join('');
+    }
+    if (typeof body === 'string') return body;
+    return escHtml(a.summary || '');
   }
 
   loadArticle();
