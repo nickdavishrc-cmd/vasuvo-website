@@ -76,6 +76,40 @@
             opacity: 0.8;
         }
 
+        /* Trust bar */
+        .trust-bar {
+            background: #2a3d34;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            padding: .55rem 0;
+        }
+        .trust-bar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: .45rem;
+            color: rgba(255,255,255,0.82);
+            font-size: .82rem;
+            font-weight: 600;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+        .trust-item::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #8bc9ad;
+            flex-shrink: 0;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
@@ -735,8 +769,18 @@
         </nav>
     </header>
 
+    <!-- Values strip -->
+    <div class="trust-bar" style="margin-top:70px;">
+      <div class="trust-bar-inner">
+        <span class="trust-item">Trust</span>
+        <span class="trust-item">Clarity</span>
+        <span class="trust-item">Compliance</span>
+        <span class="trust-item">Empathy</span>
+      </div>
+    </div>
+
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" style="margin-top:0;">
         <div class="container">
             <h1>Your Family's Health, Simplified</h1>
             <p>Smart medication management powered by AI. Never miss a dose, manage your family's health, and get personalized health insights—all in one app.</p>
