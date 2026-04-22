@@ -503,7 +503,7 @@
     const tagsHtml = (a.tags || []).slice(0, 2)
       .map(t => `<span class="tag">${escHtml(t)}</span>`).join('');
 
-    const articleUrl = `/care/blog/article.html?id=${encodeURIComponent(a.id)}`;
+    const articleUrl = `article.html?id=${encodeURIComponent(a.id)}`;
 
     return `
       <a class="card" href="${articleUrl}">
@@ -548,41 +548,34 @@
       return;
     }
     container.innerHTML = videos.map(v => {
-      const thumb = v.thumbnail_url
-        ? `<img src="${escHtml(v.thumbnail_url)}" alt="${escHtml(v.title)}" loading="lazy" />`
-        : '';
-      const duration = v.duration ? `<span class="video-duration">${escHtml(v.duration)}</span>` : '';
+      // v.id IS the YouTube video ID — no separate video_url or thumbnail_url fields
+      const ytId = String(v.id);
+      const thumb = `<img src="https://img.youtube.com/vi/${encodeURIComponent(ytId)}/hqdefault.jpg" alt="${escHtml(v.title)}" loading="lazy" onerror="this.style.display='none'" />`;
       return `
-        <div class="video-card" data-video-url="${escHtml(v.video_url || '')}">
+        <div class="video-card" data-yt-id="${escHtml(ytId)}" style="cursor:pointer;">
           <div class="video-thumb">
             ${thumb}
-            <div class="play-btn">▶</div>
-            ${duration}
+            <div class="play-btn">&#9654;</div>
           </div>
           <div class="video-body">
             <div class="video-category">${escHtml(v.category || 'Health')}</div>
             <div class="video-title">${escHtml(v.title)}</div>
-            <div class="video-desc">${escHtml(v.description || v.summary || '')}</div>
+            <div class="video-desc">${escHtml(v.description || '')}</div>
           </div>
         </div>`;
     }).join('');
 
     // attach click handlers after rendering
     container.querySelectorAll('.video-card').forEach(card => {
-      card.addEventListener('click', () => openVideoModal(card.dataset.videoUrl));
+      card.addEventListener('click', () => openVideoModal(card.dataset.ytId));
     });
   }
 
-  function openVideoModal(videoUrl) {
-    if (!videoUrl) return;
+  function openVideoModal(ytId) {
+    if (!ytId) return;
     const modal = document.getElementById('videoModal');
     const content = document.getElementById('videoModalContent');
-    const ytMatch = videoUrl.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-    if (ytMatch) {
-      content.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-    } else {
-      content.innerHTML = `<video src="${videoUrl}" controls autoplay style="position:absolute;top:0;left:0;width:100%;height:100%;"></video>`;
-    }
+    content.innerHTML = `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(ytId)}?autoplay=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
   }
@@ -616,31 +609,28 @@
       return;
     }
     container.innerHTML = recipes.map(r => {
-      const cover = r.cover_image_url
-        ? `<img src="${escHtml(r.cover_image_url)}" alt="${escHtml(r.title)}" loading="lazy" />`
-          + `<span class="emoji-fallback">${escHtml(r.emoji || '🥗')}</span>`
-        : `<span class="emoji-fallback">${escHtml(r.emoji || '🥗')}</span>`;
+      // actual API fields: image_url, carb_count, fiber_count, ingredients, steps
+      const cover = r.image_url
+        ? `<img src="${escHtml(r.image_url)}" alt="${escHtml(r.title)}" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" /><span class="emoji-fallback">🥗</span>`
+        : `<span class="emoji-fallback">🥗</span>`;
       const meta = [
-        r.prep_time ? `⏱ Prep ${escHtml(r.prep_time)}` : null,
-        r.cook_time ? `🔥 Cook ${escHtml(r.cook_time)}` : null,
-        r.servings  ? `🍽 ${escHtml(String(r.servings))} servings` : null,
-      ].filter(Boolean).map(m => `<span>${m}</span>`).join('');
-      const cal = r.calories ? `<span class="cal">~${escHtml(String(r.calories))} kcal</span>` : '';
+        r.carb_count  != null ? `<span>Carbs: ${escHtml(String(r.carb_count))}g</span>` : null,
+        r.fiber_count != null ? `<span>Fiber: ${escHtml(String(r.fiber_count))}g</span>` : null,
+      ].filter(Boolean).join('');
+      const safeJson = JSON.stringify({title:r.title,category:r.category,image_url:r.image_url,ingredients:r.ingredients,steps:r.steps,tags:r.tags,carb_count:r.carb_count,fiber_count:r.fiber_count,why:r.why_diabetes_friendly}).replace(/"/g,'&quot;');
       return `
-        <div class="recipe-card" data-recipe-id="${escHtml(String(r.id || ''))}"
-             data-recipe='${JSON.stringify({title:r.title,category:r.category,emoji:r.emoji,cover:r.cover_image_url,description:r.description||r.summary,prep_time:r.prep_time,cook_time:r.cook_time,servings:r.servings,calories:r.calories,ingredients:r.ingredients,steps:r.steps||r.instructions,tags:r.tags}).replace(/'/g,"&#39;")}'>
+        <div class="recipe-card" data-recipe="${safeJson}">
           <div class="recipe-cover">${cover}</div>
           <div class="recipe-body">
             <div class="recipe-category">${escHtml(r.category || 'Nutrition')}</div>
             <div class="recipe-title">${escHtml(r.title)}</div>
-            <div class="recipe-desc">${escHtml(r.description || r.summary || '')}</div>
-            <div class="recipe-meta">${meta}${cal}</div>
+            <div class="recipe-meta">${meta}</div>
           </div>
         </div>`;
     }).join('');
 
-    // attach click handlers after rendering
     container.querySelectorAll('.recipe-card').forEach(card => {
+      card.style.cursor = 'pointer';
       card.addEventListener('click', () => openRecipeModal(card.dataset.recipe));
     });
   }
@@ -649,14 +639,12 @@
     try {
       const r = JSON.parse(jsonStr);
       const modal = document.getElementById('recipeModal');
-      const cover = r.cover
-        ? `<img src="${escHtml(r.cover)}" alt="${escHtml(r.title)}" style="width:100%;max-height:280px;object-fit:cover;border-radius:10px 10px 0 0;">`
-        : `<div style="background:linear-gradient(135deg,#4F7F6A,#3a5f52);padding:2.5rem;text-align:center;font-size:4rem;border-radius:10px 10px 0 0;">${escHtml(r.emoji||'🥗')}</div>`;
-      const meta = [
-        r.prep_time ? `<div><strong>Prep</strong><br>${escHtml(r.prep_time)}</div>` : null,
-        r.cook_time ? `<div><strong>Cook</strong><br>${escHtml(r.cook_time)}</div>` : null,
-        r.servings  ? `<div><strong>Servings</strong><br>${escHtml(String(r.servings))}</div>` : null,
-        r.calories  ? `<div><strong>Calories</strong><br>~${escHtml(String(r.calories))} kcal</div>` : null,
+      const cover = r.image_url
+        ? `<img src="${escHtml(r.image_url)}" alt="${escHtml(r.title)}" style="width:100%;max-height:280px;object-fit:cover;border-radius:10px 10px 0 0;">`
+        : `<div style="background:linear-gradient(135deg,#4F7F6A,#3a5f52);padding:2.5rem;text-align:center;font-size:4rem;border-radius:10px 10px 0 0;">🥗</div>`;
+      const metaItems = [
+        r.carb_count  != null ? `<div><strong>Carbs</strong><br>${escHtml(String(r.carb_count))}g</div>` : null,
+        r.fiber_count != null ? `<div><strong>Fiber</strong><br>${escHtml(String(r.fiber_count))}g</div>` : null,
       ].filter(Boolean).join('');
       const ingredients = Array.isArray(r.ingredients) && r.ingredients.length
         ? `<h3 style="color:#2a3d34;margin:1.25rem 0 .5rem;">Ingredients</h3><ul style="padding-left:1.25rem;color:#374151;">${r.ingredients.map(i=>`<li style="margin-bottom:.3rem;">${escHtml(String(i))}</li>`).join('')}</ul>`
@@ -664,6 +652,7 @@
       const steps = Array.isArray(r.steps) && r.steps.length
         ? `<h3 style="color:#2a3d34;margin:1.25rem 0 .5rem;">Instructions</h3><ol style="padding-left:1.25rem;color:#374151;">${r.steps.map(s=>`<li style="margin-bottom:.6rem;">${escHtml(String(s))}</li>`).join('')}</ol>`
         : '';
+      const why = r.why ? `<div style="background:#e8f5f1;border-radius:8px;padding:.85rem 1rem;margin-top:1rem;font-size:.9rem;color:#2a3d34;"><strong>Why it works:</strong><br>${escHtml(r.why)}</div>` : '';
       const tags = Array.isArray(r.tags) && r.tags.length
         ? `<div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.4rem;">${r.tags.map(t=>`<span style="background:#e8f5f1;color:#4F7F6A;border-radius:999px;padding:.2rem .65rem;font-size:.8rem;font-weight:600;">${escHtml(t)}</span>`).join('')}</div>`
         : '';
@@ -672,15 +661,15 @@
         <div style="padding:1.5rem 1.75rem 1.75rem;">
           <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#4F7F6A;margin-bottom:.3rem;">${escHtml(r.category||'Nutrition')}</div>
           <h2 style="font-size:1.5rem;font-weight:800;color:#111827;margin-bottom:1rem;">${escHtml(r.title)}</h2>
-          ${meta ? `<div style="display:flex;flex-wrap:wrap;gap:1rem;background:#f8f9fa;border-radius:8px;padding:.9rem 1rem;margin-bottom:1rem;font-size:.9rem;text-align:center;color:#374151;">${meta}</div>` : ''}
-          ${r.description ? `<p style="color:#4b5563;margin-bottom:.5rem;">${escHtml(r.description)}</p>` : ''}
+          ${metaItems ? `<div style="display:flex;flex-wrap:wrap;gap:1.5rem;background:#f8f9fa;border-radius:8px;padding:.9rem 1rem;margin-bottom:1rem;font-size:.9rem;text-align:center;color:#374151;">${metaItems}</div>` : ''}
           ${ingredients}
           ${steps}
+          ${why}
           ${tags}
         </div>`;
       modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
-    } catch(err) { console.error(err); }
+    } catch(err) { console.error('Recipe modal error:', err); }
   }
 
   function closeRecipeModal(e) {
