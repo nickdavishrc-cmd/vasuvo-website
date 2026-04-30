@@ -739,10 +739,10 @@
         r.fiber_count != null ? `<div><strong>Fiber</strong><br>${escHtml(String(r.fiber_count))}g</div>` : null,
       ].filter(Boolean).join('');
       const ingredients = Array.isArray(r.ingredients) && r.ingredients.length
-        ? `<h3 style="color:#2a3d34;margin:1.25rem 0 .5rem;">Ingredients</h3><ul style="padding-left:1.25rem;color:#374151;">${r.ingredients.map(i=>`<li style="margin-bottom:.3rem;">${escHtml(String(i))}</li>`).join('')}</ul>`
+        ? `<h3 style="color:#000000;margin:1.25rem 0 .5rem;">Ingredients</h3><ul style="padding-left:1.25rem;color:#000000;">${r.ingredients.map(i=>`<li style="margin-bottom:.3rem;">${escHtml(String(i))}</li>`).join('')}</ul>`
         : '';
       const steps = Array.isArray(r.steps) && r.steps.length
-        ? `<h3 style="color:#2a3d34;margin:1.25rem 0 .5rem;">Instructions</h3><ol style="padding-left:1.25rem;color:#374151;">${r.steps.map(s=>`<li style="margin-bottom:.6rem;">${escHtml(String(s))}</li>`).join('')}</ol>`
+        ? `<h3 style="color:#000000;margin:1.25rem 0 .5rem;">Instructions</h3><ol style="padding-left:1.25rem;color:#000000;">${r.steps.map(s=>`<li style="margin-bottom:.6rem;">${escHtml(String(s))}</li>`).join('')}</ol>`
         : '';
       const why = r.why ? `<div style="background:#e8f5f1;border-radius:8px;padding:.85rem 1rem;margin-top:1rem;font-size:.9rem;color:#2a3d34;"><strong>Why it works:</strong><br>${escHtml(r.why)}</div>` : '';
       const tags = Array.isArray(r.tags) && r.tags.length
@@ -752,8 +752,8 @@
         ${cover}
         <div style="padding:1.5rem 1.75rem 1.75rem;">
           <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#4F7F6A;margin-bottom:.3rem;">${escHtml(r.category||'Nutrition')}</div>
-          <h2 style="font-size:1.5rem;font-weight:800;color:#111827;margin-bottom:1rem;">${escHtml(r.title)}</h2>
-          ${metaItems ? `<div style="display:flex;flex-wrap:wrap;gap:1.5rem;background:#f8f9fa;border-radius:8px;padding:.9rem 1rem;margin-bottom:1rem;font-size:.9rem;text-align:center;color:#374151;">${metaItems}</div>` : ''}
+          <h2 style="font-size:1.5rem;font-weight:800;color:#000000;margin-bottom:1rem;">${escHtml(r.title)}</h2>
+          ${metaItems ? `<div style="display:flex;flex-wrap:wrap;gap:1.5rem;background:#f8f9fa;border-radius:8px;padding:.9rem 1rem;margin-bottom:1rem;font-size:.9rem;text-align:center;color:#000000;">${metaItems}</div>` : ''}
           ${ingredients}
           ${steps}
           ${why}
