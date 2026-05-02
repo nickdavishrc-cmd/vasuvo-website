@@ -1,0 +1,12 @@
+# Vasuvo Care — robots.txt
+# https://vasuvo.com
+
+User-agent: *
+Allow: /
+
+# Block admin/API paths that should not be indexed
+Disallow: /api/
+Disallow: /care/docs/
+
+# Sitemaps
+Sitemap: https://vasuvo.com/sitemap.xml
