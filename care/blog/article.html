@@ -9,14 +9,14 @@
   <meta name="description" content="Read expert health articles on heart health, diabetes management, nutrition, and family wellness from the Vasuvo Care team.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="author" content="Vasuvo Care">
-  <link id="canonicalTag" rel="canonical" href="https://vasuvo.com/care/blog/article.html">
+  <link id="canonicalTag" rel="canonical" href="https://vasuvo.com/blog/article.html">
 
   <!-- ── Open Graph (updated dynamically) ── -->
   <meta id="og-type" property="og:type" content="article">
-  <meta id="og-url" property="og:url" content="https://vasuvo.com/care/blog/article.html">
+  <meta id="og-url" property="og:url" content="https://vasuvo.com/blog/article.html">
   <meta id="og-title" property="og:title" content="Vasuvo Health Article">
   <meta id="og-description" property="og:description" content="Expert health advice from the Vasuvo Care team.">
-  <meta id="og-image" property="og:image" content="https://vasuvo.com/care/images/og-cover.png">
+  <meta id="og-image" property="og:image" content="https://vasuvo.com/images/og-cover.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="Vasuvo Care">
@@ -27,7 +27,7 @@
   <meta name="twitter:site" content="@vasuvocare">
   <meta id="tw-title" name="twitter:title" content="Vasuvo Health Article">
   <meta id="tw-description" name="twitter:description" content="Expert health advice from the Vasuvo Care team.">
-  <meta id="tw-image" name="twitter:image" content="https://vasuvo.com/care/images/og-cover.png">
+  <meta id="tw-image" name="twitter:image" content="https://vasuvo.com/images/og-cover.png">
 
   <!-- ── Structured Data: BreadcrumbList (static part) ── -->
   <script type="application/ld+json">
@@ -285,9 +285,9 @@
       const a = await r.json();
 
       // ── Dynamic SEO meta injection ─────────────────────────────
-      const pageUrl = `https://vasuvo.com/care/blog/article.html?id=${encodeURIComponent(id)}`;
+      const pageUrl = `https://vasuvo.com/blog/article.html?id=${encodeURIComponent(id)}`;
       const metaDesc = a.summary ? a.summary.slice(0, 155) : `${a.title} — Expert health advice from the Vasuvo Care team.`;
-      const imgUrl   = a.cover_image_url || 'https://vasuvo.com/care/images/og-cover.png';
+      const imgUrl   = a.cover_image_url || 'https://vasuvo.com/images/og-cover.png';
 
       document.title = `${a.title} — Vasuvo Health Blog`;
       document.querySelector('meta[name="description"]').setAttribute('content', metaDesc);
@@ -315,14 +315,14 @@
         "author": {
           "@type": "Organization",
           "name": "Vasuvo Care",
-          "url": "https://vasuvo.com/care/"
+          "url": "https://vasuvo.com/"
         },
         "publisher": {
           "@type": "Organization",
           "name": "Vasuvo Care",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://vasuvo.com/care/images/logo.png"
+            "url": "https://vasuvo.com/images/logo.png"
           }
         },
         "mainEntityOfPage": {
