@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Upgrade to Vasuvo Care Plus — AI Clinic, unlimited medication tracking, advanced health reports and caregiver tools.">
     <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
     <title>Upgrade to Care Plus — Vasuvo Care</title>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -519,7 +520,15 @@
     }
 
     // ── Boot ───────────────────────────────────────────────────────────────────
-    init();
+    // Test mode: ?test=1 bypasses token check so the form can be previewed
+    if (getParam('test') === '1') {
+        _session = { user_id: 'test-user', name: 'Test User', phone: '' };
+        document.getElementById('greeting-bar').innerHTML =
+            `Hi <strong>Test</strong> 👋  You're one step away from Care Plus.`;
+        show('state-form');
+    } else {
+        init();
+    }
 </script>
 </body>
 </html>
