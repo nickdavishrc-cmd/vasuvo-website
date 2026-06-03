@@ -1,15 +1,534 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <title>Vasuvo Care — Subscription</title>
-  <script>
-    // Forward all query params (token, billing, test, etc.) to the canonical page
-    var qs = window.location.search;
-    window.location.replace('/care/subscribe.html' + qs);
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Upgrade to Vasuvo Care Plus — AI Clinic, unlimited medication tracking, advanced health reports and caregiver tools.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <title>Upgrade to Care Plus — Vasuvo Care</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #000000;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ── Header ──────────────────────────────────────────────────────── */
+        header {
+            width: 100%;
+            background: #2a3d34;
+            color: white;
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+        }
+        .logo img { height: 38px; width: auto; }
+        .logo span { font-size: 1.2rem; font-weight: 700; }
+
+        /* ── Main card ───────────────────────────────────────────────────── */
+        main {
+            width: 100%;
+            max-width: 460px;
+            padding: 1.5rem 1.5rem 2.5rem;
+            flex: 1;
+        }
+
+        /* State containers */
+        #state-loading,
+        #state-error,
+        #state-form,
+        #state-processing,
+        #state-success { display: none; flex-direction: column; align-items: center; gap: 1rem; }
+        #state-loading { display: flex; }
+
+        .spinner {
+            width: 48px; height: 48px;
+            border: 4px solid #d1e8df;
+            border-top-color: #0D6E4F;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .subtle { color: #666; font-size: 0.9rem; text-align: center; }
+
+        /* ── Plan cards ──────────────────────────────────────────────────── */
+        .plan-grid { display: flex; flex-direction: column; gap: 0.75rem; width: 100%; }
+
+        .plan-card {
+            background: white;
+            border: 2px solid #d0e8de;
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .plan-card:hover { border-color: #2a3d34; }
+        .plan-card.selected {
+            border-color: #2a3d34;
+            box-shadow: 0 0 0 3px rgba(42,61,52,0.12);
+        }
+        .plan-card input[type="radio"] { accent-color: #2a3d34; width: 18px; height: 18px; }
+        .plan-info { flex: 1; }
+        .plan-name { font-weight: 700; font-size: 1rem; }
+        .plan-price { font-size: 0.9rem; color: #444; margin-top: 0.15rem; }
+        .plan-badge {
+            background: #2a3d34;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        /* ── Section headings ────────────────────────────────────────────── */
+        .section-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #2a3d34;
+            align-self: flex-start;
+            margin-top: 0.5rem;
+        }
+
+        /* ── Greeting bar ────────────────────────────────────────────────── */
+        .greeting {
+            background: white;
+            border-radius: 12px;
+            padding: 0.9rem 1.1rem;
+            width: 100%;
+            font-size: 0.9rem;
+            color: #444;
+            border: 1px solid #d0e8de;
+        }
+        .greeting strong { color: #2a3d34; }
+
+        /* ── Feature list ────────────────────────────────────────────────── */
+        .features {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            width: 100%;
+            border: 1px solid #d0e8de;
+        }
+        .features h3 { font-size: 0.85rem; font-weight: 700; color: #2a3d34; margin-bottom: 0.6rem; }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            color: #444;
+            padding: 0.25rem 0;
+        }
+        .feature-item::before {
+            content: '✓';
+            color: #2a3d34;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        /* ── Pay button ──────────────────────────────────────────────────── */
+        #btn-pay {
+            width: 100%;
+            background: #8bc9ad;
+            color: #2a3d34;
+            border: none;
+            border-radius: 50px;
+            padding: 1rem;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(42,61,52,0.15);
+        }
+        #btn-pay:disabled { opacity: 0.6; cursor: not-allowed; }
+        #btn-pay:hover:not(:disabled) { background: #a3d9be; transform: translateY(-2px); }
+
+        .legal {
+            font-size: 0.72rem;
+            color: #888;
+            text-align: center;
+            line-height: 1.5;
+        }
+        .legal a { color: #2a3d34; }
+
+        /* ── Error / success states ──────────────────────────────────────── */
+        .error-card {
+            background: #fff5f5;
+            border: 1px solid #ffb3b3;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            text-align: center;
+            width: 100%;
+        }
+        .error-card h2 { color: #c0392b; font-size: 1rem; margin-bottom: 0.4rem; }
+        .error-card p { font-size: 0.85rem; color: #555; }
+        #btn-retry {
+            margin-top: 0.75rem;
+            background: #c0392b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .success-icon { font-size: 3rem; }
+        .success-card {
+            background: #f0faf5;
+            border: 1px solid #a8d8be;
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            width: 100%;
+        }
+        .success-card h2 { color: #2a3d34; font-size: 1.1rem; margin-bottom: 0.4rem; }
+        .success-card p { font-size: 0.85rem; color: #444; }
+        #btn-return {
+            margin-top: 0.75rem;
+            background: #8bc9ad;
+            color: #2a3d34;
+            border: none;
+            border-radius: 50px;
+            padding: 0.6rem 1.75rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+        #btn-return:hover { background: #a3d9be; }
+
+        /* ── Footer ─────────────────────────────────────────────────────── */
+        footer {
+            width: 100%;
+            background: #2a3d34;
+            color: white;
+            padding: 1.2rem 1.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        footer a { color: #8bc9ad; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        /* ── Animation ──────────────────────────────────────────────────── */
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner {
+            width: 48px; height: 48px;
+            border: 4px solid #d0e8de;
+            border-top-color: #2a3d34;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .subtle { color: #666; font-size: 0.9rem; text-align: center; }
+    </style>
 </head>
-<body></body>
+<body>
+
+<header>
+    <a class="logo" href="index.html">
+        <img src="images/logo.png" alt="Vasuvo Care">
+        <span>Vasuvo Care</span>
+    </a>
+</header>
+
+<main>
+    <!-- Loading -->
+    <div id="state-loading">
+        <div style="height: 2rem;"></div>
+        <div class="spinner"></div>
+        <p class="subtle">Preparing your plan…</p>
+    </div>
+
+    <!-- Session error -->
+    <div id="state-error">
+        <div style="height: 2rem;"></div>
+        <div class="error-card">
+            <h2>Session Expired</h2>
+            <p id="err-msg">Your payment session has expired or is invalid. Please return to the app and try again.</p>
+            <button id="btn-retry" onclick="window.close()">Close &amp; Return to App</button>
+        </div>
+    </div>
+
+    <!-- Plan selection form -->
+    <div id="state-form">
+        <div style="height: 1rem;"></div>
+        <div class="greeting" id="greeting-bar">Welcome!</div>
+
+        <p class="section-label">Choose your plan</p>
+        <div class="plan-grid">
+            <label class="plan-card selected" id="card-monthly">
+                <input type="radio" name="billing" value="monthly" checked>
+                <div class="plan-info">
+                    <div class="plan-name">Care Plus — Monthly</div>
+                    <div class="plan-price">₹399 / month</div>
+                </div>
+            </label>
+            <label class="plan-card" id="card-yearly">
+                <input type="radio" name="billing" value="yearly">
+                <div class="plan-info">
+                    <div class="plan-name">Care Plus — Yearly</div>
+                    <div class="plan-price">₹3,990 / year</div>
+                </div>
+                <span class="plan-badge">Save 17%</span>
+            </label>
+        </div>
+
+        <div class="features">
+            <h3>What's included</h3>
+            <div class="feature-item">AI Clinic — personalised health insights</div>
+            <div class="feature-item">Unlimited medication tracking</div>
+            <div class="feature-item">Advanced health reports</div>
+            <div class="feature-item">Caregiver connections</div>
+            <div class="feature-item">Priority customer support</div>
+        </div>
+
+        <button id="btn-pay">Pay with Razorpay</button>
+
+        <p class="legal">
+            By subscribing you agree to the
+            <a href="/subscriptionlegal.html" target="_blank">Subscription Terms</a>
+            and <a href="/terms.html" target="_blank">Terms of Service</a>.
+            <br>Secure payment powered by Razorpay.
+        </p>
+    </div>
+
+    <!-- Processing -->
+    <div id="state-processing">
+        <div style="height: 2rem;"></div>
+        <div class="spinner"></div>
+        <p class="subtle">Activating your subscription…</p>
+    </div>
+
+    <!-- Success -->
+    <div id="state-success">
+        <div style="height: 2rem;"></div>
+        <div class="success-icon">🎉</div>
+        <div class="success-card">
+            <h2>Welcome to Care Plus!</h2>
+            <p>Your subscription is now active. Tap below to return to the app.</p>
+            <button id="btn-return" onclick="returnToApp()">Return to App</button>
+        </div>
+    </div>
+</main>
+
+<footer>
+    © 2026 Vasuvo Care &nbsp;·&nbsp;
+    <a href="/subscriptionlegal.html">Subscription Terms</a> &nbsp;·&nbsp;
+    <a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp;
+    <a href="/privacy.html">Privacy Policy</a>
+</footer>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    const API = 'https://api.vasuvo.com/api/v1';
+
+    // State
+    let _session = null;  // { user_id, name, phone, plan }
+    let _billing  = 'monthly';
+
+    // ── Helpers ────────────────────────────────────────────────────────────────
+
+    function show(id) {
+        ['state-loading','state-error','state-form','state-processing','state-success']
+            .forEach(s => {
+                const el = document.getElementById(s);
+                el.style.display = (s === id) ? 'flex' : 'none';
+            });
+    }
+
+    function getParam(name) {
+        return new URLSearchParams(window.location.search).get(name);
+    }
+
+    // ── Init ───────────────────────────────────────────────────────────────────
+
+    async function init() {
+        show('state-loading');
+
+        const token = getParam('token');
+        if (!token) {
+            document.getElementById('err-msg').textContent =
+                'No session token found. Please return to the app and try again.';
+            show('state-error');
+            return;
+        }
+
+        // Pre-select billing from app hint
+        const billingHint = getParam('billing');
+        if (billingHint === 'yearly') {
+            _billing = 'yearly';
+            document.querySelector('input[value="yearly"]').checked = true;
+            document.getElementById('card-monthly').classList.remove('selected');
+            document.getElementById('card-yearly').classList.add('selected');
+        }
+
+        try {
+            const resp = await fetch(`${API}/auth/web-session?token=${encodeURIComponent(token)}`);
+            if (!resp.ok) {
+                const body = await resp.json().catch(() => ({}));
+                document.getElementById('err-msg').textContent =
+                    body.detail || 'Session validation failed. Please try again from the app.';
+                show('state-error');
+                return;
+            }
+            _session = await resp.json();
+
+            // Personalise greeting
+            const name = (_session.name || '').split(' ')[0] || 'there';
+            document.getElementById('greeting-bar').innerHTML =
+                `Hi <strong>${name}</strong> 👋  You're one step away from Care Plus.`;
+
+            show('state-form');
+        } catch (err) {
+            document.getElementById('err-msg').textContent =
+                'Network error. Please check your connection and try again.';
+            show('state-error');
+        }
+    }
+
+    // ── Plan selection ─────────────────────────────────────────────────────────
+
+    document.querySelectorAll('input[name="billing"]').forEach(radio => {
+        radio.addEventListener('change', e => {
+            _billing = e.target.value;
+            document.getElementById('card-monthly').classList.toggle('selected', _billing === 'monthly');
+            document.getElementById('card-yearly').classList.toggle('selected',  _billing === 'yearly');
+        });
+    });
+
+    // ── Payment ────────────────────────────────────────────────────────────────
+
+    document.getElementById('btn-pay').addEventListener('click', startPayment);
+
+    async function startPayment() {
+        if (!_session) return;
+        document.getElementById('btn-pay').disabled = true;
+
+        try {
+            // Create Razorpay order — pass web_user_id so the backend can identify
+            // the user without a JWT (identity already validated via /auth/web-session).
+            const orderResp = await fetch(
+                `${API}/subscriptions/create-order?web_user_id=${encodeURIComponent(_session.user_id)}`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ plan: 'CARE', billing: _billing }),
+                }
+            );
+
+            if (!orderResp.ok) {
+                const body = await orderResp.json().catch(() => ({}));
+                alert(body.detail || 'Could not create payment order. Please try again.');
+                document.getElementById('btn-pay').disabled = false;
+                return;
+            }
+
+            const order = await orderResp.json();
+
+            const options = {
+                key: order.key_id,
+                order_id: order.order_id,
+                amount: order.amount,
+                currency: 'INR',
+                name: 'Vasuvo Care',
+                image: 'https://res.cloudinary.com/dksomlfxh/image/upload/v1780091314/logo_nznqge.png',
+                description: `Care Plus — ${_billing}`,
+                prefill: { contact: _session.phone || '' },
+                theme: { color: '#0D6E4F' },
+                handler: function(response) {
+                    verifyPayment(response);
+                },
+                modal: {
+                    ondismiss: function() {
+                        document.getElementById('btn-pay').disabled = false;
+                    },
+                },
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.on('payment.failed', function(response) {
+                alert('Payment failed: ' + (response.error.description || 'Unknown error'));
+                document.getElementById('btn-pay').disabled = false;
+            });
+            rzp.open();
+
+        } catch (err) {
+            alert('Network error. Please check your connection and try again.');
+            document.getElementById('btn-pay').disabled = false;
+        }
+    }
+
+    async function verifyPayment(razorpayResponse) {
+        show('state-processing');
+        try {
+            const verifyResp = await fetch(
+                `${API}/subscriptions/verify-payment?web_user_id=${encodeURIComponent(_session.user_id)}`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        razorpay_order_id:   razorpayResponse.razorpay_order_id,
+                        razorpay_payment_id: razorpayResponse.razorpay_payment_id,
+                        razorpay_signature:  razorpayResponse.razorpay_signature,
+                        plan:    'CARE',
+                        billing: _billing,
+                    }),
+                }
+            );
+
+            if (!verifyResp.ok) {
+                const body = await verifyResp.json().catch(() => ({}));
+                alert('Activation failed: ' + (body.detail || 'Please contact support.'));
+                show('state-form');
+                document.getElementById('btn-pay').disabled = false;
+                return;
+            }
+
+            show('state-success');
+        } catch (err) {
+            alert('Network error during activation. Please contact support if payment was deducted.');
+            show('state-form');
+            document.getElementById('btn-pay').disabled = false;
+        }
+    }
+
+    function returnToApp() {
+        window.location.href = 'vasuvocare://subscription-activated';
+    }
+
+    // ── Boot ───────────────────────────────────────────────────────────────────
+    // Test mode: ?test=1 bypasses token check so the form can be previewed
+    if (getParam('test') === '1') {
+        _session = { user_id: 'test-user', name: 'Test User', phone: '' };
+        document.getElementById('greeting-bar').innerHTML =
+            `Hi <strong>Test</strong> 👋  You're one step away from Care Plus.`;
+        show('state-form');
+    } else {
+        init();
+    }
+</script>
+</body>
 </html>

@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ── Primary SEO ── -->
+  <title>Vasuvo Healthy Pages — Expert Articles on Heart Health, Diabetes & Family Wellness</title>
+  <meta name="description" content="Evidence-based health articles on heart health, diabetes management, nutrition, mental wellness, and senior care — written by experts and curated by the Vasuvo Care team. Free to read.">
+  <meta name="keywords" content="heart health articles, diabetes management tips, family nutrition advice, mental wellness, senior health, healthy recipes, health news, chronic disease articles, medication tips, caregiver advice, health blog">
+  <meta name="author" content="Vasuvo Care">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://vasuvo.com/blog/">
+
+  <!-- ── Open Graph / Facebook ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vasuvo.com/blog/">
+  <meta property="og:title" content="Vasuvo Healthy Pages — Expert Articles on Heart Health, Diabetes & Family Wellness">
+  <meta property="og:description" content="Evidence-based health articles on heart health, diabetes management, nutrition, mental wellness, and senior care — free to read, written with care.">
+  <meta property="og:image" content="https://vasuvo.com/images/og-cover.png">
+  <meta property="og:image:alt" content="Vasuvo Healthy Pages — Health Articles & Recipes">
+  <meta property="og:site_name" content="Vasuvo Care">
+  <meta property="og:locale" content="en_GB">
+
+  <!-- ── Twitter Card ── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@vasuvocare">
+  <meta name="twitter:title" content="Vasuvo Healthy Pages — Expert Health Articles">
+  <meta name="twitter:description" content="Evidence-based articles on heart health, diabetes, nutrition, and more — free from the Vasuvo Care team.">
+  <meta name="twitter:image" content="https://vasuvo.com/images/og-cover.png">
+
+  <!-- ── Structured Data: Blog ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Vasuvo Healthy Pages",
+    "description": "Evidence-based health articles on heart health, diabetes management, nutrition, mental wellness, and senior care, curated by the Vasuvo Care team.",
+    "url": "https://vasuvo.com/blog/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Vasuvo Care",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://vasuvo.com/images/logo.png"
+      }
+    }
+  }
+  </script>
+
+  <!-- ── Structured Data: BreadcrumbList ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://vasuvo.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Healthy Pages",
+        "item": "https://vasuvo.com/blog/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- ── Performance hints ── -->
+  <link rel="preconnect" href="https://api.vasuvo.com">
+  <link rel="dns-prefetch" href="https://api.vasuvo.com">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      color: #000000;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* ── Nav ──────────────────────────────────────────────────── */
+    header {
+      background: #2a3d34;
+      color: white;
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { font-size: 1.8rem; font-weight: bold; color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .logo img { height: 50px; width: auto; }
+    nav a { color: white; text-decoration: none; font-size: 1rem; font-weight: 500; margin-left: 1.4rem; transition: opacity .2s; }
+    nav a:hover { opacity: 0.8; }
+    nav a.active { border-bottom: 2px solid white; padding-bottom: 2px; }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #4F7F6A 0%, #3a5f52 100%);
+      color: white;
+      text-align: center;
+      padding: 3.5rem 1.2rem 3rem;
+      margin-top: 70px;
+    }
+    .hero h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: .5rem; }
+    .hero p { font-size: 1.1rem; opacity: 1; color: #ffffff; }
+
+    /* ── Tag filter ───────────────────────────────────────────── */
+    .tag-bar {
+      max-width: 1100px;
+      margin: 1.6rem auto 0;
+      padding: 0 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .tag-btn {
+      padding: .37rem .95rem;
+      border-radius: 999px;
+      border: 1.5px solid #4F7F6A;
+      background: white;
+      color: #4F7F6A;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .18s, color .18s;
+    }
+    .tag-btn:hover, .tag-btn.active {
+      background: #4F7F6A;
+      color: white;
+    }
+
+    /* ── Article grid ─────────────────────────────────────────── */
+    .articles {
+      max-width: 1100px;
+      margin: 1.4rem auto 3rem;
+      padding: 0 1.2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.2rem;
+    }
+
+    /* ── Article card ─────────────────────────────────────────── */
+    .card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      display: flex;
+      flex-direction: column;
+      transition: transform .18s, box-shadow .18s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+
+    .card-cover {
+      height: 140px;
+      background: linear-gradient(135deg, #4F7F6A, #3a5f52);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-cover img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+    .card-cover .emoji-fallback { position: relative; z-index: 1; }
+
+    .card-body { padding: 1rem 1.1rem 1.1rem; flex: 1; display: flex; flex-direction: column; }
+    .card-cluster {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #4F7F6A;
+      margin-bottom: .35rem;
+    }
+    .card-title { font-size: 1.05rem; font-weight: 700; line-height: 1.35; margin-bottom: .5rem; color: #000000; }
+    .card-summary { font-size: .9375rem; color: #000000; flex: 1; line-height: 1.5; }
+    .card-meta {
+      margin-top: .7rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .8125rem;
+      color: #000000;
+    }
+    .card-meta .tag {
+      background: #e8f5f1;
+      color: #4F7F6A;
+      border-radius: 999px;
+      padding: .15rem .6rem;
+      font-weight: 600;
+    }
+    .read-time::before { content: '🕐 '; }
+
+    /* ── States ───────────────────────────────────────────────── */
+    .state-msg {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1.2rem;
+      text-align: center;
+      color: #000000;
+      font-size: .9375rem;
+    }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid #e5e7eb;
+      border-top-color: #4F7F6A;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Deep-link banner ─────────────────────────────────────── */
+    .app-banner {
+      background: #e8f5f1;
+      border-top: 1px solid #8bc9ad;
+      text-align: center;
+      padding: 1.1rem 1.2rem;
+      font-size: .92rem;
+      color: #000000;
+    }
+    .app-banner a {
+      color: #4F7F6A;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* ── Section headings ──────────────────────────────────────── */
+    .section-heading {
+      max-width: 1100px;
+      margin: 2.5rem auto 1rem;
+      padding: 0 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .section-heading h2 {
+      font-size: 1.5625rem;
+      font-weight: 800;
+      color: #000000;
+    }
+    .section-heading .sh-badge {
+      background: #4F7F6A;
+      color: white;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: .2rem .65rem;
+      border-radius: 999px;
+      letter-spacing: .04em;
+    }
+    .section-divider {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.2rem;
+      border: none;
+      border-top: 2px solid #e5e7eb;
+    }
+
+    /* ── Video cards ─────────────────────────────────────────────── */
+    .videos {
+      max-width: 1100px;
+      margin: 1.2rem auto 2rem;
+      padding: 0 1.2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+    }
+    .video-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      display: flex;
+      flex-direction: column;
+      transition: transform .18s, box-shadow .18s;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+    .video-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+    .video-thumb {
+      height: 160px;
+      background: linear-gradient(135deg, #2a3d34, #4F7F6A);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-thumb img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+    .play-btn {
+      position: relative;
+      z-index: 1;
+      width: 52px;
+      height: 52px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,.25);
+      transition: transform .2s;
+    }
+    .video-card:hover .play-btn { transform: scale(1.1); }
+    .video-duration {
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      background: rgba(0,0,0,.65);
+      color: white;
+      font-size: .72rem;
+      font-weight: 600;
+      padding: .15rem .45rem;
+      border-radius: 4px;
+      z-index: 1;
+    }
+    .video-body { padding: 1rem 1.1rem 1.1rem; flex: 1; display: flex; flex-direction: column; }
+    .video-category {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #4F7F6A;
+      margin-bottom: .35rem;
+    }
+    .video-title { font-size: 1.05rem; font-weight: 700; line-height: 1.35; margin-bottom: .4rem; color: #000000; }
+    .video-desc { font-size: .9375rem; color: #000000; flex: 1; line-height: 1.5; }
+
+    /* ── Recipe cards ────────────────────────────────────────────── */
+    .recipes {
+      max-width: 1100px;
+      margin: 1.2rem auto 3rem;
+      padding: 0 1.2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+    }
+    .recipe-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      display: flex;
+      flex-direction: column;
+      transition: transform .18s, box-shadow .18s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .recipe-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+    .recipe-cover {
+      height: 150px;
+      background: linear-gradient(135deg, #4F7F6A, #3a5f52);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .recipe-cover img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+    .recipe-cover .emoji-fallback { position: relative; z-index: 1; }
+    .recipe-body { padding: 1rem 1.1rem 1.1rem; flex: 1; display: flex; flex-direction: column; }
+    .recipe-category {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #4F7F6A;
+      margin-bottom: .35rem;
+    }
+    .recipe-title { font-size: 1.05rem; font-weight: 700; line-height: 1.35; margin-bottom: .4rem; color: #000000; }
+    .recipe-desc { font-size: .9375rem; color: #000000; flex: 1; margin-bottom: .7rem; line-height: 1.5; }
+    .recipe-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      font-size: .78rem;
+      color: #000000;
+    }
+    .recipe-meta span {
+      background: #f3f4f6;
+      border-radius: 6px;
+      padding: .2rem .55rem;
+    }
+    .recipe-meta .cal { background: #e8f5f1; color: #2a3d34; font-weight: 600; }
+
+    /* ── News cards ──────────────────────────────────────────────── */
+    .news {
+      max-width: 1100px;
+      margin: 1.2rem auto 3rem;
+      padding: 0 1.2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+    }
+    .news-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      display: flex;
+      flex-direction: column;
+      transition: transform .18s, box-shadow .18s;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+    .news-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+    .news-cover {
+      height: 150px;
+      background: linear-gradient(135deg, #2a3d34, #4F7F6A);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .news-cover img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+    .news-breaking {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #dc2626;
+      color: white;
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: .2rem .55rem;
+      border-radius: 4px;
+      z-index: 1;
+    }
+    .news-body { padding: 1rem 1.1rem 1.1rem; flex: 1; display: flex; flex-direction: column; }
+    .news-category {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #4F7F6A;
+      margin-bottom: .35rem;
+    }
+    .news-title { font-size: 1.05rem; font-weight: 700; line-height: 1.35; margin-bottom: .4rem; color: #000000; }
+    .news-summary { font-size: .9375rem; color: #000000; flex: 1; margin-bottom: .7rem;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .news-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .78rem;
+      color: #000000;
+    }
+    .news-source-link {
+      font-size: .78rem;
+      color: #4F7F6A;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .news-source-link:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      .articles, .videos, .recipes { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ───────────────────────────────────────────────────────── -->
+<header>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html">
+      <img src="../images/logo.png" alt="Vasuvo Care Logo">
+      <div>Vasuvo Care</div>
+    </a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../index.html">App</a>
+      <a href="index.html" class="active">Healthy Pages</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ──────────────────────────────────────────────────────── -->
+<section class="hero">
+  <h1>Vasuvo Healthy Pages — Expert Health Articles & Recipes</h1>
+  <p>Evidence-based articles on heart health, diabetes management, nutrition, and mental wellness — curated by our care team and free to read.</p>
+</section>
+
+<!-- ── App deep-link banner ──────────────────────────────────────── -->
+<div class="app-banner">
+  📱 Read these articles on the go — open them in the <a href="https://onelink.to/vasuvo" target="_blank">Vasuvo app</a> under <strong>Healthy Pages</strong>.
+</div>
+
+<!-- ── Articles section ──────────────────────────────────────────── -->
+<div class="section-heading">
+  <h2>📖 Healthy Articles</h2>
+  <span class="sh-badge">Read &amp; Learn</span>
+</div>
+
+<!-- ── Tag filter ────────────────────────────────────────────────── -->
+<div class="tag-bar" id="tagBar">
+  <!-- buttons injected by JS after articles load -->
+</div>
+
+<!-- ── Article grid ──────────────────────────────────────────────── -->
+<div id="articles" class="articles">
+  <div class="state-msg"><div class="spinner"></div>Loading articles…</div>
+</div>
+
+<!-- ── Videos section ────────────────────────────────────────────── -->
+<hr class="section-divider">
+<div class="section-heading">
+  <h2>🎬 Health Videos</h2>
+  <span class="sh-badge">Watch &amp; Learn</span>
+</div>
+<div id="videos" class="videos">
+  <div class="state-msg"><div class="spinner"></div>Loading videos…</div>
+</div>
+
+<!-- ── Recipes section ───────────────────────────────────────────── -->
+<hr class="section-divider">
+<div class="section-heading">
+  <h2>🥗 Healthy Recipes</h2>
+  <span class="sh-badge">Eat Well</span>
+</div>
+<div id="recipes" class="recipes">
+  <div class="state-msg"><div class="spinner"></div>Loading recipes…</div>
+</div>
+
+<!-- ── News section ────────────────────────────────────────────────── -->
+<hr class="section-divider">
+<div class="section-heading">
+  <h2>📰 Health News</h2>
+  <span class="sh-badge">Stay Informed</span>
+</div>
+<div id="news" class="news">
+  <div class="state-msg"><div class="spinner"></div>Loading news…</div>
+</div>
+
+<script>
+  // ── Config ────────────────────────────────────────────────────────────────
+  const _host = window.location.hostname;
+  const API_BASE = (_host === 'localhost' || _host === '127.0.0.1' || _host.startsWith('192.168.'))
+    ? 'http://192.168.1.113:8000'
+    : 'https://api.vasuvo.com';
+
+  // Helper: fetch with a 10-second timeout
+  async function fetchWithTimeout(url, options = {}, timeoutMs = 10000) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+    try {
+      const res = await fetch(url, { ...options, signal: ctrl.signal });
+      return res;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  // Cluster display order — Cardiometabolic first
+  const CLUSTER_ORDER = [
+    'Cardiometabolic', 'General', 'Diabetes', 'Heart Health',
+    'Nutrition', 'Mental Wellness', 'Seniors',
+  ];
+
+  let _allArticles = [];
+  let _activeTag   = 'All';
+
+  // ── Fetch ─────────────────────────────────────────────────────────────────
+  async function loadArticles() {
+    try {
+      // Public endpoint — returns all published articles
+      const r = await fetchWithTimeout(`${API_BASE}/api/v1/content/articles?language=en`, {
+        headers: { 'Accept': 'application/json' },
+      });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      _allArticles = await r.json();
+      buildTagBar();
+      render('All');
+    } catch (e) {
+      document.getElementById('articles').innerHTML =
+        `<div class="state-msg">⚠️ Could not load articles right now.<br><small>${e.message}</small></div>`;
+    }
+  }
+
+  // ── Tag bar ───────────────────────────────────────────────────────────────
+  function buildTagBar() {
+    // Collect unique clusters, Cardiometabolic first
+    const present = [...new Set(_allArticles.map(a => a.cluster))];
+    const ordered = CLUSTER_ORDER.filter(c => present.includes(c))
+      .concat(present.filter(c => !CLUSTER_ORDER.includes(c)));
+
+    const bar = document.getElementById('tagBar');
+    bar.innerHTML = '';
+
+    ['All', ...ordered].forEach(tag => {
+      const btn = document.createElement('button');
+      btn.className = 'tag-btn' + (tag === 'All' ? ' active' : '');
+      btn.textContent = tag;
+      btn.addEventListener('click', () => {
+        _activeTag = tag;
+        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        render(tag);
+      });
+      bar.appendChild(btn);
+    });
+  }
+
+  // ── Render articles ───────────────────────────────────────────────────────
+  function render(tag) {
+    const filtered = tag === 'All'
+      ? _allArticles
+      : _allArticles.filter(a => a.cluster === tag || (a.tags || []).includes(tag));
+
+    // Sort: Cardiometabolic cluster first, then by updated_at desc
+    filtered.sort((a, b) => {
+      const ai = CLUSTER_ORDER.indexOf(a.cluster);
+      const bi = CLUSTER_ORDER.indexOf(b.cluster);
+      if (ai !== bi) return ai - bi;
+      return new Date(b.updated_at) - new Date(a.updated_at);
+    });
+
+    const container = document.getElementById('articles');
+
+    if (filtered.length === 0) {
+      container.innerHTML = '<div class="state-msg">No articles found for this topic yet.</div>';
+      return;
+    }
+
+    container.innerHTML = filtered.map(a => cardHtml(a)).join('');
+  }
+
+  // ── Card HTML ─────────────────────────────────────────────────────────────
+  function cardHtml(a) {
+    const coverHtml = a.cover_image_url
+      ? `<img src="${escHtml(a.cover_image_url)}" alt="${escHtml(a.title)}" loading="lazy" />`
+        + `<span class="emoji-fallback">${escHtml(a.emoji || '📄')}</span>`
+      : `<span class="emoji-fallback">${escHtml(a.emoji || '📄')}</span>`;
+
+    const tagsHtml = (a.tags || []).slice(0, 2)
+      .map(t => `<span class="tag">${escHtml(t)}</span>`).join('');
+
+    const articleUrl = `article.html?id=${encodeURIComponent(a.id)}`;
+
+    return `
+      <a class="card" href="${articleUrl}">
+        <div class="card-cover">${coverHtml}</div>
+        <div class="card-body">
+          <div class="card-cluster">${escHtml(a.cluster)}</div>
+          <div class="card-title">${escHtml(a.title)}</div>
+          <div class="card-summary">${escHtml(a.summary)}</div>
+          <div class="card-meta">
+            <span class="read-time">${a.reading_time} min read</span>
+            ${tagsHtml}
+          </div>
+        </div>
+      </a>`;
+  }
+
+  function escHtml(s) {
+    return String(s ?? '')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── Videos ───────────────────────────────────────────────────────────────
+  async function loadVideos() {
+    try {
+      const r = await fetchWithTimeout(`${API_BASE}/api/v1/content/videos?language=en`, {
+        headers: { 'Accept': 'application/json' },
+      });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const videos = await r.json();
+      renderVideos(videos);
+    } catch (e) {
+      document.getElementById('videos').innerHTML =
+        `<div class="state-msg">⚠️ Could not load videos right now.<br><small>${e.message}</small></div>`;
+    }
+  }
+
+  function renderVideos(videos) {
+    const container = document.getElementById('videos');
+    if (!videos || videos.length === 0) {
+      container.innerHTML = '<div class="state-msg">No videos available yet.</div>';
+      return;
+    }
+    container.innerHTML = videos.map(v => {
+      // v.id IS the YouTube video ID — no separate video_url or thumbnail_url fields
+      const ytId = String(v.id);
+      const thumb = `<img src="https://img.youtube.com/vi/${encodeURIComponent(ytId)}/hqdefault.jpg" alt="${escHtml(v.title)}" loading="lazy" onerror="this.style.display='none'" />`;
+      return `
+        <div class="video-card" data-yt-id="${escHtml(ytId)}" style="cursor:pointer;">
+          <div class="video-thumb">
+            ${thumb}
+            <div class="play-btn">&#9654;</div>
+          </div>
+          <div class="video-body">
+            <div class="video-category">${escHtml(v.category || 'Health')}</div>
+            <div class="video-title">${escHtml(v.title)}</div>
+            <div class="video-desc">${escHtml(v.description || '')}</div>
+          </div>
+        </div>`;
+    }).join('');
+
+    // attach click handlers after rendering
+    container.querySelectorAll('.video-card').forEach(card => {
+      card.addEventListener('click', () => openVideoModal(card.dataset.ytId));
+    });
+  }
+
+  function openVideoModal(ytId) {
+    if (!ytId) return;
+    const modal = document.getElementById('videoModal');
+    const content = document.getElementById('videoModalContent');
+    content.innerHTML = `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(ytId)}?autoplay=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVideoModal(e) {
+    if (e && e.target !== e.currentTarget) return;
+    document.getElementById('videoModalContent').innerHTML = '';
+    document.getElementById('videoModal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // ── Recipes ──────────────────────────────────────────────────────────────
+  async function loadRecipes() {
+    try {
+      const r = await fetchWithTimeout(`${API_BASE}/api/v1/content/recipes?language=en`, {
+        headers: { 'Accept': 'application/json' },
+      });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const recipes = await r.json();
+      renderRecipes(recipes);
+    } catch (e) {
+      document.getElementById('recipes').innerHTML =
+        `<div class="state-msg">⚠️ Could not load recipes right now.<br><small>${e.message}</small></div>`;
+    }
+  }
+
+  function renderRecipes(recipes) {
+    const container = document.getElementById('recipes');
+    if (!recipes || recipes.length === 0) {
+      container.innerHTML = '<div class="state-msg">No recipes available yet.</div>';
+      return;
+    }
+    container.innerHTML = recipes.map(r => {
+      // actual API fields: image_url, carb_count, fiber_count, ingredients, steps
+      const cover = r.image_url
+        ? `<img src="${escHtml(r.image_url)}" alt="${escHtml(r.title)}" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" /><span class="emoji-fallback">🥗</span>`
+        : `<span class="emoji-fallback">🥗</span>`;
+      const meta = [
+        r.carb_count  != null ? `<span>Carbs: ${escHtml(String(r.carb_count))}g</span>` : null,
+        r.fiber_count != null ? `<span>Fiber: ${escHtml(String(r.fiber_count))}g</span>` : null,
+      ].filter(Boolean).join('');
+      const safeJson = JSON.stringify({title:r.title,category:r.category,image_url:r.image_url,ingredients:r.ingredients,steps:r.steps,tags:r.tags,carb_count:r.carb_count,fiber_count:r.fiber_count,why:r.why_diabetes_friendly}).replace(/"/g,'&quot;');
+      return `
+        <div class="recipe-card" data-recipe="${safeJson}">
+          <div class="recipe-cover">${cover}</div>
+          <div class="recipe-body">
+            <div class="recipe-category">${escHtml(r.category || 'Nutrition')}</div>
+            <div class="recipe-title">${escHtml(r.title)}</div>
+            <div class="recipe-meta">${meta}</div>
+          </div>
+        </div>`;
+    }).join('');
+
+    container.querySelectorAll('.recipe-card').forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => openRecipeModal(card.dataset.recipe));
+    });
+  }
+
+  function openRecipeModal(jsonStr) {
+    try {
+      const r = JSON.parse(jsonStr);
+      const modal = document.getElementById('recipeModal');
+      const cover = r.image_url
+        ? `<img src="${escHtml(r.image_url)}" alt="${escHtml(r.title)}" style="width:100%;max-height:280px;object-fit:cover;border-radius:10px 10px 0 0;">`
+        : `<div style="background:linear-gradient(135deg,#4F7F6A,#3a5f52);padding:2.5rem;text-align:center;font-size:4rem;border-radius:10px 10px 0 0;">🥗</div>`;
+      const metaItems = [
+        r.carb_count  != null ? `<div><strong>Carbs</strong><br>${escHtml(String(r.carb_count))}g</div>` : null,
+        r.fiber_count != null ? `<div><strong>Fiber</strong><br>${escHtml(String(r.fiber_count))}g</div>` : null,
+      ].filter(Boolean).join('');
+      const ingredients = Array.isArray(r.ingredients) && r.ingredients.length
+        ? `<h3 style="color:#000000;margin:1.25rem 0 .5rem;">Ingredients</h3><ul style="padding-left:1.25rem;color:#000000;">${r.ingredients.map(i=>`<li style="margin-bottom:.3rem;">${escHtml(String(i))}</li>`).join('')}</ul>`
+        : '';
+      const steps = Array.isArray(r.steps) && r.steps.length
+        ? `<h3 style="color:#000000;margin:1.25rem 0 .5rem;">Instructions</h3><ol style="padding-left:1.25rem;color:#000000;">${r.steps.map(s=>`<li style="margin-bottom:.6rem;">${escHtml(String(s))}</li>`).join('')}</ol>`
+        : '';
+      const why = r.why ? `<div style="background:#e8f5f1;border-radius:8px;padding:.85rem 1rem;margin-top:1rem;font-size:.9rem;color:#2a3d34;"><strong>Why it works:</strong><br>${escHtml(r.why)}</div>` : '';
+      const tags = Array.isArray(r.tags) && r.tags.length
+        ? `<div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.4rem;">${r.tags.map(t=>`<span style="background:#e8f5f1;color:#4F7F6A;border-radius:999px;padding:.2rem .65rem;font-size:.8rem;font-weight:600;">${escHtml(t)}</span>`).join('')}</div>`
+        : '';
+      document.getElementById('recipeModalContent').innerHTML = `
+        ${cover}
+        <div style="padding:1.5rem 1.75rem 1.75rem;">
+          <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#4F7F6A;margin-bottom:.3rem;">${escHtml(r.category||'Nutrition')}</div>
+          <h2 style="font-size:1.5rem;font-weight:800;color:#000000;margin-bottom:1rem;">${escHtml(r.title)}</h2>
+          ${metaItems ? `<div style="display:flex;flex-wrap:wrap;gap:1.5rem;background:#f8f9fa;border-radius:8px;padding:.9rem 1rem;margin-bottom:1rem;font-size:.9rem;text-align:center;color:#000000;">${metaItems}</div>` : ''}
+          ${ingredients}
+          ${steps}
+          ${why}
+          ${tags}
+        </div>`;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    } catch(err) { console.error('Recipe modal error:', err); }
+  }
+
+  function closeRecipeModal(e) {
+    if (e && e.target !== e.currentTarget) return;
+    document.getElementById('recipeModal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // ── News ───────────────────────────────────────────────────────────
+  async function loadNews() {
+    try {
+      const r = await fetchWithTimeout(`${API_BASE}/api/v1/content/news?language=en`, {
+        headers: { 'Accept': 'application/json' },
+      });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const items = await r.json();
+      renderNews(items);
+    } catch (e) {
+      document.getElementById('news').innerHTML =
+        `<div class="state-msg">⚠️ Could not load news right now.<br><small>${e.message}</small></div>`;
+    }
+  }
+
+  function renderNews(items) {
+    const container = document.getElementById('news');
+    if (!items || items.length === 0) {
+      container.innerHTML = '<div class="state-msg">No news available yet.</div>';
+      return;
+    }
+    container.innerHTML = items.map(n => {
+      const cover = n.image_url
+        ? `<img src="${escHtml(n.image_url)}" alt="${escHtml(n.title)}" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" />`
+        : '';
+      const breaking = n.is_breaking
+        ? `<span class="news-breaking">Breaking</span>` : '';
+      const date = n.created_at
+        ? new Date(n.created_at).toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric'})
+        : '';
+      const sourceLink = n.source_url
+        ? `<a class="news-source-link" href="${escHtml(n.source_url)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Read full story ↗</a>`
+        : '';
+      return `
+        <a class="news-card" href="${escHtml(n.source_url || '#')}" target="_blank" rel="noopener noreferrer">
+          <div class="news-cover">
+            ${cover}
+            ${breaking}
+            ${!cover ? '📰' : ''}
+          </div>
+          <div class="news-body">
+            <div class="news-category">${escHtml(n.category || 'Health')}</div>
+            <div class="news-title">${escHtml(n.title)}</div>
+            <div class="news-summary">${escHtml(n.summary || '')}</div>
+            <div class="news-footer">
+              <span>${date}</span>
+              ${n.source_url ? `<span class="news-source-link">↗ Full story</span>` : ''}
+            </div>
+          </div>
+        </a>`;
+    }).join('');
+  }
+  loadArticles();
+  loadVideos();
+  loadRecipes();
+  loadNews();
+</script>
+
+<!-- ── Video Modal ───────────────────────────────────────────────── -->
+<div id="videoModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:9999; align-items:center; justify-content:center;" onclick="closeVideoModal(event)">
+  <div style="position:relative; width:92%; max-width:860px;">
+    <button onclick="document.getElementById('videoModal').style.display='none'; document.getElementById('videoModalContent').innerHTML=''; document.body.style.overflow='';" style="position:absolute; top:-38px; right:0; background:none; border:none; color:white; font-size:2rem; cursor:pointer; line-height:1;">&times;</button>
+    <div id="videoModalContent" style="position:relative; padding-bottom:56.25%; height:0; background:#000; border-radius:10px; overflow:hidden;"></div>
+  </div>
+</div>
+
+<!-- ── Recipe Modal ─────────────────────────────────────────────── -->
+<div id="recipeModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:9999; align-items:center; justify-content:center; overflow-y:auto; padding:20px;" onclick="closeRecipeModal(event)">
+  <div style="position:relative; width:92%; max-width:640px; background:white; border-radius:12px; overflow:hidden; max-height:90vh; overflow-y:auto;">
+    <button onclick="document.getElementById('recipeModal').style.display='none'; document.body.style.overflow='';" style="position:absolute; top:10px; right:14px; background:rgba(0,0,0,0.4); border:none; color:white; font-size:1.5rem; cursor:pointer; line-height:1; border-radius:50%; width:32px; height:32px; z-index:10;">&times;</button>
+    <div id="recipeModalContent"></div>
+  </div>
+</div>
+</body>
+</html>
