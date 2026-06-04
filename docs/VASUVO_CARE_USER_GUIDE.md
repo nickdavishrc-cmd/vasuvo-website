@@ -1,4 +1,4 @@
-# Vasuvo Care — Complete User Guide
+﻿# Vasuvo Care — Complete User Guide
 
 > **Version:** 1.0 | **Platform:** Android (iOS coming soon)  
 > Your intelligent family health companion — medication management, vitals tracking, AI insights, and family coordination in one app.
@@ -572,4 +572,4 @@ Go to **Profile → Subscription → Switch to Free**. You retain Care Plus acce
 
 *Vasuvo Care is a health management tool. It is not a substitute for professional medical advice. Always consult your doctor for medical decisions.*
 
-*© 2026 Vasuvo HealthTech. All rights reserved.*
+*© 2026 Vasuvo Care. All rights reserved.*
