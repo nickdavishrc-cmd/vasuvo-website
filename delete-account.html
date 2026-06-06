@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Request deletion of your Vasuvo Care account and personal data. Learn what data is deleted, what is retained, and how long it takes.">
+    <meta name="robots" content="index, follow">
+    <title>Delete Your Account — Vasuvo Care</title>
+    <link rel="canonical" href="https://vasuvo.com/delete-account">
+
+    <!-- ── Open Graph ── -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vasuvo.com/delete-account">
+    <meta property="og:title" content="Delete Your Account — Vasuvo Care">
+    <meta property="og:description" content="Request deletion of your Vasuvo Care account and personal data. Learn what data is deleted, what is retained, and how long it takes.">
+    <meta property="og:image" content="https://vasuvo.com/images/og-cover.png">
+    <meta property="og:site_name" content="Vasuvo Care">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #000000;
+            overflow-x: hidden;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ── Header ── */
+        header {
+            background: #2a3d34;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* ── Page Hero ── */
+        .page-hero {
+            background: linear-gradient(135deg, #7a3535 0%, #4a1f1f 100%);
+            color: white;
+            padding: 130px 0 70px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .page-hero .hero-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-hero h1 {
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+
+        .page-hero p {
+            font-size: 1.15rem;
+            opacity: 0.92;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ── Warning banner ── */
+        .warning-banner {
+            background: #fff3cd;
+            border-left: 5px solid #e0a800;
+            padding: 1.1rem 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            color: #5a4000;
+        }
+
+        .warning-banner strong {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        /* ── Main Content ── */
+        .main-section {
+            padding: 70px 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* ── Info panel ── */
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .info-card h3 {
+            color: #2a3d34;
+            margin-bottom: 0.6rem;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card p,
+        .info-card li {
+            color: #333;
+            font-size: 0.9rem;
+            line-height: 1.65;
+        }
+
+        .info-card ul {
+            padding-left: 1.2rem;
+            margin-top: 0.4rem;
+        }
+
+        .info-card li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Steps list */
+        .steps-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+            margin-top: 0.5rem;
+        }
+
+        .steps-list li {
+            counter-increment: step-counter;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #333;
+            line-height: 1.55;
+        }
+
+        .steps-list li::before {
+            content: counter(step-counter);
+            background: #2a3d34;
+            color: white;
+            font-weight: 700;
+            font-size: 0.78rem;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Data table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .data-table th {
+            background: #f0f7f4;
+            color: #2a3d34;
+            padding: 0.6rem 0.75rem;
+            text-align: left;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table td {
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+            vertical-align: top;
+        }
+
+        .badge-deleted {
+            background: #fde8e8;
+            color: #b91c1c;
+            border-radius: 20px;
+            padding: 0.15rem 0.55rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .badge-retained {
+            background: #fef9e7;
+            color: #92400e;
+            border-radius: 20px;
+            padding: 0.15rem 0.55rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* ── Form Card ── */
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .form-card h2 {
+            color: #2a3d34;
+            font-size: 1.7rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .form-card .form-subtitle {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.4rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #2a3d34;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        label span.required {
+            color: #e05;
+            margin-left: 2px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e8e8e8;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: #000000;
+            background: #fafafa;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2a3d34;
+            box-shadow: 0 0 0 3px rgba(42, 61, 52, 0.12);
+            background: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            cursor: pointer;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+            border-radius: 10px;
+            padding: 1rem 1.1rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: #b91c1c;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-weight: 500;
+            color: #7f1d1d;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #7a3535 0%, #4a1f1f 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.3px;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(122, 53, 53, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Messages */
+        .form-message {
+            display: none;
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-message.success {
+            background: #e8f5f1;
+            color: #2a6049;
+            border: 1px solid #b2ddc9;
+            text-align: center;
+        }
+
+        .form-message.success .success-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .form-message.error {
+            background: #fef0f0;
+            color: #b91c1c;
+            border: 1px solid #fca5a5;
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: #2a3d34;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #8bc9ad;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,1.0);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #8bc9ad;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,1.0);
+            font-size: 0.875rem;
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-card, .info-card {
+            animation: fadeInUp 0.6s ease both;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .form-card {
+                padding: 1.5rem;
+            }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+    <!-- ── Header ── -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Vasuvo Care Logo">
+                <div>Vasuvo Care</div>
+            </a>
+            <ul>
+                <li><a href="blog/index.html">Healthy Pages</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ── Page Hero ── -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="hero-icon">🗑️</div>
+            <h1>Delete Your Vasuvo Care Account</h1>
+            <p>You have the right to request deletion of your account and personal data at any time. Submit the form below and our team will process your request promptly.</p>
+        </div>
+    </section>
+
+    <!-- ── Main Content ── -->
+    <section class="main-section">
+        <div class="container">
+            <div class="content-grid">
+
+                <!-- ── Left Info Panel ── -->
+                <div class="info-panel">
+
+                    <!-- How to request -->
+                    <div class="info-card">
+                        <h3>📋 How to Request Account Deletion</h3>
+                        <ol class="steps-list">
+                            <li>Fill in the account deletion request form on this page with your registered email address and full name.</li>
+                            <li>Select the scope of deletion you want — full account deletion or data-only deletion.</li>
+                            <li>Confirm you understand that this action is irreversible by ticking the acknowledgement checkbox.</li>
+                            <li>Submit the form. You will receive a confirmation email at your registered address within 24 hours.</li>
+                            <li>Our team will verify your identity and process the request within <strong>30 days</strong> of confirmation.</li>
+                            <li>You will receive a final email confirming that your account and data have been deleted.</li>
+                        </ol>
+                    </div>
+
+                    <!-- What is deleted -->
+                    <div class="info-card">
+                        <h3>🗂️ Data Deleted vs. Retained</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Data Type</th>
+                                    <th>Status</th>
+                                    <th>Retention</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Account profile (name, email, phone)</td>
+                                    <td><span class="badge-deleted">Deleted</span></td>
+                                    <td>30 days after request</td>
+                                </tr>
+                                <tr>
+                                    <td>Family member profiles</td>
+                                    <td><span class="badge-deleted">Deleted</span></td>
+                                    <td>30 days after request</td>
+                                </tr>
+                                <tr>
+                                    <td>Medication schedules &amp; reminders</td>
+                                    <td><span class="badge-deleted">Deleted</span></td>
+                                    <td>30 days after request</td>
+                                </tr>
+                                <tr>
+                                    <td>Adherence history &amp; health logs</td>
+                                    <td><span class="badge-deleted">Deleted</span></td>
+                                    <td>30 days after request</td>
+                                </tr>
+                                <tr>
+                                    <td>App usage &amp; analytics data</td>
+                                    <td><span class="badge-deleted">Deleted</span></td>
+                                    <td>30 days after request</td>
+                                </tr>
+                                <tr>
+                                    <td>Transaction / payment records</td>
+                                    <td><span class="badge-retained">Retained</span></td>
+                                    <td>7 years (legal obligation)</td>
+                                </tr>
+                                <tr>
+                                    <td>Aggregated anonymised statistics</td>
+                                    <td><span class="badge-retained">Retained</span></td>
+                                    <td>Indefinite (not linked to you)</td>
+                                </tr>
+                                <tr>
+                                    <td>Support correspondence</td>
+                                    <td><span class="badge-retained">Retained</span></td>
+                                    <td>3 years (fraud prevention)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-top: 0.75rem; font-size: 0.82rem; color: #666;">Retained data is kept solely to meet legal, tax, and fraud-prevention obligations. It will never be used for marketing.</p>
+                    </div>
+
+                    <!-- Contact directly -->
+                    <div class="info-card">
+                        <h3>📧 Prefer to Email Us?</h3>
+                        <p>Send your deletion request directly to <a href="mailto:contact@vasuvo.com" style="color:#4F7F6A;font-weight:600;">contact@vasuvo.com</a> with the subject line <strong>"Account Deletion Request"</strong> and include your registered email address.</p>
+                    </div>
+
+                    <!-- Privacy link -->
+                    <div class="info-card">
+                        <h3>🛡️ Your Rights</h3>
+                        <p>Under GDPR and applicable data protection laws, you have the right to erasure ("right to be forgotten"). Read our full <a href="privacy.html" style="color:#4F7F6A;font-weight:600;">Privacy Policy</a> to understand all your rights and how we handle your data.</p>
+                    </div>
+
+                </div>
+
+                <!-- ── Right Form Card ── -->
+                <div class="form-card">
+                    <h2>Account Deletion Request</h2>
+                    <p class="form-subtitle">Complete the form below. All fields marked <span style="color:#e05;">*</span> are required. We will respond within one business day.</p>
+
+                    <div class="warning-banner">
+                        <strong>⚠️ This action is permanent and cannot be undone.</strong>
+                        Deleting your account will permanently remove your profile, all family member data, medication schedules, and health history from the Vasuvo Care app. Please read the data table on the left before proceeding.
+                    </div>
+
+                    <div class="form-message success" id="successMsg">
+                        <span class="success-title">✅ Request Submitted Successfully</span>
+                        Thank you. Your account deletion request has been received. You will get a confirmation email within 24 hours, and your account will be fully deleted within 30 days of that confirmation.
+                    </div>
+                    <div class="form-message error" id="errorMsg">
+                        ❌ Something went wrong. Please email us directly at <a href="mailto:contact@vasuvo.com" style="color:#b91c1c;">contact@vasuvo.com</a> with the subject "Account Deletion Request".
+                    </div>
+
+                    <form id="deleteForm" novalidate>
+                        <!-- Web3Forms access key -->
+                        <input type="hidden" name="access_key" value="2331c375-5378-4e93-bba3-dce8b7df63b2">
+                        <input type="hidden" name="subject" value="[Vasuvo Care] Account Deletion Request">
+                        <input type="hidden" name="from_name" value="Vasuvo Care — Delete Account">
+                        <!-- Honeypot spam protection -->
+                        <input type="checkbox" name="botcheck" style="display:none">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Priya" required autocomplete="given-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Sharma" autocomplete="family-name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Registered Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="deletionScope">Deletion Scope <span class="required">*</span></label>
+                            <select id="deletionScope" name="deletion_scope" required>
+                                <option value="" disabled selected>Select what you want deleted…</option>
+                                <option value="Full account and all data">Full account and all personal data</option>
+                                <option value="Personal data only (keep account shell)">Personal data only (keep account)</option>
+                                <option value="Health data only">Health &amp; medication data only</option>
+                                <option value="Family member profile only">A specific family member profile only</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reason">Reason for Deletion <span style="font-weight:400; color:#888;">(optional)</span></label>
+                            <select id="reason" name="reason">
+                                <option value="" selected>Prefer not to say</option>
+                                <option value="No longer using the app">No longer using the app</option>
+                                <option value="Privacy concerns">Privacy concerns</option>
+                                <option value="Switching to another app">Switching to another app</option>
+                                <option value="Technical issues">Technical issues</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="additionalInfo">Additional Information <span style="font-weight:400; color:#888;">(optional)</span></label>
+                            <textarea id="additionalInfo" name="message" placeholder="E.g. which family member profile to delete, or any other details that help us process your request."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="confirmDelete" name="confirmed" required>
+                                <label for="confirmDelete">I understand that deleting my account is <strong>permanent and irreversible</strong>. All my personal data, medication schedules, and health history in the Vasuvo Care app will be permanently erased within 30 days. <span class="required">*</span></label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">Submit Deletion Request</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Vasuvo Care</h3>
+                    <p style="color: #ffffff; line-height: 1.8; font-size: 0.9rem;">
+                        Vasuvo Care is a family health management app providing medication reminders, chronic disease tracking, and caregiver support.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="blog/index.html">Healthy Pages</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                        <li><a href="medicaldisclaimer.html">Medical Disclaimer</a></li>
+                        <li><a href="delete-account.html">Delete Account</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Get the App</h3>
+                    <ul>
+                        <li><a href="#">Download for Android</a></li>
+                        <li><a href="#">iOS (Coming Soon)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vasuvo Care. All rights reserved. | Making healthcare management simple and accessible.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('deleteForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const btn = document.getElementById('submitBtn');
+            const successMsg = document.getElementById('successMsg');
+            const errorMsg = document.getElementById('errorMsg');
+
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            // Validate required fields
+            if (
+                !form.firstName.value.trim() ||
+                !form.email.value.trim() ||
+                !form.deletion_scope.value ||
+                !form.confirmed.checked
+            ) {
+                return;
+            }
+
+            btn.textContent = 'Submitting…';
+            btn.disabled = true;
+
+            const data = new FormData(form);
+            const payload = Object.fromEntries(data.entries());
+
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    form.style.display = 'none';
+                    successMsg.style.display = 'block';
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    form.reset();
+                } else {
+                    throw new Error(result.message || 'Submission failed');
+                }
+            } catch (err) {
+                errorMsg.style.display = 'block';
+                errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } finally {
+                btn.textContent = 'Submit Deletion Request';
+                btn.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+</html>
