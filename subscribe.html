@@ -508,6 +508,9 @@
             }
 
             show('state-success');
+            // Auto-redirect back to app after a short delay.
+            // The button on the success card is a fallback if the intent URI fails.
+            setTimeout(returnToApp, 1500);
         } catch (err) {
             alert('Network error during activation. Please contact support if payment was deducted.');
             show('state-form');
