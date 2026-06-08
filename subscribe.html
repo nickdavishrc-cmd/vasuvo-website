@@ -516,7 +516,13 @@
     }
 
     function returnToApp() {
-        window.location.href = 'vasuvocare://subscription-activated';
+        if (/Android/i.test(navigator.userAgent)) {
+            // Intent URI — Chrome never blocks this on Android 12+
+            window.location.href = 'intent://subscription-activated#Intent;scheme=vasuvocare;package=com.vasuvo.care;end';
+        } else {
+            // iOS — custom scheme works fine
+            window.location.href = 'vasuvocare://subscription-activated';
+        }
     }
 
     // ── Boot ───────────────────────────────────────────────────────────────────
