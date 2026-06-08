@@ -328,8 +328,9 @@
         <div class="success-icon">🎉</div>
         <div class="success-card">
             <h2>Welcome to Care Plus!</h2>
-            <p>Your subscription is now active. Tap below to return to the app.</p>
-            <button id="btn-return" onclick="returnToApp()">Return to App</button>
+            <p>Your subscription is now active.</p>
+            <p style="margin-top:0.5rem; font-size:0.82rem; color:#666;">Tap the button below to go back to the app.</p>
+            <button id="btn-return" onclick="returnToApp()" style="margin-top:1rem; font-size:1.05rem; padding:0.75rem 2rem;">↩ Return to Vasuvo App</button>
         </div>
     </div>
 </main>
@@ -508,9 +509,6 @@
             }
 
             show('state-success');
-            // Auto-redirect back to app after a short delay.
-            // The button on the success card is a fallback if the intent URI fails.
-            setTimeout(returnToApp, 1500);
         } catch (err) {
             alert('Network error during activation. Please contact support if payment was deducted.');
             show('state-form');
