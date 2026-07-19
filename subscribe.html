@@ -220,6 +220,31 @@
         }
         #btn-return:hover { background: #a3d9be; }
 
+        /* ── Security seal ─────────────────────────────────────────────── */
+        .security-seal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            background: #f0faf5;
+            border: 1px solid #c8e6d8;
+            border-radius: 10px;
+            padding: 0.65rem 1rem;
+            margin-top: 0.75rem;
+            width: 100%;
+        }
+        .seal-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.75rem;
+            color: #2a3d34;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .seal-divider { color: #b0c8bc; font-size: 0.8rem; }
+
         /* ── Footer ─────────────────────────────────────────────────────── */
         footer {
             width: 100%;
@@ -313,6 +338,15 @@
             and <a href="/terms.html" target="_blank">Terms of Service</a>.
             <br>Secure payment powered by Razorpay.
         </p>
+
+        <!-- Security seal -->
+        <div class="security-seal">
+            <span class="seal-item">🔒 256-bit SSL Encrypted</span>
+            <span class="seal-divider">·</span>
+            <span class="seal-item">🛡️ PCI-DSS via Razorpay</span>
+            <span class="seal-divider">·</span>
+            <span class="seal-item">✓ Secure Checkout</span>
+        </div>
     </div>
 
     <!-- Processing -->
@@ -396,6 +430,10 @@
                 return;
             }
             _session = await resp.json();
+
+            // Remove the token from the URL immediately — prevents it appearing
+            // in server logs, the address bar, and the Referer header.
+            window.history.replaceState({}, '', window.location.pathname);
 
             // Personalise greeting
             const name = (_session.name || '').split(' ')[0] || 'there';
@@ -519,7 +557,7 @@
     function returnToApp() {
         var intentUrl;
         if (/Android/i.test(navigator.userAgent)) {
-            intentUrl = 'intent://subscription-activated#Intent;scheme=vasuvocare;package=com.vasuvo.care;end';
+            intentUrl = 'intent://subscription-activated#Intent;scheme=vasuvocare;package=com.vasuvo.careapp;end';
         } else {
             intentUrl = 'vasuvocare://subscription-activated';
         }
