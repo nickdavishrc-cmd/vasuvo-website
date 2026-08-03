@@ -497,6 +497,10 @@
                 description: `Care Plus — ${_billing}`,
                 prefill: { contact: _session.phone || '' },
                 theme: { color: '#0D6E4F' },
+                // callback_url handles mobile UPI redirect (user leaves browser to pay in UPI app)
+                // Razorpay appends razorpay_payment_id, razorpay_order_id, razorpay_signature as GET params
+                callback_url: `https://vasuvo.com/subscribe.html?web_user_id=${encodeURIComponent(_session.user_id)}&billing=${_billing}`,
+                redirect: true,
                 handler: function(response) {
                     verifyPayment(response);
                 },
@@ -596,8 +600,27 @@
     }
 
     // ── Boot ───────────────────────────────────────────────────────────────────
+    // Handle Razorpay redirect return (mobile UPI — Razorpay redirects back with payment params)
+    const _rzpPaymentId  = getParam('razorpay_payment_id');
+    const _rzpOrderId    = getParam('razorpay_order_id');
+    const _rzpSignature  = getParam('razorpay_signature');
+    const _rzpWebUserId  = getParam('web_user_id');
+    const _rzpBilling    = getParam('billing') || 'monthly';
+
+    if (_rzpPaymentId && _rzpOrderId && _rzpSignature && _rzpWebUserId) {
+        // Came back from Razorpay redirect — verify payment directly
+        _session  = { user_id: _rzpWebUserId };
+        _billing  = _rzpBilling;
+        // Clean up URL so params don't linger
+        window.history.replaceState({}, '', window.location.pathname);
+        show('state-processing');
+        verifyPayment({
+            razorpay_payment_id: _rzpPaymentId,
+            razorpay_order_id:   _rzpOrderId,
+            razorpay_signature:  _rzpSignature,
+        });
     // Test mode: ?test=1 bypasses token check so the form can be previewed
-    if (getParam('test') === '1') {
+    } else if (getParam('test') === '1') {
         _session = { user_id: 'test-user', name: 'Test User', phone: '' };
         document.getElementById('greeting-bar').innerHTML =
             `Hi <strong>Test</strong> 👋  You're one step away from Care Plus.`;
