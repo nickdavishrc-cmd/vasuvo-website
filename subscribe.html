@@ -308,14 +308,14 @@
                 <input type="radio" name="billing" value="monthly" checked>
                 <div class="plan-info">
                     <div class="plan-name">Care Plus — Monthly</div>
-                    <div class="plan-price">₹399 / month</div>
+                    <div class="plan-price">₹99 / month</div>
                 </div>
             </label>
             <label class="plan-card" id="card-yearly">
                 <input type="radio" name="billing" value="yearly">
                 <div class="plan-info">
                     <div class="plan-name">Care Plus — Yearly</div>
-                    <div class="plan-price">₹3,990 / year</div>
+                    <div class="plan-price">₹99 / year</div>
                 </div>
                 <span class="plan-badge">Save 17%</span>
             </label>
@@ -497,9 +497,10 @@
                 description: `Care Plus — ${_billing}`,
                 prefill: { contact: _session.phone || '' },
                 theme: { color: '#0D6E4F' },
-                // callback_url handles mobile UPI redirect (user leaves browser to pay in UPI app)
-                // Razorpay appends razorpay_payment_id, razorpay_order_id, razorpay_signature as GET params
-                callback_url: `https://vasuvo.com/subscribe.html?web_user_id=${encodeURIComponent(_session.user_id)}&billing=${_billing}`,
+                // Razorpay POSTs form data to this backend endpoint after UPI/PhonePe payment.
+                // The backend verifies HMAC, activates the subscription, then redirects the
+                // browser to subscribe.html?payment_success=1 (or ?payment_failed=1 on error).
+                callback_url: `https://api.vasuvo.com/api/v1/subscriptions/payment-redirect?web_user_id=${encodeURIComponent(_session.user_id)}&billing=${_billing}`,
                 redirect: true,
                 handler: function(response) {
                     verifyPayment(response);
@@ -600,25 +601,16 @@
     }
 
     // ── Boot ───────────────────────────────────────────────────────────────────
-    // Handle Razorpay redirect return (mobile UPI — Razorpay redirects back with payment params)
-    const _rzpPaymentId  = getParam('razorpay_payment_id');
-    const _rzpOrderId    = getParam('razorpay_order_id');
-    const _rzpSignature  = getParam('razorpay_signature');
-    const _rzpWebUserId  = getParam('web_user_id');
-    const _rzpBilling    = getParam('billing') || 'monthly';
-
-    if (_rzpPaymentId && _rzpOrderId && _rzpSignature && _rzpWebUserId) {
-        // Came back from Razorpay redirect — verify payment directly
-        _session  = { user_id: _rzpWebUserId };
-        _billing  = _rzpBilling;
-        // Clean up URL so params don't linger
+    // Case 1: backend /payment-redirect verified the UPI payment and sent us here
+    if (getParam('payment_success') === '1') {
         window.history.replaceState({}, '', window.location.pathname);
-        show('state-processing');
-        verifyPayment({
-            razorpay_payment_id: _rzpPaymentId,
-            razorpay_order_id:   _rzpOrderId,
-            razorpay_signature:  _rzpSignature,
-        });
+        show('state-success');
+    // Case 2: backend /payment-redirect encountered a verification failure
+    } else if (getParam('payment_failed') === '1') {
+        window.history.replaceState({}, '', window.location.pathname);
+        document.getElementById('err-msg').textContent =
+            'Payment verification failed. If money was deducted, please contact support@vasuvo.com — we will resolve it within 24 hours.';
+        show('state-error');
     // Test mode: ?test=1 bypasses token check so the form can be previewed
     } else if (getParam('test') === '1') {
         _session = { user_id: 'test-user', name: 'Test User', phone: '' };
