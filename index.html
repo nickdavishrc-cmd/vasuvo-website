@@ -6,7 +6,7 @@
 
   <!-- ── Primary SEO ── -->
   <title>Vasuvo Care — Family Health App | Medication Reminders & Wellness Tracker</title>
-  <meta name="description" content="Vasuvo Care is the family health app that keeps everyone's health routines on track. Medication reminders, chronic disease management, and caregiver support — all in one place. Launching soon.">
+  <meta name="description" content="Vasuvo Care is the family health app that keeps everyone's health routines on track. Medication reminders, chronic disease management, and caregiver support — all in one place. Available now on iOS and Android.">
   <meta name="keywords" content="family health app, medication reminder app, health tracker for families, caregiver app, chronic disease management, diabetes management app, heart health app, family wellness app, medication management, health routine tracker, senior health app, remote patient monitoring">
   <meta name="author" content="Vasuvo Care">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vasuvo.com/">
   <meta property="og:title" content="Vasuvo Care — Family Health App | Medication Reminders & Wellness Tracker">
-  <meta property="og:description" content="Keep your whole family's health on track with Vasuvo Care. Medication reminders, chronic disease management & caregiver support — all in one trusted app. Launching soon.">
+  <meta property="og:description" content="Keep your whole family's health on track with Vasuvo Care. Medication reminders, chronic disease management & caregiver support — all in one trusted app. Download free on iOS & Android.">
   <meta property="og:image" content="https://vasuvo.com/images/og-cover.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -122,7 +122,7 @@
         "name": "When will Vasuvo Care be available?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Vasuvo Care is launching soon on iOS and Android. Join the waitlist to be notified the moment we go live — waitlist members get early access."
+          "text": "Vasuvo Care is available now on iOS and Android. Download it free from the App Store or Google Play and start managing your family's health today."
         }
       }
     ]
@@ -709,6 +709,69 @@
       gap: .5rem;
     }
 
+    /* ── Download buttons ── */
+    .download-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp .8s ease .3s both;
+      margin-bottom: 2rem;
+    }
+    .dl-btn {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.55);
+      color: white;
+      padding: .75rem 1.8rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+    .dl-btn:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+    .dl-btn.primary {
+      background: #8bc9ad;
+      border-color: #8bc9ad;
+      color: #2a3d34;
+    }
+    .dl-btn.primary:hover { background: #a3d9be; border-color: #a3d9be; }
+
+    /* ── QR code ── */
+    .qr-section {
+      animation: fadeUp .8s ease .45s both;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .qr-box {
+      background: white;
+      border-radius: 20px;
+      padding: 1.1rem 1.1rem .7rem;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    }
+    .qr-box img {
+      width: 150px;
+      height: 150px;
+      display: block;
+    }
+    .qr-label {
+      font-size: .78rem;
+      color: #2a3d34;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin: 0;
+      opacity: 1 !important;
+    }
+
     /* ── Animation ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(22px); }
@@ -753,18 +816,18 @@
 
 <!-- ── Hero ── -->
 <section class="hero">
-  <div class="badge">Family Health App — Launching Soon</div>
+  <div class="badge">Family Health App — Now Available</div>
   <h1>The family health app that keeps everyone's routine on track.</h1>
   <p>Vasuvo Care helps families manage medications, chronic conditions, and daily health routines — with calm, confidence, and care. Every single day.</p>
 
-  <div class="waitlist-wrap">
-    <div>
-      <form class="waitlist-form" id="waitlistForm" onsubmit="handleWaitlist(event)">
-        <input type="email" id="waitlistEmail" placeholder="your@email.com" required autocomplete="email">
-        <button type="submit">Notify Me</button>
-      </form>
-      <div class="success-msg" id="successMsg">&#10003; You're on the list! We'll reach out before we go live.</div>
-      <p class="waitlist-note">Be the first to know when Vasuvo launches. No spam, ever.</p>
+  <div class="download-btns">
+    <a href="https://apps.apple.com" class="dl-btn primary">&#xf179; Download on the App Store</a>
+    <a href="https://play.google.com" class="dl-btn">&#x25B6; Get it on Google Play</a>
+  </div>
+  <div class="qr-section">
+    <div class="qr-box">
+      <img src="images/QRCode.png" alt="Scan QR code to download Vasuvo Care">
+      <p class="qr-label">Scan to Download</p>
     </div>
   </div>
 </section>
@@ -1006,7 +1069,7 @@
 
 <!-- ── Blog teaser ── -->
 <section class="blog-teaser">
-  <h2>Expert health articles — free, while you wait.</h2>
+  <h2>Expert health articles — free for everyone.</h2>
   <p>Our Healthy Pages are live now. Evidence-based articles on heart health, diabetes management, nutrition, mental wellness, and more — written with care, not clicks.</p>
   <a href="blog/index.html" class="blog-btn">Explore Healthy Pages &rarr;</a>
 </section>
@@ -1042,8 +1105,8 @@
     </div>
 
     <div class="faq-item">
-      <div class="faq-q">When will Vasuvo Care be available?</div>
-      <div class="faq-a">Vasuvo Care is launching soon on iOS and Android. Join the waitlist above to be notified the moment we go live — waitlist members get early access.</div>
+      <div class="faq-q">Where can I download Vasuvo Care?</div>
+      <div class="faq-a">Vasuvo Care is available now on iOS and Android. Download it free from the App Store or Google Play, or scan the QR code on this page to get started straight away.</div>
     </div>
 
   </div>
@@ -1057,7 +1120,7 @@
         <img src="images/logo.png" alt="" style="height:38px;">
         <div style="font-size:1.2rem;">Vasuvo Care</div>
       </a>
-      <p>Family health, held with care.<br>Launching soon.</p>
+      <p>Family health, held with care.<br>Available now on iOS &amp; Android.</p>
     </div>
     <div class="footer-links">
       <h4>Explore</h4>
@@ -1078,17 +1141,7 @@
   </div>
 </footer>
 
-<script>
-  function handleWaitlist(e) {
-    e.preventDefault();
-    const email = document.getElementById('waitlistEmail').value.trim();
-    if (!email) return;
-    document.getElementById('waitlistForm').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
-    // Connect to your waitlist API endpoint when ready:
-    // fetch('/api/waitlist', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email}) });
-  }
-</script>
+
 
 </body>
 </html>
